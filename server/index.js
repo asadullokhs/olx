@@ -16,7 +16,6 @@ app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(fileUpload());
 
-// test
 app.get("/", (req, res) => {
   res.send("ok");
 });
