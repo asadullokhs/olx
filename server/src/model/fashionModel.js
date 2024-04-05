@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const carSchema = new mongoose.Schema(
+const fashionSchema = new mongoose.Schema(
   {
     fashion: {
       name: String,
@@ -37,4 +37,4 @@ const carSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Car", carSchema);
+module.exports = mongoose.model("Fashion", fashionSchema);
