@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const authSchema = new mongoose.Schema(
+const userSchema = new mongoose.Schema(
   {
     googleId: {
       type: String,
@@ -38,4 +38,4 @@ const authSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Auth", authSchema);
+module.exports = mongoose.model("User", userSchema);
