@@ -4,6 +4,8 @@ require("dotenv").config();
 const cors = require("cors");
 const mongoose = require("mongoose");
 
+const userRouter = require("./src/router/authRouter");
+
 const app = express();
 
 const PORT = process.env.PORT || 4002;
@@ -15,6 +17,8 @@ app.use(express.json());
 app.use(cors());
 app.use(express.urlencoded({ extended: true }));
 app.use(fileUpload());
+
+app.use("/api", userRouter);
 
 app.get("/", (req, res) => {
   res.send("ok");
