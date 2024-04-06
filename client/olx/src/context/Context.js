@@ -9,9 +9,6 @@ export const InfoProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("profile") || null)
   );
 
-  const [modal, setModal] = useState(false);
-  const [postId, setPostId] = useState(null);
-
   const serverUrl = process.env.REACT_APP_SERVER_URL;
 
   const exit = () => {
