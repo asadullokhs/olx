@@ -8,7 +8,7 @@ const userCtrl = {
   login: async (req, res) => {
     const { email, password } = req.body;
     try {
-      if (email && password) {
+      if (password && email) {
         const oldUser = await User.findOne({ email });
         if (!oldUser) {
           return res.status(404).json({ message: "User not found" });
