@@ -1,17 +1,25 @@
+import React from "react";
 import { useInfoContext } from "./context/Context";
-import Auth from "./pages/Auth/Auth";
 import Home from "./pages/Home/Home";
-import { Routes, Route } from "react-router-dom";
+import Auth from "./pages/Auth/Auth";
+import Test from "./pages/Auth/Test";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
-function App() {
-  const currentUser = useInfoContext();
+const App = () => {
+  const { currentUser } = useInfoContext();
+  console.log(currentUser);
   return (
-    <div className="App">
-      <Routes>
-        <Route path={"/"} element={!currentUser ? <Home /> : <Auth />} />
-      </Routes>
-    </div>
+    <Router>
+      <div className="app">
+        <Routes>
+          <Route path="/" element={currentUser ? <Home /> : <Auth />} />
+          <Route path="/test" element={<Test />} />
+        </Routes>
+        <ToastContainer />
+      </div>
+    </Router>
   );
-}
+};
 
 export default App;
