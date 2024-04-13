@@ -76,9 +76,9 @@ const userCtrl = {
     try {
       const findUser = await User.findOne({ email });
       if (findUser) {
-        userCtrl.login(req, res);
+        userCtrl.login;
       } else {
-        userCtrl.signup(req, res);
+        userCtrl.signup;
       }
     } catch (error) {
       res.status(503).json({ message: error.message });
