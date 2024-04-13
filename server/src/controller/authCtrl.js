@@ -45,9 +45,9 @@ const userCtrl = {
     const { email } = req.body;
 
     try {
-      const author = await User.findOne({ email });
+      const user = await User.findOne({ email });
 
-      if (author) {
+      if (user) {
         return res.status(400).json({ message: "This email is already taken" });
       }
 
@@ -55,9 +55,9 @@ const userCtrl = {
 
       req.body.password = hashdedPassword;
 
-      const newAuthor = await User.create(req.body);
+      const newUser = await User.create(req.body);
 
-      const { password, ...otherDetails } = newAuthor._doc;
+      const { password, ...otherDetails } = newUser._doc;
 
       const token = JWT.sign(otherDetails, JWT_SECRET_KEY, { expiresIn: "1h" });
 
@@ -76,9 +76,26 @@ const userCtrl = {
     try {
       const findUser = await User.findOne({ email });
       if (findUser) {
-        userCtrl.login;
+        const token = JWT.sign(
+          { email: findUser.email, _id: findUser._id, role: findUser.role },
+          JWT_SECRET_KEY
+        );
+
+        res
+          .status(200)
+          .send({ message: "Login successfully", findUser, token });
       } else {
-        userCtrl.signup;
+        const newUser = await User.create(req.body);
+
+        const token = JWT.sign(newUser, JWT_SECRET_KEY, {
+          expiresIn: "1h",
+        });
+
+        res.status(201).send({
+          message: "Created successfully",
+          user: newUser,
+          token,
+        });
       }
     } catch (error) {
       res.status(503).json({ message: error.message });
