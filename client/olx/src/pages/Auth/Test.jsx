@@ -11,13 +11,16 @@ const Test = () => {
       <GoogleLogin
         onSuccess={ async(credentialResponse) => {
           let data = jwtDecode(credentialResponse?.credential);
+          let res;
           let newUser = {
             name: data.given_name,
             surname: data.name,
             email: data.email,
             profilePicture: data.picture,
           }
-          await googleAuth(newUser)
+          console.log('ok');
+          res = await googleAuth(newUser)
+          console.log(res);
           localStorage.setItem(JSON.stringify(newUser))
           setCurrentUser(newUser);
         }}
