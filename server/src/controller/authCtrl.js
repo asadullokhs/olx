@@ -71,6 +71,19 @@ const userCtrl = {
       res.status(503).json(error.message);
     }
   },
+  googleAuth: async (req, res) => {
+    const { email } = req.body;
+    try {
+      const findUser = await User.findOne({ email });
+      if (findUser) {
+        userCtrl.login;
+      } else {
+        userCtrl.signup;
+      }
+    } catch (error) {
+      res.status(503).json({ message: error.message });
+    }
+  },
 };
 
 module.exports = userCtrl;
