@@ -9,7 +9,7 @@ const Test = () => {
   return (
     <div>
       <GoogleLogin
-        onSuccess={ async(credentialResponse) => {
+        onSuccess={async (credentialResponse) => {
           let data = jwtDecode(credentialResponse?.credential);
           let res;
           let newUser = {
@@ -17,14 +17,13 @@ const Test = () => {
             surname: data.name,
             email: data.email,
             profilePicture: data.picture,
-          }
-          console.log('ok');
-          res = await googleAuth(newUser)
+          };
+          res = await googleAuth(newUser);
           console.log(res);
-          localStorage.setItem(JSON.stringify(newUser))
+          localStorage.setItem("profile", JSON.stringify(res?.data.user));
+          localStorage.setItem("token", JSON.stringify(res?.data.token));
           setCurrentUser(newUser);
         }}
-
         onError={() => {
           console.log("Login Failed");
         }}

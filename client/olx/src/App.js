@@ -8,7 +8,6 @@ import { ToastContainer } from "react-toastify";
 
 const App = () => {
   const { currentUser } = useInfoContext();
-  console.log(currentUser);
   return (
     <Router>
       <div className="app">
