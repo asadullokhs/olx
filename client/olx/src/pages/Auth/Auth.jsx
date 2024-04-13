@@ -4,7 +4,7 @@ import { login, register } from "../../api/authRequests";
 
 import "./Auth.scss";
 import { useInfoContext } from "../../context/Context";
-import Test from "./Test"
+import Test from "./Test";
 
 const Signup = () => {
   const [code, setCode] = useState(false);
@@ -37,9 +37,6 @@ const Signup = () => {
     setCheckboxValue(!checkboxValue);
   };
 
-
-
-
   return (
     <div className="signup">
       <div className="signup-page">
@@ -52,27 +49,42 @@ const Signup = () => {
             <i class="fa-brands fa-apple"></i>
             <span>Apple orqali kirish</span>
           </button>
-          <button  className="facebook google mb-3">
-           <Test />
+          <button className="facebook google mb-3">
+            <Test />
           </button>
-          
         </div>
         <form onSubmit={handleForm} action="">
           <div className="signing">
-           <div className="d-flex justify-content-around align-items-center">
-           <div className="line"></div>
-            <span className="and">Yoki</span>
-            <div className="line"></div>
-           </div>
+            <div className="d-flex justify-content-around align-items-center">
+              <div className="line"></div>
+              <span className="and">Yoki</span>
+              <div className="line"></div>
+            </div>
             <div className="d-flex justify-content-around">
               <h5
-                style={isAccount ? { cursor: "pointer", borderBottom: '3px solid #002F34', padding: '10px'} : {cursor: "pointer"}}
+                style={
+                  isAccount
+                    ? {
+                        cursor: "pointer",
+                        borderBottom: "3px solid #002F34",
+                        padding: "10px",
+                      }
+                    : { cursor: "pointer" }
+                }
                 onClick={() => setIsAccount(true)}
               >
                 Kirish
               </h5>
               <h5
-                style={!isAccount ? { cursor: "pointer", borderBottom: '3px solid #002F34', padding: '10px'} : {cursor: "pointer"}}
+                style={
+                  !isAccount
+                    ? {
+                        cursor: "pointer",
+                        borderBottom: "3px solid #002F34",
+                        padding: "10px",
+                      }
+                    : { cursor: "pointer" }
+                }
                 onClick={() => setIsAccount(false)}
               >
                 Roy'hatdan otish
@@ -108,22 +120,29 @@ const Signup = () => {
                 Parol unutdingizmi
               </span>
             ) : (
-             <div>
-               <span className="olx">
-                Men <b>xizmatdan foydalanish qoidalarini</b>, shuningdek, OLX ga
-                mening ma'lumotlarimni uzatish va qayta ishlashga rozilik
-                bildiraman. Men voyaga yetganligimni va e'lon joylashtirish
-                uchun javobgarligimni tasdiqlayman.
-              </span>
-              <div className="check d-flex my-2">
-                <input type="checkbox"
-                checked={checkboxValue}
-                onChange={toggleCheckbox} />
-                <span onClick={toggleCheckbox}>Ha, men OLX dagi yangiliklar va aksiyalar haqida ma'lumot olishni xohlayman.</span>
+              <div>
+                <span className="olx">
+                  Men <b>xizmatdan foydalanish qoidalarini</b>, shuningdek, OLX
+                  ga mening ma'lumotlarimni uzatish va qayta ishlashga rozilik
+                  bildiraman. Men voyaga yetganligimni va e'lon joylashtirish
+                  uchun javobgarligimni tasdiqlayman.
+                </span>
+                <div className="check d-flex my-2">
+                  <input
+                    type="checkbox"
+                    checked={checkboxValue}
+                    onChange={toggleCheckbox}
+                  />
+                  <span onClick={toggleCheckbox}>
+                    Ha, men OLX dagi yangiliklar va aksiyalar haqida ma'lumot
+                    olishni xohlayman.
+                  </span>
+                </div>
               </div>
-             </div>
             )}
-            <button className="login">{!isAccount ? "Roy'hatdan otish" : "Kirish"}</button>
+            <button className="login">
+              {!isAccount ? "Roy'hatdan otish" : "Kirish"}
+            </button>
           </div>
         </form>
       </div>

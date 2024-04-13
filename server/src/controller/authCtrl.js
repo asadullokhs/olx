@@ -59,7 +59,9 @@ const userCtrl = {
 
       const { password, ...otherDetails } = newUser._doc;
 
-      const token = JWT.sign(otherDetails, JWT_SECRET_KEY, { expiresIn: "1h" });
+      const token = JWT.sign(otherDetails, JWT_SECRET_KEY, {
+        expiresIn: "24h",
+      });
 
       res.status(201).send({
         message: "Created successfully",
@@ -88,7 +90,7 @@ const userCtrl = {
         const newUser = await User.create(req.body);
 
         const token = JWT.sign(newUser, JWT_SECRET_KEY, {
-          expiresIn: "1h",
+          expiresIn: "24h",
         });
 
         res.status(201).send({

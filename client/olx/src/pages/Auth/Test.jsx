@@ -19,8 +19,7 @@ const Test = () => {
             profilePicture: data.picture,
           };
           res = await googleAuth(newUser);
-          console.log(res);
-          localStorage.setItem("profile", JSON.stringify(res?.data.user));
+          localStorage.setItem("profile", JSON.stringify(res?.data.findUser));
           localStorage.setItem("token", JSON.stringify(res?.data.token));
           setCurrentUser(newUser);
         }}
