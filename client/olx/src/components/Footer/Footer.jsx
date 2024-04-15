@@ -126,7 +126,12 @@ const Footer = () => {
               </ul>
             </div>
 
-            <div className="col-md-5 offset-md-1 mb-3"></div>
+            <div className="col-md-5 offset-md-1 mb-3">
+              <div className="">
+                <img src="https://www.olx.uz/app/static/media/google_play.8cb1ced49.svg" alt="" className="m-2" />
+                <img src="https://www.olx.uz/app/static/media/app_store.156ac6d41.svg" alt="" />
+              </div><span className="fs-0,1 m-3">Телефонингиз учун бепул илова</span>
+            </div>
           </div>
 
           <div className="d-flex flex-column flex-sm-row justify-content-between py-4 my-4">
