@@ -1,12 +1,13 @@
 .Search_Com{
     width: auto;
     height: 90px;
-    margin-top: 300px;
+    margin-top: 40px;
     margin-left: 20%;
     .search{
         width: 452px;
         height: 72px;
         border: none;
+        padding: 10px;
         box-shadow: 0 0 5px #b6b6b6d0;
         outline: none;
     }.search:focus{
@@ -15,6 +16,7 @@
     .location{
         margin: 0 2px 0 2px;
         width: 376px;
+        padding: 10px;
         height: 72px;
         border: none;
         box-shadow: 0 0 5px #b6b6b6d0;
