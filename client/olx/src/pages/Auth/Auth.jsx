@@ -6,7 +6,7 @@ import "./Auth.scss";
 import { useInfoContext } from "../../context/Context";
 import Test from "./Test";
 
-const Signup = () => {
+const Auth = () => {
   const [code, setCode] = useState(false);
   const [isAccount, setIsAccount] = useState(true);
   const { setCurrentUser } = useInfoContext();
@@ -22,14 +22,14 @@ const Signup = () => {
       const res = isAccount ? await login(formData) : await register(formData);
       console.log(res);
       toast.dismiss();
-      toast.success(res.data.message);
-      setCurrentUser(res.data.user);
-      localStorage.setItem("profile", JSON.stringify(res.data.user));
-      localStorage.setItem("token", JSON.stringify(res.data.token));
+      toast.success(res?.data?.message);
+      setCurrentUser(res?.data?.user);
+      localStorage.setItem("profile", JSON.stringify(res?.data?.user));
+      localStorage.setItem("token", JSON.stringify(res?.data?.token));
     } catch (error) {
       toast.dismiss();
       console.log(error);
-      toast.error(error.response.data.message);
+      toast.error(error?.response?.data?.message);
     }
   };
 
@@ -151,4 +151,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default Auth;
