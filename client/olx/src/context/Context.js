@@ -9,8 +9,6 @@ export const InfoProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("profile") || null)
   );
 
-  const serverUrl = process.env.REACT_APP_SERVER_URL;
-
   const exit = () => {
     localStorage.clear();
     setCurrentUser(null);
@@ -20,7 +18,6 @@ export const InfoProvider = ({ children }) => {
     currentUser,
     setCurrentUser,
     exit,
-    serverUrl,
   };
 
   return (

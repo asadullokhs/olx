@@ -7,9 +7,9 @@ import { useInfoContext } from "../../context/Context";
 import Test from "./Test";
 
 const Auth = () => {
+  const { setCurrentUser } = useInfoContext();
   const [code, setCode] = useState(false);
   const [isAccount, setIsAccount] = useState(true);
-  const { setCurrentUser } = useInfoContext();
   const [checkboxValue, setCheckboxValue] = useState(false);
 
   const handleForm = async (e) => {
