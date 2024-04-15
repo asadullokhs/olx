@@ -7,16 +7,17 @@
         width: 452px;
         height: 72px;
         border: none;
-        box-shadow: 0 0 5px #fff;
+        box-shadow: 0 0 5px #b6b6b6d0;
         outline: none;
     }.search:focus{
         border-bottom: 2px solid #002f34;
     }
     .location{
+        margin: 0 2px 0 2px;
         width: 376px;
         height: 72px;
         border: none;
-        box-shadow: 0 0 5px #fff;
+        box-shadow: 0 0 5px #b6b6b6d0;
         outline: none;
     }.location:focus{
         border-bottom: 2px solid #002f34;

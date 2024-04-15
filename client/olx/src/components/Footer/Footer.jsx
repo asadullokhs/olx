@@ -128,8 +128,12 @@ const Footer = () => {
 
             <div className="col-md-5 offset-md-1 mb-3">
               <div className="">
+                <a href="https://play.google.com/store/apps/details?id=com.torg.torg&hl=ru&referrer=utm_source%3Dolx.uz%26utm_medium%3Dcpc%26utm_campaign%3Dandroid-app-footer">
                 <img src="https://www.olx.uz/app/static/media/google_play.8cb1ced49.svg" alt="" className="m-2" />
+                </a>
+                <a href="https://itunes.apple.com/uz/app/torg.uz/id665094472?mt=8&ign-mpt=uo%3D4">
                 <img src="https://www.olx.uz/app/static/media/app_store.156ac6d41.svg" alt="" />
+                </a>
               </div><span className="fs-0,1 m-3">Телефонингиз учун бепул илова</span>
             </div>
           </div>
