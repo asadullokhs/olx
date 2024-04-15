@@ -39,6 +39,7 @@ const Signup = () => {
 
   return (
     <div className="signup">
+      <div className="circle"></div>
       <div className="signup-page">
         <div className="auth">
           <button className="facebook mb-3">
@@ -108,9 +109,9 @@ const Signup = () => {
                 />
                 <span disabled onClick={() => setCode(!code)}>
                   {!code ? (
-                    <i class="fa-solid fa-eye"></i>
+                    <i className="fa-solid fa-eye"></i>
                   ) : (
-                    <i class="fa-solid fa-eye-slash"></i>
+                    <i className="fa-solid fa-eye-slash"></i>
                   )}
                 </span>
               </label>

@@ -1,24 +1,39 @@
 .signup {
+  position: relative;
   width: 100%;
-  min-height: 140vh;
+  height: 100vh;
   background-color: #3a77ff;
+  overflow-x: hidden;
 }
 
-.signup::before {
-  content: "";
+
+.signup .circle {
+
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 150px;
-  margin: auto 0;
-  width: 90vw;
-  height: 90vw;
-  min-height: 768px;
-  min-width: 768px;
-  max-width: 1236px;
-  max-height: 1236px;
-  border: 150px solid #ceddff;
+  margin: 0 auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vw;
+  border: 150px solid #CEDDFF;
   border-radius: 50%;
+  animation: loader 1.5s ease-out;
+}
+
+@keyframes loader {
+  from {
+      width: 0;
+      height: 0;
+  }
+
+  ;
+
+  to {
+      width: 100vw;
+  }
+
+  ;
 }
 
 .signup-page {
