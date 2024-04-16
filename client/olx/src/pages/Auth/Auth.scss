@@ -47,6 +47,9 @@
   position: relative;
   top: 50px;
   border-radius: 4px;
+  .welcome{
+    display: none;
+  }
 }
 
 .signup-page .facebook {
@@ -226,8 +229,25 @@
   .signup-page{
     width: 100%;
     top: 0;
+    .facebook{
+     
+      border-radius: 3px;
+    }
+    .welcome{
+      display: flex;
+      justify-content: center;
+      margin-bottom: 35px;
+
+    }
+
+    .facebook:hover {
+      background-color: #85a6aa;
+      border-color: white;
+      box-shadow: none;
+    }
   }
   .circle{
     display: none;
   }
 }
+

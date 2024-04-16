@@ -41,6 +41,7 @@ const Auth = () => {
     <div className="signup">
       <div className="circle"></div>
       <div className="signup-page">
+        <h2 className="welcome">OLX ga xush kelibsiz!</h2>
         <div className="auth">
           <button className="facebook mb-3">
             <i class="fa-brands fa-facebook"></i>
