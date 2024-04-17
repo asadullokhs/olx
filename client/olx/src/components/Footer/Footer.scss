@@ -1,0 +1,24 @@
+
+.nav-link{
+color: #002F34;
+}
+.nav-link:hover{
+background-color: #002F34;
+width: 250px;
+color: white !important;
+}
+.link_flag{
+display: flex;
+    .alink{
+        filter: grayscale(100%);
+        padding: 5px;
+        display: flex;
+        h2{
+            margin-left: 5px;
+            margin-right: 5px;
+            margin-top: -5px;
+        }
+    }.alink:hover{
+        filter: grayscale(0%);
+    }
+}
