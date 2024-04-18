@@ -5,6 +5,7 @@ import Auth from "./pages/Auth/Auth";
 import Test from "./pages/Auth/Test";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import Prod from "./pages/OneProd/Prod";
 
 const App = () => {
   const { currentUser } = useInfoContext();
@@ -14,6 +15,7 @@ const App = () => {
         <Routes>
           <Route path="/" element={currentUser ? <Home /> : <Auth />} />
           <Route path="/test" element={<Test />} />
+          <Route path="/prod/:id" element={<Prod/>}/>
         </Routes>
         <ToastContainer />
       </div>
