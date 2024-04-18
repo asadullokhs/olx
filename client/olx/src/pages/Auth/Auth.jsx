@@ -3,8 +3,10 @@ import { toast } from "react-toastify";
 import { login, register } from "../../api/authRequests";
 
 import "./Auth.scss";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 import { useInfoContext } from "../../context/Context";
-import Test from "./Test";
+import { googleAuth } from "../../api/authRequests";
 
 const Auth = () => {
   const { setCurrentUser } = useInfoContext();
@@ -52,7 +54,38 @@ const Auth = () => {
             <span>Apple orqali kirish</span>
           </button>
           <button className="facebook google mb-3">
-            <Test />
+            <div>
+              <GoogleLogin
+                onSuccess={async (credentialResponse) => {
+                  let data = jwtDecode(credentialResponse?.credential);
+                  toast.loading("Please wait...");
+                  let res;
+
+                  let newUser = {
+                    name: data.given_name,
+                    surname: data.name,
+                    email: data.email,
+                    profilePicture: data.picture,
+                  };
+                  res = await googleAuth(newUser);
+                  toast.dismiss();
+
+                  localStorage.setItem(
+                    "profile",
+                    JSON.stringify(res?.data.user)
+                  );
+                  localStorage.setItem(
+                    "token",
+                    JSON.stringify(res?.data.token)
+                  );
+                  setCurrentUser(newUser);
+                  toast.success(res?.data?.message);
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              />
+            </div>
           </button>
         </div>
         <form onSubmit={handleForm} action="">

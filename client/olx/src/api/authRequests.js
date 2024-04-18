@@ -1,7 +1,8 @@
 import axios from "axios";
 
 // const serverUrl = process.env.REACT_APP_SERVER_URL;
-const serverUrl = "https://server-ti8k.onrender.com";
+// const serverUrl = "https://server-ti8k.onrender.com";
+const serverUrl = "http://localhost:4002";
 
 const API = axios.create({ baseURL: serverUrl });
 
