@@ -1,0 +1,21 @@
+.links_prod{
+    display: flex;
+    .btn_links{
+        background-color: white;
+        border: none;
+        a{
+            text-decoration: none;
+            color: #002f34 !important;
+        }
+    }
+    .links_ol{
+        display: flex;
+        list-style: none;
+        .links_li{
+            .links_a{
+                color: #406367 !important;
+            }
+        }
+       } 
+    
+}
