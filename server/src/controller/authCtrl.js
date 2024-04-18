@@ -77,6 +77,7 @@ const userCtrl = {
     const { email } = req.body;
     try {
       const findUser = await User.findOne({ email });
+
       if (findUser) {
         const token = JWT.sign(
           { email: findUser.email, _id: findUser._id, role: findUser.role },

@@ -21,9 +21,17 @@ const userSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    profilePicture: {
+      type: Object,
+      default: null,
+    },
     role: {
       type: String,
       enum: ["user", "admin"],
+    },
+    isActive: {
+      type: Boolean,
+      default: true,
     },
   },
   {

@@ -24,8 +24,6 @@ const Test = () => {
           res = await googleAuth(newUser);
           toast.dismiss();
 
-          delete res?.data?.findUser?.password;
-
           localStorage.setItem("profile", JSON.stringify(res?.data.findUser));
           localStorage.setItem("token", JSON.stringify(res?.data.token));
           setCurrentUser(newUser);
