@@ -62,12 +62,14 @@ const Auth = () => {
                   let res;
 
                   let newUser = {
+                    googleId: data.sub,
                     name: data.given_name,
                     surname: data.name,
                     email: data.email,
                     profilePicture: data.picture,
                   };
                   res = await googleAuth(newUser);
+                  console.log(res);
                   toast.dismiss();
 
                   localStorage.setItem(

@@ -10,6 +10,7 @@ const userCtrl = {
     try {
       if (password && email) {
         const oldUser = await User.findOne({ email });
+        console.log(oldUser);
         if (!oldUser) {
           return res.status(404).json({ message: "User not found" });
         }
@@ -84,13 +85,9 @@ const userCtrl = {
           JWT_SECRET_KEY
         );
 
-        res
-          .status(200)
-          .send({ message: "Login successfully", findUser, token });
+        res.status(200).send({ message: "Login successfully", user, token });
       } else {
         const newUser = await User.create(req.body);
-
-        console.log(newUser);
 
         const token = JWT.sign(
           { email: newUser.email, _id: newUser._id, role: newUser.role },

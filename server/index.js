@@ -7,7 +7,8 @@ const cors = require("cors");
 const socketIo = require("socket.io");
 const mongoose = require("mongoose");
 
-const userRouter = require("./src/router/authRouter");
+const authRouter = require("./src/router/authRouter");
+const userRouter = require("./src/router/userRouter");
 
 const app = express();
 
@@ -38,6 +39,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(fileUpload());
 
 // routes
+app.use("/api", authRouter);
 app.use("/api", userRouter);
 
 // websocket functions
