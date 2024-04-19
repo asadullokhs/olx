@@ -68,17 +68,17 @@ const Auth = () => {
                     email: data.email,
                     profilePicture: data.picture,
                   };
+
                   res = await googleAuth(newUser);
-                  console.log(res);
                   toast.dismiss();
 
                   localStorage.setItem(
                     "profile",
-                    JSON.stringify(res?.data.user)
+                    JSON.stringify(res?.data?.user)
                   );
                   localStorage.setItem(
                     "token",
-                    JSON.stringify(res?.data.token)
+                    JSON.stringify(res?.data?.token)
                   );
                   setCurrentUser(newUser);
                   toast.success(res?.data?.message);

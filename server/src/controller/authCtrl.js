@@ -85,7 +85,9 @@ const userCtrl = {
           JWT_SECRET_KEY
         );
 
-        res.status(200).send({ message: "Login successfully", user, token });
+        res
+          .status(200)
+          .send({ message: "Login successfully", user: findUser, token });
       } else {
         const newUser = await User.create(req.body);
 
