@@ -36,7 +36,7 @@ const io = socketIo(server, {
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(fileUpload());
+app.use(fileUpload({ useTempFiles: true }));
 
 // routes
 app.use("/api", authRouter);

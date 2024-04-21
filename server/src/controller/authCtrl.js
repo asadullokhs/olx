@@ -10,7 +10,6 @@ const userCtrl = {
     try {
       if (password && email) {
         const oldUser = await User.findOne({ email });
-        console.log(oldUser);
         if (!oldUser) {
           return res.status(404).json({ message: "User not found" });
         }
