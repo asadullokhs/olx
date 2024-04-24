@@ -1,6 +1,23 @@
 
 .prodbody2 {
     margin: 0 5%;
+    margin-top: 200px;
+    .container{
+        .links_prod{
+            display: flex;
+            .btn_links{
+                border: none;
+                background-color: #fff;
+                .btn_link{
+                    text-decoration: none;
+                    color: #002f34;
+                }
+            }
+            .links_ol{
+                margin-top: 18px;
+            }
+        }
+    }
 
     .a1 {
         display: flex;
@@ -256,15 +273,16 @@
     }
 
 
-    .links_ol{
+    .links_ol {
         display: flex;
         list-style: none;
-        .links_li{
-            .links_a{
+
+        .links_li {
+            .links_a {
                 color: #406367 !important;
             }
         }
-       } 
-    
+    }
+
 
 }

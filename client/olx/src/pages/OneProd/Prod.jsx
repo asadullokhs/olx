@@ -12,7 +12,7 @@ const Prod = () => {
     return (
         <div className='prodbody'>
             <Navbar />
-            <br /><br />
+            
             <Search />
 
             <div className='prodbody2'>
@@ -20,7 +20,7 @@ const Prod = () => {
                 <div className="container">
 
                     <div className="links_prod">
-                        <button type="button" data-testid="to-back" className="btn_links"> <Link to="//"> <i class="fa-solid fa-chevron-left"></i> Orqaga</Link></button>
+                        <button type="button" data-testid="to-back" className="btn_links"> <Link to="/" className='btn_link'> <i class="fa-solid fa-chevron-left"></i> Orqaga</Link></button>
                         <ol data-testid="breadcrumbs" data-cy="categories-breadcrumbs" className="links_ol">
                             <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Bosh sahifa  </Link></li> <div> / </div>
                             <li data-testid="breadcrumb-item" className="links_li"> <Link to="/oz/transport/" className="links_a">Transport  </Link></li> <div> / </div>
