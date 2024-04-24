@@ -9,9 +9,7 @@ const Footer = () => {
         <footer className="py-5">
           <div className="row">
             <div
-              className="col-6 col-md-3
-             mb-3"
-            >
+              className="col-6 col-md-3 mb-3">
               <ul className="nav flex-column">
                 <li
                   className="nav-item mb-3
@@ -121,7 +119,7 @@ const Footer = () => {
                   className="nav-item mb-3
                 "
                 >
-                  <Link href="/" className="nav-link p-0 text-muted">
+                  <Link to="/" className="nav-link p-0 text-muted">
                     Contact
                   </Link>
                 </li>

@@ -4,7 +4,7 @@ export const data =[
 
     {
       id: "1",
-      name: "Spark",
+      name: "turbo",
       img: [
           " https://frankfurt.apollo.olxcdn.com/v1/files/b0pcpooowfu23-UZ/image;s=1000x700 ",
           " https://frankfurt.apollo.olxcdn.com/v1/files/zbga1w0jzxxc2-UZ/image;s=1000x700 ",
@@ -23,7 +23,7 @@ export const data =[
     },
     {
         id: "2",
-        name: "Spark",
+        name: "Spark turbo",
         img: [
             " https://frankfurt.apollo.olxcdn.com/v1/files/zbga1w0jzxxc2-UZ/image;s=1000x700 ",
             " https://frankfurt.apollo.olxcdn.com/v1/files/8aw57evrbvzi2-UZ/image;s=1000x700 ",
