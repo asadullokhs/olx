@@ -56,6 +56,7 @@ const Auth = () => {
           <button className="facebook google mb-3">
             <div>
               <GoogleLogin
+                width="330"
                 onSuccess={async (credentialResponse) => {
                   let data = jwtDecode(credentialResponse?.credential);
                   toast.loading("Please wait...");
