@@ -3,23 +3,30 @@ import Footer from "../../components/Footer/Footer";
 import "./Set.scss";
 import { updateAll } from "../../api/updRequests";
 import { useInfoContext } from "../../context/Context";
+import { toast } from "react-toastify";
 
 const Setings = () => {
-  const {currentUser} = useInfoContext()
-  console.log(currentUser);
+  const { currentUser, setCurrentUser } = useInfoContext();
 
-  const handleSubmit  = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     try {
       const form = new FormData(e.target);
-      const res = await updateAll(currentUser._id,form,"user")
-      console.log('ok');
-      console.log(res);
-    } catch (error) {
-      console.log(error);
-    }
-  }
+      toast.loading("Please wait...");
 
+      const res = await updateAll(currentUser._id, form, "user");
+      toast.dismiss();
+
+      localStorage.setItem("profile", JSON.stringify(res?.data?.newUser));
+
+      setCurrentUser(res?.data?.newUser);
+      toast.success(res?.data?.message);
+    } catch (error) {
+      toast.dismiss();
+      console.log(error);
+      toast.error(error?.response?.data?.message);
+    }
+  };
 
   return (
     <div className="bg">
@@ -56,8 +63,10 @@ const Setings = () => {
         </header>
         <div className="container">
           <section className="middle_sec">
-
-            <div className="accordion accordion-flush" id="accordionFlushExample">
+            <div
+              className="accordion accordion-flush"
+              id="accordionFlushExample"
+            >
               <div className="accordion-item">
                 <h2 className="accordion-header" id="flush-headingOne">
                   <button
@@ -77,9 +86,9 @@ const Setings = () => {
                   aria-labelledby="flush-headingOne"
                   data-bs-parent="#accordionFlushExample"
                 >
-                <form onSubmit={handleSubmit}>
-                  <div className="accordion-body">
-                    <label for="address">Shaharni tanlash</label>
+                  <form onSubmit={handleSubmit}>
+                    <div className="accordion-body">
+                      <label for="address">Shaharni tanlash</label>
                       <select id="address" name="address">
                         <option value="bektemir">
                           Toshkent, Bektemir tumani
@@ -119,32 +128,31 @@ const Setings = () => {
                           Toshkent, Olmazor tumani
                         </option>
                       </select>
-                    
-                  </div>
+                    </div>
 
-                  <div className="set_line"></div>
+                    <div className="set_line"></div>
 
-                  <div className="accordion-body">
-                    <label htmlFor="">Aloqa uchun shaxs</label>
-                   
-                    <input type="text" className="accord-input" />
-                   
-                  </div>
-                  <div className="accordion-body">
-                    <label htmlFor="">Telefon raqami</label>
-                   
-                    <input type="text" className="accord-input" />
-                    
-                  </div>
+                    <div className="accordion-body">
+                      <label htmlFor="">Aloqa uchun shaxs</label>
 
-                  <button className="d_btn">Saqlash</button>
+                      <input type="text" className="accord-input" />
+                    </div>
+                    <div className="accordion-body">
+                      <label htmlFor="">Telefon raqami</label>
 
-                 </form>
+                      <input type="text" className="accord-input" />
+                    </div>
+
+                    <button className="d_btn">Saqlash</button>
+                  </form>
                 </div>
               </div>
             </div>
 
-            <div className="accordion accordion-flush" id="accordionFlushExample">
+            <div
+              className="accordion accordion-flush"
+              id="accordionFlushExample"
+            >
               <div className="accordion-item">
                 <h2 className="accordion-header" id="flush-headingTwo">
                   <button
@@ -165,32 +173,32 @@ const Setings = () => {
                   data-bs-parent="#accordionFlushExample"
                 >
                   <form>
-                  <div className="accordion-body">
-                   <label htmlFor="">
-                      Паролингиз <code>*</code>
-                    </label>
-                
-                    <input type="text" className="accord-input" />
-                   
-                  </div>
+                    <div className="accordion-body">
+                      <label htmlFor="">
+                        Паролингиз <code>*</code>
+                      </label>
 
-                  <div className="accordion-body">
-                    <label htmlFor="">
-                      Yangi parol <code>*</code>
-                    </label>
-                  
-                   <input type="text" className="accord-input" />
-                  
-                  </div>
+                      <input type="text" className="accord-input" />
+                    </div>
 
-                  <button className="d_btn">Saqlash</button>
+                    <div className="accordion-body">
+                      <label htmlFor="">
+                        Yangi parol <code>*</code>
+                      </label>
 
+                      <input type="text" className="accord-input" />
+                    </div>
+
+                    <button className="d_btn">Saqlash</button>
                   </form>
                 </div>
               </div>
             </div>
 
-            <div className="accordion accordion-flush" id="accordionFlushExample">
+            <div
+              className="accordion accordion-flush"
+              id="accordionFlushExample"
+            >
               <div className="accordion-item">
                 <h2 className="accordion-header" id="flush-headingThree">
                   <button
@@ -211,27 +219,28 @@ const Setings = () => {
                   data-bs-parent="#accordionFlushExample"
                 >
                   <form>
-                  <div className="accordion-body">
-                    <label htmlFor="">
-                      Sizning OLX dagi xozirgi parolingiz
-                    </label>
-                    <input type="text" className="accord-input" />
-                  </div>
+                    <div className="accordion-body">
+                      <label htmlFor="">
+                        Sizning OLX dagi xozirgi parolingiz
+                      </label>
+                      <input type="text" className="accord-input" />
+                    </div>
 
-                  <div className="accordion-body">
-                   
+                    <div className="accordion-body">
                       <label htmlFor="">Yangi e‘lon</label>
                       <input type="text" className="accord-input" />
-                 
-                  </div>
+                    </div>
 
-                  <button className="d_btn">Saqlash</button>
+                    <button className="d_btn">Saqlash</button>
                   </form>
                 </div>
               </div>
             </div>
 
-            <div className="accordion accordion-flush" id="accordionFlushExample">
+            <div
+              className="accordion accordion-flush"
+              id="accordionFlushExample"
+            >
               <div className="accordion-item">
                 <h2 className="accordion-header" id="flush-headingFour">
                   <button
@@ -256,7 +265,10 @@ const Setings = () => {
               </div>
             </div>
 
-            <div className="accordion accordion-flush" id="accordionFlushExample">
+            <div
+              className="accordion accordion-flush"
+              id="accordionFlushExample"
+            >
               <div className="accordion-item">
                 <h2 className="accordion-header" id="flush-headingFive">
                   <button

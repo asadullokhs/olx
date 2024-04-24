@@ -2,7 +2,6 @@ import React from "react";
 import { useInfoContext } from "./context/Context";
 import Home from "./pages/Home/Home";
 import Auth from "./pages/Auth/Auth";
-import Test from "./pages/Auth/Test";
 import Settings from "./pages/Settings/Set";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
@@ -15,8 +14,11 @@ const App = () => {
       <div className="app">
         <Routes>
           <Route path="/" element={currentUser ? <Home /> : <Auth />} />
-          <Route path="/test" element={<Test />} />
-          <Route path="/settings" element={ <Settings />} />
+          <Route
+            path="/settings"
+            element={currentUser ? <Settings /> : <Auth />}
+          />
+          <Route path="/prod/:id" element={<Prod />} />
         </Routes>
         <ToastContainer />
       </div>
