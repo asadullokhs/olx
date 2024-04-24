@@ -13,7 +13,10 @@ const App = () => {
       <div className="app">
         <Routes>
           <Route path="/" element={currentUser ? <Home /> : <Auth />} />
+
+
           <Route path="/prod/:id" element={<Prod />} />
+
         </Routes>
         <ToastContainer />
       </div>

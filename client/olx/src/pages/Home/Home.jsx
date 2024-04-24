@@ -6,6 +6,7 @@ import "./Home.scss";
 import { Link, useParams } from "react-router-dom";
 import { data } from "../../data";
 
+
 const Home = () => {
   const id = useParams().id;
   const res = data.filter((res) => res.id == id)[0];
@@ -55,32 +56,28 @@ const Home = () => {
             <h1 className="h1">Премиум объявления</h1>
 
             <div className="announcementss">
-              {data.length > 0 ? (
-                data.map((res) => {
-                  return (
-                    <Link to={`/prod/${res.id}`} className="row">
-                      <div className="div_2">
-                        <div className="img">
-                          <img src={res.img[0]} alt="photo" />
-                        </div>
-                        <div className="row_text">
-                          <div className="name_row">
-                            <span className="">{res.name}</span>
-                            <div className="heart">
-                              <i class="fa-regular fa-heart"></i>
-                            </div>
-                          </div>
-                          <div className="prise">3,112,300$</div>
-                          <div className="location">Toshkent Shaxar</div>
-                          <div className="date">17.04.2024</div>
-                        </div>
-                      </div>
-                    </Link>
-                  );
-                })
-              ) : (
-                <h2>Tovar yo'q</h2>
-              )}
+
+              {data.length > 0 ? data.map(res=> {
+                return   <Link to={`/prod/${res.id}`} className="row">
+                <div className="div_2">
+                  <div className="img">
+                    <img src={res.img[0]} alt="photo" />
+                  </div>
+                  <div className="row_text">
+                    <div className="name_row">
+
+                      <span className="">{res.name}</span>
+                      <div className="heart"><i class="fa-regular fa-heart"></i></div>
+                    </div>
+                    <div className="prise">3,112,300$</div>
+                    <div className="location">Toshkent Shaxar</div>
+                    <div className="date">17.04.2024</div>
+                  </div>
+
+                </div>
+              </Link >
+              }) : <h2>Tvar yo'q</h2>}
+
             </div>
           </div>
         </div>
