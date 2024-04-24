@@ -140,6 +140,7 @@ const Auth = () => {
                     olishni xohlayman.
                   </span>
                 </div>
+              
               </div>
             )}
             <button className="login">

@@ -19,5 +19,3 @@ root.render(
   </InfoProvider>
 );
 
-
-console.log("Hi");
