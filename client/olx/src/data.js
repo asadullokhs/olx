@@ -38,5 +38,3 @@ export const data = [
     phone: "+998 98 465 21 84",
   },
 ];
-
-import React from "react";

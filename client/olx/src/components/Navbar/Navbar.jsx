@@ -21,7 +21,7 @@ const Navbar = () => {
     };
   }, []);
   return (
-    <div className={`navbar scrollableDiv ${isVisible ? "" : "hidden"}`}>
+    <div className={`${isVisible ? "" : "hidden"} navbar scrollableDiv `}>
       <div className="container">
         <div className="flex">
           <div className="logo">
