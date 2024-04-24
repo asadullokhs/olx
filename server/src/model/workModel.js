@@ -2,26 +2,49 @@ const mongoose = require("mongoose");
 
 const workSchema = new mongoose.Schema(
   {
-    work: {
-      name: String,
+    name: {
+      type: String,
       required: true,
-      work_category: {
-        name: String,
-        required: true,
-        sub_category: {
-          name: String,
-          category: String,
-          content: String,
-          linkToResume: String,
-          salary: String,
-          kindOfWork: String,
-          employmentType: String,
-          email: String,
-          location: String,
-          author: String,
-          phone: String,
-        },
-      },
+    },
+    categoryType: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Type",
+    },
+    content: {
+      type: String,
+      required: true,
+    },
+    link: {
+      type: String,
+      required: true,
+    },
+    salary: {
+      type: String,
+      required: true,
+    },
+    kindOfWork: {
+      type: String,
+      required: true,
+    },
+    employmentType: {
+      type: String,
+      required: true,
+    },
+    location: {
+      type: String,
+      required: true,
+    },
+    author: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
     },
   },
   {

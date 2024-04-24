@@ -18,3 +18,5 @@ root.render(
     </GoogleOAuthProvider>
   </InfoProvider>
 );
+
+console.log("Hi");

@@ -3,8 +3,10 @@ import { toast } from "react-toastify";
 import { login, register } from "../../api/authRequests";
 
 import "./Auth.scss";
+import { GoogleLogin } from "@react-oauth/google";
+import { jwtDecode } from "jwt-decode";
 import { useInfoContext } from "../../context/Context";
-import Test from "./Test";
+import { googleAuth } from "../../api/authRequests";
 
 const Auth = () => {
   const { setCurrentUser } = useInfoContext();
@@ -22,10 +24,10 @@ const Auth = () => {
       const res = isAccount ? await login(formData) : await register(formData);
       console.log(res);
       toast.dismiss();
-      toast.success(res?.data?.message);
-      setCurrentUser(res?.data?.user);
       localStorage.setItem("profile", JSON.stringify(res?.data?.user));
       localStorage.setItem("token", JSON.stringify(res?.data?.token));
+      toast.success(res?.data?.message);
+      setCurrentUser(res?.data?.user);
     } catch (error) {
       toast.dismiss();
       console.log(error);
@@ -41,6 +43,7 @@ const Auth = () => {
     <div className="signup">
       <div className="circle"></div>
       <div className="signup-page">
+        <h2 className="welcome">OLX ga xush kelibsiz!</h2>
         <div className="auth">
           <button className="facebook mb-3">
             <i class="fa-brands fa-facebook"></i>
@@ -51,7 +54,40 @@ const Auth = () => {
             <span>Apple orqali kirish</span>
           </button>
           <button className="facebook google mb-3">
-            <Test />
+            <div>
+              <GoogleLogin
+                onSuccess={async (credentialResponse) => {
+                  let data = jwtDecode(credentialResponse?.credential);
+                  toast.loading("Please wait...");
+                  let res;
+
+                  let newUser = {
+                    googleId: data.sub,
+                    name: data.given_name,
+                    surname: data.name,
+                    email: data.email,
+                    profilePicture: data.picture,
+                  };
+
+                  res = await googleAuth(newUser);
+                  toast.dismiss();
+
+                  localStorage.setItem(
+                    "profile",
+                    JSON.stringify(res?.data?.user)
+                  );
+                  localStorage.setItem(
+                    "token",
+                    JSON.stringify(res?.data?.token)
+                  );
+                  setCurrentUser(newUser);
+                  toast.success(res?.data?.message);
+                }}
+                onError={() => {
+                  console.log("Login Failed");
+                }}
+              />
+            </div>
           </button>
         </div>
         <form onSubmit={handleForm} action="">

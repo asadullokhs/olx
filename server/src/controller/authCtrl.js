@@ -77,6 +77,7 @@ const userCtrl = {
     const { email } = req.body;
     try {
       const findUser = await User.findOne({ email });
+
       if (findUser) {
         const token = JWT.sign(
           { email: findUser.email, _id: findUser._id, role: findUser.role },
@@ -85,13 +86,17 @@ const userCtrl = {
 
         res
           .status(200)
-          .send({ message: "Login successfully", findUser, token });
+          .send({ message: "Login successfully", user: findUser, token });
       } else {
         const newUser = await User.create(req.body);
 
-        const token = JWT.sign(newUser, JWT_SECRET_KEY, {
-          expiresIn: "24h",
-        });
+        const token = JWT.sign(
+          { email: newUser.email, _id: newUser._id, role: newUser.role },
+          JWT_SECRET_KEY,
+          {
+            expiresIn: "24h",
+          }
+        );
 
         res.status(201).send({
           message: "Created successfully",

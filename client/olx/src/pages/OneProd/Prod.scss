@@ -1,23 +1,4 @@
-.prodbody {
-    background-color: #f2f4f5;
-    height: auto;
-}
 
-.links_prod {
-    display: flex;
-    margin-top: 50px;
-    margin-left: 20px;
-
-    .btn_links {
-        background-color: #f2f4f5;
-        border: none;
-        margin-bottom: 15px;
-
-        a {
-            text-decoration: none;
-            color: #002f34 !important;
-        }
-    }
 
     .links_ol {
         display: flex;
@@ -291,5 +272,17 @@
         }
 
     }
+
+
+    .links_ol{
+        display: flex;
+        list-style: none;
+        .links_li{
+            .links_a{
+                color: #406367 !important;
+            }
+        }
+       } 
+    
 
 }
