@@ -7,7 +7,9 @@ const cors = require("cors");
 const socketIo = require("socket.io");
 const mongoose = require("mongoose");
 
-const userRouter = require("./src/router/authRouter");
+const authRouter = require("./src/router/authRouter");
+const userRouter = require("./src/router/userRouter");
+const categoryRouter = require("./src/router/categoryRouter");
 
 const app = express();
 
@@ -35,10 +37,12 @@ const io = socketIo(server, {
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(fileUpload());
+app.use(fileUpload({ useTempFiles: true }));
 
 // routes
+app.use("/api", authRouter);
 app.use("/api", userRouter);
+app.use("/api", categoryRouter);
 
 // websocket functions
 

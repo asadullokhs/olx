@@ -6,6 +6,7 @@ import Test from "./pages/Auth/Test";
 import Settings from "./pages/Settings/Set";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
+import Prod from "./pages/OneProd/Prod";
 
 const App = () => {
   const { currentUser } = useInfoContext();
@@ -21,6 +22,6 @@ const App = () => {
       </div>
     </Router>
   );
-};  
+};
 
 export default App;

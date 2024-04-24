@@ -2,7 +2,6 @@
     position: fixed !important;
     top: 0;
     left: 50%;
-    transform: translateX(-50%);
     opacity: 1;
     transition: opacity 0.5s ease;
 }
@@ -14,6 +13,12 @@
 .navbar {
     background-color: #002f34;
     width: 100%;
+
+    position: absolute;
+    // height: ;
+    top: 0;
+    left: 0;
+
 
     .container {
         padding: 5px 0;

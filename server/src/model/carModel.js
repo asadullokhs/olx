@@ -2,126 +2,78 @@ const mongoose = require("mongoose");
 
 const carSchema = new mongoose.Schema(
   {
-    cars: {
-      category_name: String,
+    name: {
+      type: String,
       required: true,
-      car_category: {
-        type: Array,
-        name: String,
-        required: true,
-        sub_category: {
-          name: String,
-          category: String,
-          photos: Array,
-          content: String,
-          price: String,
-          year: Date,
-          run: String,
-          transmission: String,
-          color: String,
-          capacity: String,
-          typeOfFuel: String,
-          condition: String,
-          numberOfHosts: Number,
-          options: String,
-          email: String,
-          location: String,
-          author: String,
-          phone: String,
-        },
-      },
     },
-
-    autoParts: {
-      category_name: String,
-      required: true,
-      car_category: {
-        type: Array,
-        name: String,
-        required: true,
-        sub_category: {
-          name: String,
-          category: String,
-          photos: Array,
-          content: String,
-          price: String,
-          state: String,
-          email: String,
-          location: String,
-          phone: String,
-        },
-      },
+    categoryType: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Type",
     },
-
-    autoTires: {
-      category_name: String,
+    photos: {
+      type: Array,
+      default: [],
       required: true,
-      car_category: {
-        type: Array,
-        name: String,
-        required: true,
-        sub_category: {
-          name: String,
-          category: String,
-          photos: Array,
-          content: String,
-          price: String,
-          state: String,
-          diametr: String,
-          seasonality: String,
-          profileWidth: String,
-          profileHeight: String,
-          email: String,
-          location: String,
-          phone: String,
-        },
-      },
     },
-
-    motorbikes: {
-      category_name: String,
+    content: {
+      type: String,
       required: true,
-      car_category: {
-        type: Array,
-        name: String,
-        required: true,
-        sub_category: {
-          name: String,
-          category: String,
-          photos: Array,
-          content: String,
-          price: String,
-          year: Date,
-          run: String,
-          brand: String,
-          color: String,
-          engineCapacity: String,
-          email: String,
-          location: String,
-          phone: String,
-        },
-      },
     },
-
-    motoParts: {
-      category_name: String,
+    price: {
+      type: String,
       required: true,
-      car_category: {
-        type: Array,
-        name: String,
-        required: true,
-        sub_category: {
-          name: String,
-          category: String,
-          photos: Array,
-          content: String,
-          price: String,
-          state: String,
-          email: String,
-          location: String,
-          phone: String,
-        },
-      },
+    },
+    year: {
+      type: Date,
+      required: true,
+    },
+    run: {
+      type: String,
+      required: true,
+    },
+    transmission: {
+      type: String,
+      required: true,
+    },
+    color: {
+      type: String,
+      required: true,
+    },
+    capacity: {
+      type: String,
+      required: true,
+    },
+    type_of_fuel: {
+      type: String,
+      required: true,
+    },
+    state: {
+      type: String,
+      required: true,
+    },
+    number_of_hosts: {
+      type: String,
+      required: true,
+    },
+    options: {
+      type: String,
+      required: true,
+    },
+    location: {
+      type: String,
+      required: true,
+    },
+    author: {
+      type: String,
+      required: true,
+    },
+    email: {
+      type: String,
+      required: true,
+    },
+    phone: {
+      type: String,
+      required: true,
     },
   },
   {
