@@ -1,5 +1,6 @@
 const cloudinary = require("cloudinary");
 const fs = require("fs");
+const mongoose = require("mongoose");
 
 const removeTemp = (pathes) => {
   fs.unlink(pathes, (err) => {
@@ -82,26 +83,19 @@ const carCtrl = {
     const { id } = req.params;
     try {
       const getCar = await Car.aggregate([
-        { $match: { _id: new mongoose.Types.ObjectId(id) } },
+        {
+          $match: { _id: new mongoose.Types.ObjectId(id) },
+        },
         {
           $lookup: {
-            from: "User",
-            let: { carId: "$_id" },
-            pipeline: [
-              { $match: { $expr: { $eq: ["$_Id", "$$carId"] } } },
-              {
-                $lookup: {
-                  from: "author",
-                  let: { authorId: "$_Id" },
-                  pipeline: [
-                    { $match: { $expr: { $eq: ["$_id", "$$authorId"] } } },
-                  ],
-                  as: "user",
-                },
-              },
-            ],
-            as: "prod",
+            from: "users",
+            let: { author: "$authorId" },
+            pipeline: [{ $match: { $expr: { $eq: ["$_id", "$$author"] } } }],
+            as: "author",
           },
+        },
+        {
+          $unwind: "$author",
         },
       ]);
       if (!getCar) {

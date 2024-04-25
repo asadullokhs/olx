@@ -4,5 +4,6 @@ const authMiddlewear = require("../middlewear/authMiddleware");
 
 router.post("/car", authMiddlewear, carCtrl.add);
 router.get("/car", carCtrl.get);
+router.get("/car/:id", carCtrl.getOne);
 
 module.exports = router;
