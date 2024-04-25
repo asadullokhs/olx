@@ -21,7 +21,7 @@ const carCtrl = {
       if (req.files) {
         let images = [];
         const { image } = req.files;
-        if (image.length > 0) {
+        if (image?.length > 0) {
           for (const img of image) {
             const format = img.mimetype.split("/")[1];
             if (format !== "png" && format !== "jpeg") {
@@ -41,7 +41,7 @@ const carCtrl = {
             images.push(imag);
           }
           req.body.photos = images;
-        } else if (image) {
+        } else {
           const format = image.mimetype.split("/")[1];
           if (format !== "png" && format !== "jpeg") {
             return res.status(403).json({ message: "File format incorrect" });

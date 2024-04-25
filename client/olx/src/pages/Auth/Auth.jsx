@@ -81,7 +81,7 @@ const Auth = () => {
                     "token",
                     JSON.stringify(res?.data?.token)
                   );
-                  setCurrentUser(newUser);
+                  setCurrentUser(res?.data?.user);
                   toast.success(res?.data?.message);
                 }}
                 onError={() => {
