@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const serverUrl = "https://server-ti8k.onrender.co";
+const serverUrl = "https://server-ti8k.onrender.com";
 
 const API = axios.create({ baseURL: serverUrl });
 
