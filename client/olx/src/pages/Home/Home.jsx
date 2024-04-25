@@ -2,14 +2,15 @@ import React from "react";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
 import Search from "../../components/Search/Search";
+import Card from "../../components/Card/Card";
 import "./Home.scss";
 import { Link, useParams } from "react-router-dom";
-import { data } from "../../data";
+import { useInfoContext } from "../../context/Context";
 
 
 const Home = () => {
   const id = useParams().id;
-  const res = data.filter((res) => res.id == id)[0];
+  const { cards } = useInfoContext()
   return (
     <div>
       <div className="body">
@@ -20,7 +21,7 @@ const Home = () => {
           <div className="container">
             <h1 className="h1">OLX эълонлар тахтасидаги рукнлар</h1>
             <div className="anns">
-              <a href="#" className="icon">
+              <Link to="/" className="icon">
                 <img
                   className="img cars "
                   src="https://categories.olxcdn.com/assets/categories/olxuz/transport-3-1x.png"
@@ -28,7 +29,7 @@ const Home = () => {
                 />
                 <br />
                 <span className="spans1">Transport</span>
-              </a>
+              </Link>
               <a href="#" className="icon">
                 <img
                   className="img job "
@@ -54,30 +55,10 @@ const Home = () => {
         <div className="container">
           <div className="vip_announcements">
             <h1 className="h1">Премиум объявления</h1>
-
             <div className="announcementss">
-
-              {data.length > 0 ? data.map(res=> {
-                return   <Link to={`/prod/${res.id}`} className="row">
-                <div className="div_2">
-                  <div className="img">
-                    <img src={res.img[0]} alt="photo" />
-                  </div>
-                  <div className="row_text">
-                    <div className="name_row">
-
-                      <span className="">{res.name}</span>
-                      <div className="heart"><i class="fa-regular fa-heart"></i></div>
-                    </div>
-                    <div className="prise">3,112,300$</div>
-                    <div className="location">Toshkent Shaxar</div>
-                    <div className="date">17.04.2024</div>
-                  </div>
-
-                </div>
-              </Link >
-              }) : <h2>Tvar yo'q</h2>}
-
+              {cards.length > 0 ? cards.map(card => {
+                return <Card key={card._id} prod={card} />
+              }) : <h2>Tavar yo'q</h2>}
             </div>
           </div>
         </div>

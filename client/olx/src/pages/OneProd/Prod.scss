@@ -1,13 +1,18 @@
+.prodbody{
+    background-color: #f2f4f5;
+    width: 100%;
+    height: 100%;
+    padding-top: 100px;
+}
 
 .prodbody2 {
     margin: 0 5%;
-    margin-top: 200px;
     .container{
         .links_prod{
             display: flex;
             .btn_links{
                 border: none;
-                background-color: #fff;
+                background-color: #f2f4f5;
                 .btn_link{
                     text-decoration: none;
                     color: #002f34;
@@ -231,7 +236,7 @@
     .a2 {
         width: 738px;
         border-radius: 5px;
-        height: 735px;
+        height: 620px;
         background-color: #fff;
 
         .advertising {
@@ -269,7 +274,92 @@
                 margin-left: 5px;
             }
         }
+        .line{
+            border: 1px solid #002f34;
+            width: 98%;
+            margin-left: 20px;
+        }
+        .a2_futer{
+            display: flex;
+            margin-left: 22px;
+            justify-content: space-between;
+            .a2_futer_btn{
+                background-color: #fff;
+                border: none;
+                .a2_futer_btn_link{
+                    text-decoration: none;
+                    color: #ff5636;
+                }
+            }
+        }
 
+    }
+
+    .a3_author_futter{
+        display: flex;
+        margin-top: 15px;
+        margin-bottom: 20px;
+        width: 738px;
+        border-radius: 5px;
+        background-color: #fff;
+        padding: 30px ;
+        .author_futter_1{
+            .box2{
+                .profil_link{
+                    display: flex;
+                    .link{
+                        padding: 15px;
+                        // margin-left: 20px;
+                        img{
+                            width: 72px;
+                            height: 72px;
+                            border-radius: 50%;
+                        }
+                    }
+                    .profil_link_date{
+                        padding-top: 15px;
+                        .link{
+                            text-decoration: none;
+                            color: #002f34;
+                        }
+                    }
+                }
+            }
+        }
+        // 2
+        .author_futter_2{
+            .btn{
+                margin-left: 40px;
+                width: 300px;
+                height: 48px;
+                background-color: #002f34;
+                color: #fff;
+            }
+            .author_futter_2_2{
+                margin-top: 20px;
+                display: flex;
+                .boll{
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 50%;
+                    width: 44px;
+                    height: 44px;
+                    background-color: #23e5db;
+                }
+                p{
+                    margin-top: 10px;
+                    margin-left: 15px;
+                }
+                .btn{
+                    width: 164px;
+                    height: 48px;
+                    background-color: #fff;
+                    color: #002f34;
+                    border: 3px solid #002f34;
+                }
+            }
+        }
     }
 
 

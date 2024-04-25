@@ -1,9 +1,12 @@
-
-import React from 'react'
+import React, {useEffect, useState} from 'react'
+import "./Prod.scss";
+// import { Link, useParams } from 'react-router-dom';
+// import { useInfoContext } from '../../context/Context';
+// import { getAll } from '../../api/getRequests';
+// import Slider from 'react-slick'
 import Navbar from '../../components/Navbar/Navbar'
 import Search from '../../components/Search/Search'
-import "./Prod.scss";
-import bg1 from '../../data'
+import Footer from '../../components/Footer/Footer'
 import { Link } from 'react-router-dom';
 
 
@@ -12,7 +15,7 @@ const Prod = () => {
     return (
         <div className='prodbody'>
             <Navbar />
-            
+
             <Search />
 
             <div className='prodbody2'>
@@ -23,12 +26,12 @@ const Prod = () => {
                         <button type="button" data-testid="to-back" className="btn_links"> <Link to="/" className='btn_link'> <i class="fa-solid fa-chevron-left"></i> Orqaga</Link></button>
                         <ol data-testid="breadcrumbs" data-cy="categories-breadcrumbs" className="links_ol">
                             <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Bosh sahifa  </Link></li> <div> / </div>
-                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/oz/transport/" className="links_a">Transport  </Link></li> <div> / </div>
-                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/oz/transport/legkovye-avtomobili/" className="links_a">Yengil avtomashinalar  </Link></li> <div> / </div>
-                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/oz/transport/legkovye-avtomobili/drugie/" className="links_a">Boshqalar </Link></li> <div> / </div>
-                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/oz/transport/legkovye-avtomobili/drugie/toshkent-oblast/" className="links_a">Boshqalar - Toshkent viloyati </Link></li> <div> / </div>
-                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/oz/transport/legkovye-avtomobili/drugie/tashkent/" className="links_a">Boshqalar - Toshkent </Link></li> <div> / </div>
-                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/oz/transport/legkovye-avtomobili/drugie/tashkent/?search%5Bdistrict_id%5D=22" className="links_a">Boshqalar - Yashnobod tumani  </Link></li> <div> / </div>
+                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Transport  </Link></li> <div> / </div>
+                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Yengil avtomashinalar  </Link></li> <div> / </div>
+                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Boshqalar </Link></li> <div> / </div>
+                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Boshqalar - Toshkent viloyati </Link></li> <div> / </div>
+                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Boshqalar - Toshkent </Link></li> <div> / </div>
+                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Boshqalar - Yashnobod tumani  </Link></li> <div> / </div>
                         </ol>
                     </div>
                 </div>
@@ -120,6 +123,7 @@ const Prod = () => {
                             </div>
                         </div>
                     </div>
+
                     <div className='a2'>
                         <div>
                             <div className="advertising">
@@ -154,10 +158,40 @@ const Prod = () => {
                                     тонеровка до января <br />
                                 </div>
                             </div>
+                            <br /><br />
+                            <div className="line"></div>
+                            <br />
                             <div className='a2_futer'>
                                 <span>ID: 1</span>
                                 <span>Ko'rishlar: 12</span>
-                                <button className='a2_futer_btn'> <span> Shikoyat qilish </span> </button>
+                                <button className='a2_futer_btn'> <Link to="/" className='a2_futer_btn_link'> <i class="fa-regular fa-font-awesome"></i> Shikoyat qilish </Link> </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* //////////////// author //////////////////// */}
+
+                    <div className='a3_author_futter'>
+                        <div className="author_futter_1">
+                            <h5>SOTUVCHIGA MUROJAAT QILISH</h5>
+                            <div className="box2">
+                                <div className='profil_link'>
+                                    <Link className='link' to="/"><img src="data:image/png;base64,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" alt="" /></Link>
+                                    <div className="profil_link_date">
+                                        <span><Link className='link' to="/">Umidjon</Link> </span><br />
+                                        <span><Link className='link' to="/"> OLXda 2023 M08 beri</Link></span><br />
+                                        <span><Link className='link' to="/"> Oxirgi marta kecha 17:30 ...</Link></span><br />
+                                    </div>
+                                </div>
+                            </div>
+                            {/* 2 */}
+                        </div>
+                        <div className="author_futter_2">
+                            <button className='btn'>Xabar yozish</button>
+                            <div className='author_futter_2_2'>
+                                <div className="boll"><i class="fa-solid fa-phone"></i></div>
+                                <p>XXX XX XX</p>
+                                <button className='btn'>Ko'rsatish</button>
                             </div>
                         </div>
                     </div>
@@ -165,6 +199,8 @@ const Prod = () => {
                 </div>
 
             </div>
+            <br />
+            <Footer />
 
         </div>
     )
