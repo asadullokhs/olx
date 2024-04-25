@@ -10,6 +10,9 @@ const mongoose = require("mongoose");
 const authRouter = require("./src/router/authRouter");
 const userRouter = require("./src/router/userRouter");
 const categoryRouter = require("./src/router/categoryRouter");
+const subRouter = require("./src/router/subRouter");
+const carRouter = require("./src/router/carRouter");
+const typeRouter = require("./src/router/typeRouter");
 
 const app = express();
 
@@ -43,6 +46,9 @@ app.use(fileUpload({ useTempFiles: true }));
 app.use("/api", authRouter);
 app.use("/api", userRouter);
 app.use("/api", categoryRouter);
+app.use("/api", subRouter);
+app.use("/api", typeRouter);
+app.use("/api", carRouter);
 
 // websocket functions
 

@@ -10,6 +10,10 @@ const carSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Type",
     },
+    authorId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
     photos: {
       type: Array,
       default: [],

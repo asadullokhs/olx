@@ -73,9 +73,7 @@ const categoryCtrl = {
         return res.status(403).json({ message: "Token is required" });
       }
 
-      const currentUser = JWT.decode(token);
-
-      if (currentUser.role === "admin") {
+      if (req.userIsAdmin) {
         const category = await Category.findByIdAndDelete(id);
 
         if (!category) {
