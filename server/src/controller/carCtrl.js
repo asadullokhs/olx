@@ -33,7 +33,9 @@ const carCtrl = {
                 folder: "Olx",
               }
             );
+
             removeTemp(img.tempFilePath);
+
             const imag = {
               public_id: createdImage.public_id,
               url: createdImage.secure_url,
