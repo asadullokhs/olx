@@ -12,7 +12,9 @@ const userRouter = require("./src/router/userRouter");
 const categoryRouter = require("./src/router/categoryRouter");
 const subRouter = require("./src/router/subRouter");
 const carRouter = require("./src/router/carRouter");
+const fashionRouter = require("./src/router/fashionRouter");
 const typeRouter = require("./src/router/typeRouter");
+const workRouter = require("./src/router/workRouter");
 
 const app = express();
 
@@ -49,6 +51,8 @@ app.use("/api", categoryRouter);
 app.use("/api", subRouter);
 app.use("/api", typeRouter);
 app.use("/api", carRouter);
+app.use("/api", fashionRouter);
+app.use("/api", workRouter);
 
 // websocket functions
 

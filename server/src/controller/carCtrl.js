@@ -88,14 +88,58 @@ const carCtrl = {
         },
         {
           $lookup: {
-            from: "users",
-            let: { author: "$authorId" },
-            pipeline: [{ $match: { $expr: { $eq: ["$_id", "$$author"] } } }],
-            as: "author",
+            from: "cars",
+            let: { authorId: "$authorId" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$authorId", "$$authorId"] } } },
+            ],
+            as: "userCar",
           },
         },
         {
-          $unwind: "$author",
+          $lookup: {
+            from: "fashions",
+            let: { authorId: "$authorId" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$authorId", "$$authorId"] } } },
+            ],
+            as: "userFashion",
+          },
+        },
+        {
+          $lookup: {
+            from: "works",
+            let: { authorId: "$authorId" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$authorId", "$$authorId"] } } },
+            ],
+            as: "userWork",
+          },
+        },
+        {
+          $addFields: {
+            userProd: {
+              $concatArrays: ["$userCar", "$userFashion", "$userWork"],
+            },
+          },
+        },
+        {
+          $project: {
+            userCar: 0,
+            userFashion: 0,
+            userWork: 0,
+          },
+        },
+        {
+          $lookup: {
+            from: "users",
+            let: { user: "$authorId" },
+            pipeline: [{ $match: { $expr: { $eq: ["$_id", "$$user"] } } }],
+            as: "user",
+          },
+        },
+        {
+          $unwind: "$user",
         },
       ]);
       if (!getCar) {

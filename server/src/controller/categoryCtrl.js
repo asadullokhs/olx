@@ -175,29 +175,7 @@ const categoryCtrl = {
         {
           $match: { _id: new mongoose.Types.ObjectId(id) },
         },
-        {
-          $lookup: {
-            from: "cars",
-            let: { category: "$_id" },
-            pipeline: [
-              { $match: { $expr: { $eq: ["$category", "$$category"] } } },
-              {
-                $lookup: {
-                  from: "users",
-                  let: { author: "$author" },
-                  pipeline: [
-                    { $match: { $expr: { $eq: ["$_id", "$$author"] } } },
-                  ],
-                  as: "author",
-                },
-              },
-              {
-                $unwind: "$author",
-              },
-            ],
-            as: "cars",
-          },
-        },
+        {},
       ]);
 
       res.status(200).json({ message: "Category", category });

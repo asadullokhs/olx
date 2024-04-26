@@ -10,6 +10,14 @@ const workSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Type",
     },
+    authorId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    subId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Sub",
+    },
     content: {
       type: String,
       required: true,

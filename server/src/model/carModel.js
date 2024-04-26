@@ -14,6 +14,10 @@ const carSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+    subId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Sub",
+    },
     photos: {
       type: Array,
       default: [],
