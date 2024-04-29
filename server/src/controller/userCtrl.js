@@ -150,6 +150,27 @@ const userCtrl = {
       res.status(503).json(error.message);
     }
   },
+  like: async (req, res) => {
+    const { id } = req.params;
+    const { prodId } = req.body;
+    try {
+      const user = await User.findById(id);
+      if (!user) {
+        return res.status(404).send({ message: "User is Not Found" });
+      }
+      if (user.likes.includes(prodId)) {
+        await User.updateOne({ $pull: { likes: prodId } });
+        const updatedUser = await User.findById(id);
+        res.status(200).json({ message: "Like canceled", user: updatedUser });
+      } else {
+        await User.updateOne({ $push: { likes: prodId } });
+        const updatedUser = await User.findById(id);
+        res.status(200).json({ message: "Like added", user: updatedUser });
+      }
+    } catch (error) {
+      res.status(503).json({ message: error.message });
+    }
+  },
 };
 
 module.exports = userCtrl;

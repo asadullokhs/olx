@@ -11,6 +11,8 @@ const removeTemp = (pathes) => {
 };
 
 const Fashion = require("../model/fashionModel");
+const Car = require("../model/carModel");
+const Work = require("../model/workModel");
 
 const fashionCtrl = {
   add: async (req, res) => {
@@ -157,40 +159,33 @@ const fashionCtrl = {
     }
 
     try {
-      const deleteGall = await Fashion.findByIdAndDelete(id);
-      if (!deleteGall) {
-        return res.status(400).send({ message: "Gallary not found" });
+      const deleteFashion = await Fashion.findByIdAndDelete(id);
+      if (!deleteFashion) {
+        return res.status(400).send({ message: "Fashion not found" });
       }
-      const deletePic = await Fashion.findById(id);
-
-      if (deleteGall.length > 0) {
-        deletePic.map(async (pic) => {
-          console.log(pic);
-          await cloudinary.v2.uploader.destroy(
-            pic.picture.public_id,
-            async (err) => {
-              if (err) {
-                throw err;
-              }
+      if (deleteFashion.photos.length > 0) {
+        deleteFashion.photos.map(async (pic) => {
+          await cloudinary.v2.uploader.destroy(pic.public_id, async (err) => {
+            if (err) {
+              throw err;
             }
-          );
+          });
         });
       }
-      await Fashion.deleteMany({ gallaryId: id });
-      res.status(200).send({ message: "Gallary deleted", deleteGall });
+      res.status(200).send({ message: "Fashion deleted", deleteFashion });
     } catch (error) {
       res.status(503).json({ message: error.message });
     }
   },
   update: async (req, res) => {
-    const { title } = req.body;
+    const { name } = req.body;
     const { id } = req.params;
-    if (!title || !id) {
+    if (!name || !id) {
       return res.status(403).json({ message: "insufficient information" });
     }
     try {
-      const updateCar = await Fashion.findById(id);
-      if (!updateCar) {
+      const updateFashion = await Fashion.findById(id);
+      if (!updateFashion) {
         return res.status(400).send({ message: "Car not found" });
       }
       if (req.files) {
@@ -214,18 +209,20 @@ const fashionCtrl = {
               }
             }
           );
-          if (updateCar.picture) {
-            await cloudinary.v2.uploader.destroy(
-              updateCar.picture.public_id,
-              async (err) => {
-                if (err) {
-                  throw err;
+          if (updateFashion.photos.length > 0) {
+            updateFashion.photos.map(async (pic) => {
+              await cloudinary.v2.uploader.destroy(
+                pic.public_id,
+                async (err) => {
+                  if (err) {
+                    throw err;
+                  }
                 }
-              }
-            );
+              );
+            });
           }
           const imag = { public_id: imagee.public_id, url: imagee.secure_url };
-          req.body.sub_photos = imag;
+          req.body.photos = imag;
         }
       }
       const newFashion = await Fashion.findByIdAndUpdate(id, req.body, {
@@ -234,6 +231,21 @@ const fashionCtrl = {
       res.status(200).send({ message: "Update successfully", newFashion });
     } catch (error) {
       res.status(503).json({ message: error.message });
+    }
+  },
+  similar: async (req, res) => {
+    try {
+      const { name } = req.query;
+
+      const result = await Promise.all([
+        Car.find({ name: { $regex: new RegExp(name, "i") } }),
+        Fashion.find({ name: { $regex: new RegExp(name, "i") } }),
+        Work.find({ name: { $regex: new RegExp(name, "i") } }),
+      ]);
+
+      res.status(200).send({ message: "Found result", similar: result.flat() });
+    } catch (error) {
+      console.log(error);
     }
   },
 };

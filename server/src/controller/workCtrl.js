@@ -11,6 +11,8 @@ const removeTemp = (pathes) => {
 };
 
 const Work = require("../model/workModel");
+const Car = require("../model/carModel");
+const Fashion = require("../model/fashionModel");
 
 const workCtrl = {
   add: async (req, res) => {
@@ -113,35 +115,20 @@ const workCtrl = {
     }
 
     try {
-      const deleteGall = await Work.findByIdAndDelete(id);
-      if (!deleteGall) {
-        return res.status(400).send({ message: "Gallary not found" });
+      const deleteWork = await Work.findByIdAndDelete(id);
+      if (!deleteWork) {
+        return res.status(400).send({ message: "Car not found" });
       }
-      const deletePic = await Work.findById(id);
 
-      if (deleteGall.length > 0) {
-        deletePic.map(async (pic) => {
-          console.log(pic);
-          await cloudinary.v2.uploader.destroy(
-            pic.picture.public_id,
-            async (err) => {
-              if (err) {
-                throw err;
-              }
-            }
-          );
-        });
-      }
-      await Work.deleteMany({ gallaryId: id });
-      res.status(200).send({ message: "Gallary deleted", deleteGall });
+      res.status(200).send({ message: "Work deleted", deleteWork });
     } catch (error) {
       res.status(503).json({ message: error.message });
     }
   },
   update: async (req, res) => {
-    const { title } = req.body;
+    const { name } = req.body;
     const { id } = req.params;
-    if (!title || !id) {
+    if (!name || !id) {
       return res.status(403).json({ message: "insufficient information" });
     }
     try {
@@ -149,47 +136,26 @@ const workCtrl = {
       if (!updateWork) {
         return res.status(400).send({ message: "Car not found" });
       }
-      if (req.files) {
-        const { image } = req.files;
-        if (image) {
-          const format = image.mimetype.split("/")[1];
-          if (format !== "png" && format !== "jpeg") {
-            return res.status(403).json({ message: "file format incorrect" });
-          }
-          const imagee = await cloudinary.v2.uploader.upload(
-            image.tempFilePath,
-            {
-              folder: "Olx",
-            },
-            async (err, result) => {
-              if (err) {
-                throw err;
-              } else {
-                removeTemp(image.tempFilePath);
-                return result;
-              }
-            }
-          );
-          if (updateWork.picture) {
-            await cloudinary.v2.uploader.destroy(
-              updateWork.picture.public_id,
-              async (err) => {
-                if (err) {
-                  throw err;
-                }
-              }
-            );
-          }
-          const imag = { public_id: imagee.public_id, url: imagee.secure_url };
-          req.body.sub_photos = imag;
-        }
-      }
-      const newWork = await Work.findByIdAndUpdate(id, req.body, {
-        new: true,
-      });
+
+      const newWork = await Work.findByIdAndUpdate(id, req.body, { new: true });
       res.status(200).send({ message: "Update successfully", newWork });
     } catch (error) {
       res.status(503).json({ message: error.message });
+    }
+  },
+  similar: async (req, res) => {
+    try {
+      const { name } = req.query;
+
+      const result = await Promise.all([
+        Car.find({ name: { $regex: new RegExp(name, "i") } }),
+        Fashion.find({ name: { $regex: new RegExp(name, "i") } }),
+        Work.find({ name: { $regex: new RegExp(name, "i") } }),
+      ]);
+
+      res.status(200).send({ message: "Found result", similar: result.flat() });
+    } catch (error) {
+      console.log(error);
     }
   },
 };

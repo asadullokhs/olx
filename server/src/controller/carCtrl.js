@@ -159,35 +159,28 @@ const carCtrl = {
     }
 
     try {
-      const deleteGall = await Car.findByIdAndDelete(id);
-      if (!deleteGall) {
-        return res.status(400).send({ message: "Gallary not found" });
+      const deleteCar = await Car.findByIdAndDelete(id);
+      if (!deleteCar) {
+        return res.status(400).send({ message: "Car not found" });
       }
-      const deletePic = await Car.findById(id);
-
-      if (deleteGall.length > 0) {
-        deletePic.map(async (pic) => {
-          console.log(pic);
-          await cloudinary.v2.uploader.destroy(
-            pic.picture.public_id,
-            async (err) => {
-              if (err) {
-                throw err;
-              }
+      if (deleteCar.photos.length > 0) {
+        deleteCar.photos.map(async (pic) => {
+          await cloudinary.v2.uploader.destroy(pic.public_id, async (err) => {
+            if (err) {
+              throw err;
             }
-          );
+          });
         });
       }
-      await Car.deleteMany({ gallaryId: id });
-      res.status(200).send({ message: "Gallary deleted", deleteGall });
+      res.status(200).send({ message: "Car deleted", deleteCar });
     } catch (error) {
       res.status(503).json({ message: error.message });
     }
   },
   update: async (req, res) => {
-    const { title } = req.body;
+    const { name } = req.body;
     const { id } = req.params;
-    if (!title || !id) {
+    if (!name || !id) {
       return res.status(403).json({ message: "insufficient information" });
     }
     try {
@@ -205,7 +198,7 @@ const carCtrl = {
           const imagee = await cloudinary.v2.uploader.upload(
             image.tempFilePath,
             {
-              folder: "OLX",
+              folder: "Olx",
             },
             async (err, result) => {
               if (err) {
@@ -216,18 +209,20 @@ const carCtrl = {
               }
             }
           );
-          if (updateCar.picture) {
-            await cloudinary.v2.uploader.destroy(
-              updateCar.picture.public_id,
-              async (err) => {
-                if (err) {
-                  throw err;
+          if (updateCar.photos.length > 0) {
+            updateCar.photos.map(async (pic) => {
+              await cloudinary.v2.uploader.destroy(
+                pic.public_id,
+                async (err) => {
+                  if (err) {
+                    throw err;
+                  }
                 }
-              }
-            );
+              );
+            });
           }
           const imag = { public_id: imagee.public_id, url: imagee.secure_url };
-          req.body.sub_photos = imag;
+          req.body.photos = imag;
         }
       }
       const newCar = await Car.findByIdAndUpdate(id, req.body, { new: true });

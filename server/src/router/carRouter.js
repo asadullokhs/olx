@@ -6,5 +6,7 @@ router.post("/car", authMiddlewear, carCtrl.add);
 router.get("/car", carCtrl.get);
 router.get("/car/:id", carCtrl.getOne);
 router.get("/cars/similar", carCtrl.similar);
+router.delete("/car/:id", authMiddlewear, carCtrl.delete);
+router.put("/car/:id", authMiddlewear, carCtrl.update);
 
 module.exports = router;
