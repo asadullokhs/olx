@@ -15,6 +15,8 @@ const carRouter = require("./src/router/carRouter");
 const fashionRouter = require("./src/router/fashionRouter");
 const typeRouter = require("./src/router/typeRouter");
 const workRouter = require("./src/router/workRouter");
+const chatRouter = require("./src/router/chatRouter");
+const messageRouter = require("./src/router/messageRouter");
 
 const app = express();
 
@@ -53,6 +55,8 @@ app.use("/api", typeRouter);
 app.use("/api", carRouter);
 app.use("/api", fashionRouter);
 app.use("/api", workRouter);
+app.use("/api", chatRouter);
+app.use("/api", messageRouter);
 
 // websocket functions
 
