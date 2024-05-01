@@ -3,6 +3,9 @@ const JWT = require("jsonwebtoken");
 const cloudinary = require("cloudinary");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
+const Car = require("../model/carModel");
+const workModel = require("../model/workModel");
+const fashionModel = require("../model/fashionModel");
 
 const removeTemp = (path) => {
   fs.unlink(path, (err) => {
@@ -42,15 +45,8 @@ const userCtrl = {
   deleteUser: async (req, res) => {
     try {
       const { id } = req.params;
-      const { token } = req.headers;
 
-      if (!token) {
-        res.status(403).send({ message: "Token is required" });
-      }
-
-      const currentUser = JWT.decode(token);
-
-      if (id == currentUser._id || currentUser.role == "admin") {
+      if (req.user || req.userIsAdmin) {
         const deletedUser = await User.findByIdAndDelete(id);
 
         if (!deletedUser) {
@@ -67,6 +63,10 @@ const userCtrl = {
             }
           });
         }
+
+        await Car.deleteMany({ authorId: id });
+        await workModel.deleteMany({ authorId: id });
+        await fashionModel.deleteMany({ authorId: id });
 
         return res
           .status(200)
