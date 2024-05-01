@@ -10,6 +10,10 @@ const carSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Type",
     },
+    categoryId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+    },
     authorId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",

@@ -11,6 +11,10 @@ const typeSchema = new mongoose.Schema(
       ref: "Sub",
       required: true,
     },
+    categoryId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+    },
   },
   {
     timestamps: true,

@@ -1,4 +1,7 @@
+const carModel = require("../model/carModel");
+const fashionModel = require("../model/fashionModel");
 const Type = require("../model/typeModel");
+const workModel = require("../model/workModel");
 
 const typeCtrl = {
   add: async (req, res) => {
@@ -33,6 +36,11 @@ const typeCtrl = {
       if (!deleteGall) {
         return res.status(400).send({ message: "Gallary not found" });
       }
+
+      await workModel.deleteMany({ categoryType: id });
+      await carModel.deleteMany({ categoryType: id });
+      await fashionModel.deleteMany({ categoryType: id });
+
       res.status(200).send({ message: "Type deleted", deleteGall });
     } catch (error) {
       res.status(503).json({ message: error.message });

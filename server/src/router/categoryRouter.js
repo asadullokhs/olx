@@ -5,6 +5,6 @@ const authMiddlewear = require("../middlewear/authMiddleware");
 router.post("/category", authMiddlewear, categoryCtrl.add);
 router.get("/category", categoryCtrl.get);
 router.get("/category/:id", categoryCtrl.getCategoryById);
-router.delete("/category/:id", categoryCtrl.delete);
+router.delete("/category/:id", authMiddlewear, categoryCtrl.delete);
 
 module.exports = router;

@@ -9,6 +9,10 @@ const categorySchema = new mongoose.Schema(
       type: Object,
       required: true,
     },
+    color: {
+      type: String,
+      default: "dodgerblue",
+    },
   },
   {
     timestamps: true,
