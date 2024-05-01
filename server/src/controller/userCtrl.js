@@ -84,6 +84,8 @@ const userCtrl = {
       const { id } = req.params;
       const { token } = req.headers;
 
+      console.log(req.body);
+
       if (!token) {
         return res.status(403).json({ message: "token is required" });
       }
@@ -137,6 +139,7 @@ const userCtrl = {
             password: req.body.password,
             phone: req.body.phone,
             email: req.body.email,
+            role: req.body.role,
           },
           {
             new: true,

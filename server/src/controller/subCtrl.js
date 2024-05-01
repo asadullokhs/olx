@@ -1,4 +1,8 @@
+const carModel = require("../model/carModel");
+const fashionModel = require("../model/fashionModel");
 const Sub = require("../model/subModel");
+const typeModel = require("../model/typeModel");
+const workModel = require("../model/workModel");
 
 const subCtrl = {
   add: async (req, res) => {
@@ -33,6 +37,11 @@ const subCtrl = {
       if (!deleteSub) {
         return res.status(400).send({ message: "Sub not found" });
       }
+
+      await typeModel.deleteMany({ subId: id });
+      await workModel.deleteMany({ subId: id });
+      await carModel.deleteMany({ subId: id });
+      await fashionModel.deleteMany({ subId: id });
 
       res.status(200).send({ message: "Sub deleted", deleteSub });
     } catch (error) {

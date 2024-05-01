@@ -2,6 +2,11 @@ const Category = require("../model/categoryModel");
 const cloudinary = require("cloudinary");
 const fs = require("fs");
 const mongoose = require("mongoose");
+const subModel = require("../model/subModel");
+const typeModel = require("../model/typeModel");
+const workModel = require("../model/workModel");
+const carModel = require("../model/carModel");
+const fashionModel = require("../model/fashionModel");
 
 const removeTemp = (path) => {
   fs.unlink(path, (err) => {
@@ -66,11 +71,7 @@ const categoryCtrl = {
 
   delete: async (req, res) => {
     try {
-      const { token } = req.headers;
       const { id } = req.params;
-      if (!token) {
-        return res.status(403).json({ message: "Token is required" });
-      }
 
       if (req.userIsAdmin) {
         const category = await Category.findByIdAndDelete(id);
@@ -87,6 +88,12 @@ const categoryCtrl = {
             }
           }
         );
+
+        await subModel.deleteMany({ categoryId: id });
+        await typeModel.deleteMany({ categoryId: id });
+        await workModel.deleteMany({ categoryId: id });
+        await carModel.deleteMany({ categoryId: id });
+        await fashionModel.deleteMany({ categoryId: id });
 
         res
           .status(200)
