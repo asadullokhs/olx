@@ -1,5 +1,4 @@
 const User = require("../model/userModel");
-const JWT = require("jsonwebtoken");
 const cloudinary = require("cloudinary");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
