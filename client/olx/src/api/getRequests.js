@@ -8,4 +8,4 @@ export const getAll = (method) => {
   return API.get(`/api/${method}`);
 };
 
-export const getOneProd = (id, method) => `/api/${method}/:${id}`;
+export const getOneProd = (id, method) => API.get(`/api/${method}/${id}`);

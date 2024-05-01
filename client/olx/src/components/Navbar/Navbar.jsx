@@ -20,9 +20,11 @@ const Navbar = () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
+
+
   return (
     <div className={`${isVisible ? "" : "hidden"} navbar scrollableDiv `}>
-      <div className="container">
+      <div className="container navbar_media">
         <div className="flex">
           <div className="logo">
             <Link to="/">

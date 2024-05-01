@@ -10,11 +10,11 @@ export const InfoProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("profile") || null)
   );
   const [cards, setCards] = useState([]);
+
   useEffect(() => {
     const getCars = async () => {
       try {
         const res = await getAll("car");
-        console.log(res);
         setCards(res.data.getAll);
       } catch (error) {
         console.log(error);

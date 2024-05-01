@@ -25,8 +25,7 @@ const Home = () => {
                 <img
                   className="img cars "
                   src="https://categories.olxcdn.com/assets/categories/olxuz/transport-3-1x.png"
-                  alt=""
-                />
+                  alt="" />
                 <br />
                 <span className="spans1">Transport</span>
               </Link>
@@ -55,11 +54,13 @@ const Home = () => {
         <div className="container">
           <div className="vip_announcements">
             <h1 className="h1">Премиум объявления</h1>
+
             <div className="announcementss">
               {cards.length > 0 ? cards.map(card => {
                 return <Card key={card._id} prod={card} />
               }) : <h2>Tavar yo'q</h2>}
             </div>
+
           </div>
         </div>
 
