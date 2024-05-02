@@ -9,7 +9,7 @@ import { data } from "../../data";
 
 const Home = () => {
   const id = useParams().id;
-  const res = data.filter((res) => res.id == id)[0];
+  const res = data?.filter((res) => res.id == id)[0];
   return (
     <div>
       <div className="body">

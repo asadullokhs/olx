@@ -43,7 +43,9 @@ const Navbar = () => {
               Hisobingiz
             </li>
             <li>
-              <button>E'lon berish</button>
+              <Link to={'/add-prod'}>
+               <button>E'lon berish</button>
+              </Link>
             </li>
           </ul>
         </div>

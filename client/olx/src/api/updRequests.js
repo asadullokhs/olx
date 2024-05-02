@@ -6,7 +6,7 @@ const API = axios.create({ baseURL: serverUrl });
 
 
 
-export const updateAll = (id, Data, method) => {
+export const updateAll = (id, data, method) => {
   const token = JSON.parse(localStorage.getItem("token"));
-  return API.put(`/api/${method}/${id}`,Data, { headers: { token } });
+  return API.put(`/api/${method}/${id}`, data, { headers: { token } });
 };

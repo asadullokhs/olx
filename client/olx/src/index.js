@@ -14,7 +14,7 @@ root.render(
   <InfoProvider>
     <GoogleOAuthProvider clientId="169889383935-j3a63hj1cv6bsca80knlvfc6924l43l2.apps.googleusercontent.com">
       <App />
-      <ToastContainer />
     </GoogleOAuthProvider>
+      <ToastContainer />
   </InfoProvider>
 );
