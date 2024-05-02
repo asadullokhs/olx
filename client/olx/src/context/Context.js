@@ -1,9 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react";
-<<<<<<< HEAD
-import { getAll } from "../api/getRequests";
-=======
+
+
 import { getAll, getProd } from "../api/getRequests";
->>>>>>> ef1be114cb68ab5bfcf149758e9c62e3d1290df4
 
 const InfoContext = createContext();
 
@@ -13,19 +11,6 @@ export const InfoProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("profile") || null)
   );
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    const getCars = async () => {
-      try {
-        const res = await getAll("car");
-        setCards(res.data.getAll);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getCars();
-  }, [currentUser]);
 
   const [cards, setCards] = useState([]);
   const [category, setCategory] = useState([]);
@@ -68,15 +53,12 @@ export const InfoProvider = ({ children }) => {
   const value = {
     currentUser,
     setCurrentUser,
-<<<<<<< HEAD
     exit, category, setCategory,
     sub, setSub,
-    type, setType
-=======
+    type, setType,
     exit,
     cards,
     setCards,
->>>>>>> ef1be114cb68ab5bfcf149758e9c62e3d1290df4
   };
 
   return <InfoContext.Provider value={value}>{children}</InfoContext.Provider>;
