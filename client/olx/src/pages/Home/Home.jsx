@@ -10,7 +10,7 @@ import { useInfoContext } from "../../context/Context";
 
 const Home = () => {
   const id = useParams().id;
-  const res = data?.filter((res) => res.id == id)[0];
+  // const res = data?.filter((res) => res.id == id)[0];
   const { cards } = useInfoContext()
   return (
     <div>
