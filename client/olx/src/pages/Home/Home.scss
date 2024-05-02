@@ -1,3 +1,8 @@
+*{
+    margin: 0;
+    box-sizing: border-box;
+}
+
 .body {
     background-color: #f1f2f2;
     position: relative;
@@ -156,7 +161,6 @@
             font-weight: 700;
             width: 100px;
             height: 50px;
-
         }
 
         .info_btn:hover {
@@ -175,7 +179,6 @@
     justify-content: center;
     flex-direction: column;
     text-align: center;
-
     width: 100%;
     height: 427px;
 
@@ -252,5 +255,12 @@
             }
         }
     }
-
 }
+@media only screen and (max-width: 490px) {
+    .announcementss{
+        width: auto;
+        .row{
+            margin: 0;
+        }
+    }
+  }

@@ -1,5 +1,6 @@
 const cloudinary = require("cloudinary");
 const fs = require("fs");
+const mongoose = require("mongoose");
 
 const removeTemp = (pathes) => {
   fs.unlink(pathes, (err) => {
@@ -10,6 +11,8 @@ const removeTemp = (pathes) => {
 };
 
 const Car = require("../model/carModel");
+const Fashion = require("../model/fashionModel");
+const Work = require("../model/workModel");
 
 const carCtrl = {
   add: async (req, res) => {
@@ -21,7 +24,7 @@ const carCtrl = {
       if (req.files) {
         let images = [];
         const { image } = req.files;
-        if (image.length > 0) {
+        if (image?.length > 0) {
           for (const img of image) {
             const format = img.mimetype.split("/")[1];
             if (format !== "png" && format !== "jpeg") {
@@ -33,7 +36,9 @@ const carCtrl = {
                 folder: "Olx",
               }
             );
+
             removeTemp(img.tempFilePath);
+
             const imag = {
               public_id: createdImage.public_id,
               url: createdImage.secure_url,
@@ -41,7 +46,7 @@ const carCtrl = {
             images.push(imag);
           }
           req.body.photos = images;
-        } else if (image) {
+        } else {
           const format = image.mimetype.split("/")[1];
           if (format !== "png" && format !== "jpeg") {
             return res.status(403).json({ message: "File format incorrect" });
@@ -80,26 +85,63 @@ const carCtrl = {
     const { id } = req.params;
     try {
       const getCar = await Car.aggregate([
-        { $match: { _id: new mongoose.Types.ObjectId(id) } },
+        {
+          $match: { _id: new mongoose.Types.ObjectId(id) },
+        },
         {
           $lookup: {
-            from: "User",
-            let: { carId: "$_id" },
+            from: "cars",
+            let: { authorId: "$authorId" },
             pipeline: [
-              { $match: { $expr: { $eq: ["$_Id", "$$carId"] } } },
-              {
-                $lookup: {
-                  from: "author",
-                  let: { authorId: "$_Id" },
-                  pipeline: [
-                    { $match: { $expr: { $eq: ["$_id", "$$authorId"] } } },
-                  ],
-                  as: "user",
-                },
-              },
+              { $match: { $expr: { $eq: ["$authorId", "$$authorId"] } } },
             ],
-            as: "prod",
+            as: "userCar",
           },
+        },
+        {
+          $lookup: {
+            from: "fashions",
+            let: { authorId: "$authorId" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$authorId", "$$authorId"] } } },
+            ],
+            as: "userFashion",
+          },
+        },
+        {
+          $lookup: {
+            from: "works",
+            let: { authorId: "$authorId" },
+            pipeline: [
+              { $match: { $expr: { $eq: ["$authorId", "$$authorId"] } } },
+            ],
+            as: "userWork",
+          },
+        },
+        {
+          $addFields: {
+            userProd: {
+              $concatArrays: ["$userCar", "$userFashion", "$userWork"],
+            },
+          },
+        },
+        {
+          $project: {
+            userCar: 0,
+            userFashion: 0,
+            userWork: 0,
+          },
+        },
+        {
+          $lookup: {
+            from: "users",
+            let: { user: "$authorId" },
+            pipeline: [{ $match: { $expr: { $eq: ["$_id", "$$user"] } } }],
+            as: "user",
+          },
+        },
+        {
+          $unwind: "$user",
         },
       ]);
       if (!getCar) {
@@ -117,35 +159,28 @@ const carCtrl = {
     }
 
     try {
-      const deleteGall = await Car.findByIdAndDelete(id);
-      if (!deleteGall) {
-        return res.status(400).send({ message: "Gallary not found" });
+      const deleteCar = await Car.findByIdAndDelete(id);
+      if (!deleteCar) {
+        return res.status(400).send({ message: "Car not found" });
       }
-      const deletePic = await Car.findById(id);
-
-      if (deleteGall.length > 0) {
-        deletePic.map(async (pic) => {
-          console.log(pic);
-          await cloudinary.v2.uploader.destroy(
-            pic.picture.public_id,
-            async (err) => {
-              if (err) {
-                throw err;
-              }
+      if (deleteCar.photos.length > 0) {
+        deleteCar.photos.map(async (pic) => {
+          await cloudinary.v2.uploader.destroy(pic.public_id, async (err) => {
+            if (err) {
+              throw err;
             }
-          );
+          });
         });
       }
-      await Car.deleteMany({ gallaryId: id });
-      res.status(200).send({ message: "Gallary deleted", deleteGall });
+      res.status(200).send({ message: "Car deleted", deleteCar });
     } catch (error) {
       res.status(503).json({ message: error.message });
     }
   },
   update: async (req, res) => {
-    const { title } = req.body;
+    const { name } = req.body;
     const { id } = req.params;
-    if (!title || !id) {
+    if (!name || !id) {
       return res.status(403).json({ message: "insufficient information" });
     }
     try {
@@ -163,7 +198,7 @@ const carCtrl = {
           const imagee = await cloudinary.v2.uploader.upload(
             image.tempFilePath,
             {
-              folder: "OLX",
+              folder: "Olx",
             },
             async (err, result) => {
               if (err) {
@@ -174,24 +209,41 @@ const carCtrl = {
               }
             }
           );
-          if (updateCar.picture) {
-            await cloudinary.v2.uploader.destroy(
-              updateCar.picture.public_id,
-              async (err) => {
-                if (err) {
-                  throw err;
+          if (updateCar.photos.length > 0) {
+            updateCar.photos.map(async (pic) => {
+              await cloudinary.v2.uploader.destroy(
+                pic.public_id,
+                async (err) => {
+                  if (err) {
+                    throw err;
+                  }
                 }
-              }
-            );
+              );
+            });
           }
           const imag = { public_id: imagee.public_id, url: imagee.secure_url };
-          req.body.sub_photos = imag;
+          req.body.photos = imag;
         }
       }
       const newCar = await Car.findByIdAndUpdate(id, req.body, { new: true });
       res.status(200).send({ message: "Update successfully", newCar });
     } catch (error) {
       res.status(503).json({ message: error.message });
+    }
+  },
+  similar: async (req, res) => {
+    try {
+      const { name } = req.query;
+
+      const result = await Promise.all([
+        Car.find({ name: { $regex: new RegExp(name, "i") } }),
+        Fashion.find({ name: { $regex: new RegExp(name, "i") } }),
+        Work.find({ name: { $regex: new RegExp(name, "i") } }),
+      ]);
+
+      res.status(200).send({ message: "Found result", similar: result.flat() });
+    } catch (error) {
+      console.log(error);
     }
   },
 };

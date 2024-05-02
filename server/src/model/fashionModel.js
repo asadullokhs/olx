@@ -10,6 +10,18 @@ const fashionSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Type",
     },
+    categoryId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Category",
+    },
+    authorId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User",
+    },
+    subId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Sub",
+    },
     photos: {
       type: Array,
       default: [],
@@ -53,4 +65,4 @@ const fashionSchema = new mongoose.Schema(
   }
 );
 
-module.exports = mongoose.model("Car", carSchema);
+module.exports = mongoose.model("Fashion", fashionSchema);

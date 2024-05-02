@@ -1,8 +1,10 @@
 const User = require("../model/userModel");
-const JWT = require("jsonwebtoken");
 const cloudinary = require("cloudinary");
 const bcrypt = require("bcrypt");
 const fs = require("fs");
+const Car = require("../model/carModel");
+const workModel = require("../model/workModel");
+const fashionModel = require("../model/fashionModel");
 
 const removeTemp = (path) => {
   fs.unlink(path, (err) => {
@@ -42,15 +44,8 @@ const userCtrl = {
   deleteUser: async (req, res) => {
     try {
       const { id } = req.params;
-      const { token } = req.headers;
 
-      if (!token) {
-        res.status(403).send({ message: "Token is required" });
-      }
-
-      const currentUser = JWT.decode(token);
-
-      if (id == currentUser._id || currentUser.role == "admin") {
+      if (req.user || req.userIsAdmin) {
         const deletedUser = await User.findByIdAndDelete(id);
 
         if (!deletedUser) {
@@ -68,6 +63,10 @@ const userCtrl = {
           });
         }
 
+        await Car.deleteMany({ authorId: id });
+        await workModel.deleteMany({ authorId: id });
+        await fashionModel.deleteMany({ authorId: id });
+
         return res
           .status(200)
           .send({ message: "Deleted succesfully", deletedUser });
@@ -84,6 +83,8 @@ const userCtrl = {
       const { password } = req.body;
       const { id } = req.params;
       const { token } = req.headers;
+
+      console.log(req.body);
 
       if (!token) {
         return res.status(403).json({ message: "token is required" });
@@ -138,6 +139,7 @@ const userCtrl = {
             password: req.body.password,
             phone: req.body.phone,
             email: req.body.email,
+            role: req.body.role,
           },
           {
             new: true,
@@ -148,6 +150,27 @@ const userCtrl = {
       }
     } catch (error) {
       res.status(503).json(error.message);
+    }
+  },
+  like: async (req, res) => {
+    const { id } = req.params;
+    const { prodId } = req.body;
+    try {
+      const user = await User.findById(id);
+      if (!user) {
+        return res.status(404).send({ message: "User is Not Found" });
+      }
+      if (user.likes.includes(prodId)) {
+        await User.updateOne({ $pull: { likes: prodId } });
+        const updatedUser = await User.findById(id);
+        res.status(200).json({ message: "Like canceled", user: updatedUser });
+      } else {
+        await User.updateOne({ $push: { likes: prodId } });
+        const updatedUser = await User.findById(id);
+        res.status(200).json({ message: "Like added", user: updatedUser });
+      }
+    } catch (error) {
+      res.status(503).json({ message: error.message });
     }
   },
 };
