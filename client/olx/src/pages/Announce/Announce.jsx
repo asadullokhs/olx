@@ -11,6 +11,8 @@ const Announc = () => {
   //   const userProd = cards.filter((prod) => prod.authorId === currentUser._id);
   const userProd = [];
   return (
+
+    
     <div className="announc">
       <Navbar />
       <div className="container">
@@ -22,7 +24,7 @@ const Announc = () => {
                 Sizning hisobingiz: 0 sum
                 <br /> Eʼlonlar reklamasi uchun: 0 bonuslarni
               </span>
-              <i class="fa-solid fa-circle-info"></i>
+              <i className="fa-solid fa-circle-info"></i>
               <button>Hisobni Toldirish</button>
               <button className="buyBtn">Paketni sotib oling</button>
             </div>
@@ -58,21 +60,21 @@ const Announc = () => {
           </ul>
           <div className="btns">
             <div className="filterR">
-              <i class="fa-solid fa-sliders" style={{marginRight:'10px'}}></i>
+              <i className="fa-solid fa-sliders" style={{marginRight:'10px'}}></i>
               <span>Filtrni qo'shing</span>
             </div>
             <div className="searchInput">
-              <i class="fa-solid fa-magnifying-glass"></i>
+              <i className="fa-solid fa-magnifying-glass"></i>
               <input type="text" placeholder="Sarlavha, ID yoki joylashuvi..." />
             </div>
             <div className="category">
               {/* asosida qidirish */}
               <span>Istalgan toifa</span> 
-              <i class="fa-solid fa-chevron-down"></i>
+              <i className="fa-solid fa-chevron-down"></i>
             </div>
             <div className="sort">
               <span>Saralash</span>
-              <i class="fa-solid fa-chevron-down"></i>
+              <i className="fa-solid fa-chevron-down"></i>
             </div>
           </div>
           <div className="cardsS">
@@ -85,9 +87,9 @@ const Announc = () => {
                         <img src={res.photos[0].url} alt="" />
                         <div className="status-one">
                           <b>{res.content}</b> <br /> <br />
-                          <i class="fa-solid fa-location-dot"></i>
+                          <i className="fa-solid fa-location-dot"></i>
                           {res.location} <br /> <br />
-                          <i class="fa-solid fa-calendar-days"></i>
+                          <i className="fa-solid fa-calendar-days"></i>
                           {new Date(
                             res.createdAt
                           ).toLocaleTimeString()} <br /> <br />
@@ -98,18 +100,18 @@ const Announc = () => {
                           <b>{res.price}</b>
                           <div className="iconss">
                             <span>
-                              0 <i class="fa-regular fa-heart"></i>
+                              0 <i className="fa-regular fa-heart"></i>
                             </span>
                             <span>
-                              0 <i class="fa-solid fa-phone"></i>
+                              0 <i className="fa-solid fa-phone"></i>
                             </span>
                             <span>
-                              0 <i class="fa-solid fa-eye"></i>
+                              0 <i className="fa-solid fa-eye"></i>
                             </span>
 
                             <button>Просмотр статиску</button>
                             <button>
-                              <i class="fa-regular fa-comment"></i> 0
+                              <i className="fa-regular fa-comment"></i> 0
                             </button>
                           </div>
                         </div>

@@ -1,9 +1,8 @@
 import { createContext, useContext, useEffect, useState } from "react";
-<<<<<<< HEAD
-import { getAll } from "../api/getRequests";
-=======
+
+
 import { getAll, getProd } from "../api/getRequests";
->>>>>>> ef1be114cb68ab5bfcf149758e9c62e3d1290df4
+
 
 const InfoContext = createContext();
 
@@ -27,7 +26,7 @@ export const InfoProvider = ({ children }) => {
     getCars();
   }, [currentUser]);
 
-  const [cards, setCards] = useState([]);
+
   const [category, setCategory] = useState([]);
   const [sub, setSub] = useState([]);
   const [type, setType] = useState([]);
@@ -68,15 +67,14 @@ export const InfoProvider = ({ children }) => {
   const value = {
     currentUser,
     setCurrentUser,
-<<<<<<< HEAD
     exit, category, setCategory,
     sub, setSub,
-    type, setType
-=======
+    type, setType,
+
     exit,
     cards,
     setCards,
->>>>>>> ef1be114cb68ab5bfcf149758e9c62e3d1290df4
+
   };
 
   return <InfoContext.Provider value={value}>{children}</InfoContext.Provider>;

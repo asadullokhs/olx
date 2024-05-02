@@ -53,6 +53,8 @@ const modalData = [
     "Go'zallik-salomatlik",
   ],
 ];
+
+
 const AddProd = () => {
   const { category, type, sub } = useInfoContext();
   const [currentData, setCurrentData] = useState(modalData[0]);
@@ -75,7 +77,7 @@ const AddProd = () => {
   const [subId, setSubId] = useState(null);
   const [typeId, setTypeId] = useState(null);
   const findCategory = category.filter((set) => set._id === getId)[0];
-  
+
   const findType = type.filter((set) => set._id === typeId)[0];
   const findSub = sub.filter((set) => set._id === subId)[0];
 
@@ -247,7 +249,7 @@ const AddProd = () => {
                                     className="change-menu"
                                   >
                                     {item.name}{" "}
-                                    <i class="fa-solid fa-angle-right"></i>
+                                    <i className="fa-solid fa-angle-right"></i>
                                   </li>
                                 );
                               }
@@ -267,7 +269,7 @@ const AddProd = () => {
                                     className="change-menu"
                                   >
                                     {item.name}{" "}
-                                    <i class="fa-solid fa-angle-right"></i>
+                                    <i className="fa-solid fa-angle-right"></i>
                                   </li>
                                 );
                               }

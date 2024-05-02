@@ -27,7 +27,7 @@ const Card = ({ prod }) => {
                     </div>
                 </Link>
                 <div className='card-like'>
-                    <i class="fa-regular fa-heart"></i>
+                    <i className="fa-regular fa-heart"></i>
                 </div>
             </div>
         </div>

@@ -10,11 +10,11 @@ import { useInfoContext } from "../../context/Context";
 
 const Home = () => {
   const id = useParams().id;
-<<<<<<< HEAD
-  const res = data?.filter((res) => res.id == id)[0];
-=======
+
+  // const res = data?.filter((res) => res.id == id)[0];
+
   const { cards } = useInfoContext()
->>>>>>> ef1be114cb68ab5bfcf149758e9c62e3d1290df4
+
   return (
     <div>
       <div className="body">
@@ -124,54 +124,54 @@ const Home = () => {
                 alt=""
               />
               <div className="links">
-                <span class="css-eizsos">OLX servisining bo'limlari :</span>
-                <a class="css-j634ox" href="/oz/detskiy-mir/">
+                <span className="css-eizsos">OLX servisining bo'limlari :</span>
+                <a className="css-j634ox" href="/oz/detskiy-mir/">
                   {" "}
                   Bolalar dunyosi{" "}
                 </a>
-                <a class="css-j634ox" href="/oz/nedvizhimost/">
+                <a className="css-j634ox" href="/oz/nedvizhimost/">
                   {" "}
                   Ko'chmas mulk{" "}
                 </a>
-                <a class="css-j634ox" href="/oz/transport/">
+                <a className="css-j634ox" href="/oz/transport/">
                   {" "}
                   Transport{" "}
                 </a>
-                <a class="css-j634ox" href="/oz/rabota/">
+                <a className="css-j634ox" href="/oz/rabota/">
                   {" "}
                   Ish{" "}
                 </a>
-                <a class="css-j634ox" href="/oz/zhivotnye/">
+                <a className="css-j634ox" href="/oz/zhivotnye/">
                   {" "}
                   Hayvonlar{" "}
                 </a>{" "}
                 <br />
-                <a class="css-j634ox" href="/oz/dom-i-sad/">
+                <a className="css-j634ox" href="/oz/dom-i-sad/">
                   {" "}
                   Uy va bog'{" "}
                 </a>
-                <a class="css-j634ox" href="/oz/elektronika/">
+                <a className="css-j634ox" href="/oz/elektronika/">
                   {" "}
                   Elektr jihozlari{" "}
                 </a>
-                <a class="css-j634ox" href="/oz/uslugi/">
+                <a className="css-j634ox" href="/oz/uslugi/">
                   {" "}
                   Xizmatlar{" "}
                 </a>
-                <a class="css-j634ox" href="/oz/moda-i-stil/">
+                <a className="css-j634ox" href="/oz/moda-i-stil/">
                   {" "}
                   Moda va stil{" "}
                 </a>
-                <a class="css-j634ox" href="/oz/hobbi-otdyh-i-sport/">
+                <a className="css-j634ox" href="/oz/hobbi-otdyh-i-sport/">
                   {" "}
                   Xobbi, dam olish sport{" "}
                 </a>
-                <a class="css-j634ox" href="/oz/otdam-darom/">
+                <a className="css-j634ox" href="/oz/otdam-darom/">
                   {" "}
                   Tekinga beraman{" "}
                 </a>{" "}
                 <br />
-                <a class="css-j634ox" href="/oz/obmen-barter/">
+                <a className="css-j634ox" href="/oz/obmen-barter/">
                   {" "}
                   Ayirboshlash{" "}
                 </a>
@@ -183,67 +183,67 @@ const Home = () => {
                 alt=""
               />
               <div className="links">
-                <span class="css-eizsos">Mashhur qidiruvlar : </span>
-                <a class="css-j634ox" href="/oz/q-samsung/">
+                <span className="css-eizsos">Mashhur qidiruvlar : </span>
+                <a className="css-j634ox" href="/oz/q-samsung/">
                   samsung
                 </a>
-                <a class="css-j634ox" href="/oz/q-matiz/">
+                <a className="css-j634ox" href="/oz/q-matiz/">
                   matiz
                 </a>
-                <a class="css-j634ox" href="/oz/q-telefon/">
+                <a className="css-j634ox" href="/oz/q-telefon/">
                   telefon
                 </a>
-                <a class="css-j634ox" href="/oz/q-damas/">
+                <a className="css-j634ox" href="/oz/q-damas/">
                   damas
                 </a>
-                <a class="css-j634ox" href="/oz/q-квартира/">
+                <a className="css-j634ox" href="/oz/q-квартира/">
                   квартира
                 </a>{" "}
                 <br />
-                <a class="css-j634ox" href="/oz/q-iphone-x/">
+                <a className="css-j634ox" href="/oz/q-iphone-x/">
                   iphone x
                 </a>
-                <a class="css-j634ox" href="/oz/q-jentra/">
+                <a className="css-j634ox" href="/oz/q-jentra/">
                   jentra
                 </a>
-                <a class="css-j634ox" href="/oz/q-byd/">
+                <a className="css-j634ox" href="/oz/q-byd/">
                   byd
                 </a>
-                <a class="css-j634ox" href="/oz/q-iphone-11/">
+                <a className="css-j634ox" href="/oz/q-iphone-11/">
                   iphone 11
                 </a>
-                <a class="css-j634ox" href="/oz/q-матиз/">
+                <a className="css-j634ox" href="/oz/q-матиз/">
                   матиз
                 </a>
-                <a class="css-j634ox" href="/oz/q-iphone-12/">
+                <a className="css-j634ox" href="/oz/q-iphone-12/">
                   iphone 12
                 </a>
-                <a class="css-j634ox" href="/oz/q-spark/">
+                <a className="css-j634ox" href="/oz/q-spark/">
                   spark
                 </a>
-                <a class="css-j634ox" href="/oz/q-kvartira/">
+                <a className="css-j634ox" href="/oz/q-kvartira/">
                   kvartira
                 </a>{" "}
                 <br />
-                <a class="css-j634ox" href="/oz/q-redmi/">
+                <a className="css-j634ox" href="/oz/q-redmi/">
                   redmi
                 </a>
-                <a class="css-j634ox" href="/oz/q-велосипед/">
+                <a className="css-j634ox" href="/oz/q-велосипед/">
                   велосипед
                 </a>
-                <a class="css-j634ox" href="/oz/q-malibu-2/">
+                <a className="css-j634ox" href="/oz/q-malibu-2/">
                   malibu 2
                 </a>
-                <a class="css-j634ox" href="/oz/q-iphone-13-pro/">
+                <a className="css-j634ox" href="/oz/q-iphone-13-pro/">
                   iphone 13 pro
                 </a>
-                <a class="css-j634ox" href="/oz/q-ish/">
+                <a className="css-j634ox" href="/oz/q-ish/">
                   ish
                 </a>
-                <a class="css-j634ox" href="/oz/q-velosiped/">
+                <a className="css-j634ox" href="/oz/q-velosiped/">
                   velosiped
                 </a>
-                <a class="css-j634ox" href="/oz/q-monza/">
+                <a className="css-j634ox" href="/oz/q-monza/">
                   monza
                 </a>
               </div>

@@ -36,7 +36,7 @@ const Prod = ({ prod }) => {
 
                 <div className="container">
                     <div className="links_prod">
-                        <button type="button" data-testid="to-back" className="btn_links"> <Link to="/" className='btn_link'> <i class="fa-solid fa-chevron-left"></i> Orqaga</Link></button>
+                        <button type="button" data-testid="to-back" className="btn_links"> <Link to="/" className='btn_link'> <i className="fa-solid fa-chevron-left"></i> Orqaga</Link></button>
                         <ol data-testid="breadcrumbs" data-cy="categories-breadcrumbs" className="links_ol">
                             <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Bosh sahifa  </Link></li> <div> / </div>
                             <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Transport  </Link></li> <div> / </div>
@@ -67,7 +67,7 @@ const Prod = ({ prod }) => {
                                         {isToday ? fromattedDate : `Сегодня в ${createdAt.toLocaleDateString().slice(0, 5)}`}
                                     </Link>
                                     <Link to="/" className='boxs_heard'>
-                                        <i class="fa-regular fa-heart"></i>
+                                        <i className="fa-regular fa-heart"></i>
                                     </Link>
                                 </div>
                                 <div className='sp span'>
@@ -93,7 +93,7 @@ const Prod = ({ prod }) => {
                                     </div>
                                 </div>
                                 <span className='profil_link_span_a'>
-                                    <Link to="/">Muallifning boshqa e'lonlari <i class="fa-solid fa-chevron-right"></i></Link>
+                                    <Link to="/">Muallifning boshqa e'lonlari <i className="fa-solid fa-chevron-right"></i></Link>
                                 </span>
                             </div>
                             <div className="box3">
@@ -115,10 +115,10 @@ const Prod = ({ prod }) => {
                         <div className='a2_futers'>
                             <div className="advertising">
                                 <Link to="/" className='link'>
-                                    <h6 className='.adv_h6'> <i class="fa-regular fa-bookmark"></i>  REKLAMA QILISH</h6>
+                                    <h6 className='.adv_h6'> <i className="fa-regular fa-bookmark"></i>  REKLAMA QILISH</h6>
                                 </Link>
                                 <Link to="/" className='link'>
-                                    <h6 className='.adv_h6'> <i class="fa-solid fa-rotate-right"></i>  KO'TARISH</h6>
+                                    <h6 className='.adv_h6'> <i className="fa-solid fa-rotate-right"></i>  KO'TARISH</h6>
                                 </Link>
                             </div>
                             <div className='tags'>
@@ -151,7 +151,7 @@ const Prod = ({ prod }) => {
                             <div className='a2_futer'>
                                 <span>ID: 1</span>
                                 <span>Ko'rishlar: 12</span>
-                                <button className='a2_futer_btn'> <Link to="/" className='a2_futer_btn_link'> <i class="fa-regular fa-font-awesome"></i> Shikoyat qilish </Link> </button>
+                                <button className='a2_futer_btn'> <Link to="/" className='a2_futer_btn_link'> <i className="fa-regular fa-font-awesome"></i> Shikoyat qilish </Link> </button>
                             </div>
                         </div>
                     </div>
@@ -176,7 +176,7 @@ const Prod = ({ prod }) => {
                         <div className="author_futter_2">
                             <button className='btn'>Xabar yozish</button>
                             <div className='author_futter_2_2'>
-                                <div className="boll"><i class="fa-solid fa-phone"></i></div>
+                                <div className="boll"><i className="fa-solid fa-phone"></i></div>
                                 <p>XXX XX XX</p>
                                 <button className='btn2'>Ko'rsatish</button>
                             </div>
