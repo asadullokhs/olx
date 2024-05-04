@@ -24,7 +24,6 @@ const workSchema = new mongoose.Schema(
     },
     content: {
       type: String,
-      required: true,
     },
     link: {
       type: String,
