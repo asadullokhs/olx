@@ -1,6 +1,6 @@
 import React from "react";
-// import "slick-carousel/slick/slick/slick.css"
-// import "slick-carousel/slick/slick/slick-them.css"
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 import { useInfoContext } from "./context/Context";
 import Home from "./pages/Home/Home";
 import Auth from "./pages/Auth/Auth";

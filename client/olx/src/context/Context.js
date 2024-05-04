@@ -37,7 +37,7 @@ export const InfoProvider = ({ children }) => {
         setCategory(resCategory?.data?.category);
         setSub(resSub?.data?.getAll);
         setType(resType?.data?.getAll);
-        setCards([
+        setCards([ 
           ...resCar?.data?.getAll,
           ...resFashion?.data?.getAll,
           ...resWork?.data?.getAll,
@@ -56,7 +56,6 @@ export const InfoProvider = ({ children }) => {
     exit, category, setCategory,
     sub, setSub,
     type, setType,
-    exit,
     cards,
     setCards,
   };
