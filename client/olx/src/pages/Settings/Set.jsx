@@ -4,6 +4,7 @@ import "./Set.scss";
 import { updateAll } from "../../api/updRequests";
 import { useInfoContext } from "../../context/Context";
 import { toast } from "react-toastify";
+import { Link } from "react-router-dom";
 
 const Setings = () => {
   const { currentUser, setCurrentUser } = useInfoContext();
@@ -14,11 +15,12 @@ const Setings = () => {
       const form = new FormData(e.target);
       toast.loading("Please wait...");
 
-      const res = await updateAll(currentUser._id, form, "user");
+      const res = await updateAll(currentUser?._id, form, "user");
       toast.dismiss();
 
       localStorage.setItem("profile", JSON.stringify(res?.data?.newUser));
 
+      console.log(res.data);
       setCurrentUser(res?.data?.newUser);
       toast.success(res?.data?.message);
     } catch (error) {
@@ -30,13 +32,18 @@ const Setings = () => {
 
   return (
     <div className="bg">
+        <div className="media_texts">
+          <h1>Sozlamalar</h1>
+        </div>
+      <div className="navbar">
       <Navbar />
+      </div>
       <div className="settings">
         <header>
           <div className="container">
             <div className="second_nav">
               <div className="set_texts">
-                <h2>Sozlama</h2>
+                <h2>Sozlamalar</h2>
               </div>
 
               <div className="part_pay">
@@ -44,14 +51,16 @@ const Setings = () => {
                   Sizning hisobingiz: 0 so'm <br />
                   Reklama e'lonlari uchun: 0 bonus
                 </span>
+                <i class="fa-solid fa-circle-info"></i>
 
                 <button className="pay_btn">Hisobni To'ldirish</button>
+                <button className="buyBtn">Paketni sotib oling</button>
               </div>
             </div>
 
             <div className="third_nav">
               <ul className="clr_center">
-                <li className="fleft">E'lonlar</li>
+                <Link to="/announce" className="fleft">E'lonlar</Link>
                 <li className="fleft">Xabarlar</li>
                 <li className="fleft">To'lovlar va OLX hisobi</li>
                 <li className="fleft">Olingan ballar</li>
@@ -89,45 +98,7 @@ const Setings = () => {
                   <form onSubmit={handleSubmit}>
                     <div className="accordion-body">
                       <label for="address">Shaharni tanlash</label>
-                      <select id="address" name="address">
-                        <option value="bektemir">
-                          Toshkent, Bektemir tumani
-                        </option>
-                        <hr />
-                        <option value="chilonzor">
-                          Toshkent, Chilonzor tumani
-                        </option>
-                        <hr />
-
-                        <option value="toshkent">
-                          Toshkent, Toshkent tumani
-                        </option>
-                        <hr />
-
-                        <option value="mirobod">
-                          Toshkent, Mirobod tumani
-                        </option>
-                        <hr />
-
-                        <option value="uchtepa">
-                          Toshkent, Uchtepa tumani
-                        </option>
-                        <hr />
-
-                        <option value="yunusobod">
-                          Toshkent, Yunusobod tumani
-                        </option>
-                        <hr />
-
-                        <option value="yashnobod">
-                          Toshkent, Yashnobod tumani
-                        </option>
-                        <hr />
-
-                        <option value="olmazor" selected>
-                          Toshkent, Olmazor tumani
-                        </option>
-                      </select>
+                     <input type="text" name="address" className="accord-input"/>
                     </div>
 
                     <div className="set_line"></div>
@@ -135,12 +106,12 @@ const Setings = () => {
                     <div className="accordion-body">
                       <label htmlFor="">Aloqa uchun shaxs</label>
 
-                      <input type="text" className="accord-input" />
+                      <input type="text" name="user" className="accord-input" />
                     </div>
                     <div className="accordion-body">
                       <label htmlFor="">Telefon raqami</label>
 
-                      <input type="text" className="accord-input" />
+                      <input type="text" name="phone" className="accord-input" />
                     </div>
 
                     <button className="d_btn">Saqlash</button>
@@ -186,7 +157,7 @@ const Setings = () => {
                         Yangi parol <code>*</code>
                       </label>
 
-                      <input type="text" className="accord-input" />
+                      <input type="text"  name="password" className="accord-input" />
                     </div>
 
                     <button className="d_btn">Saqlash</button>
@@ -227,8 +198,8 @@ const Setings = () => {
                     </div>
 
                     <div className="accordion-body">
-                      <label htmlFor="">Yangi e‘lon</label>
-                      <input type="text" className="accord-input" />
+                      <label htmlFor="">Yangi Email</label>
+                      <input type="text" name="email" className="accord-input" />
                     </div>
 
                     <button className="d_btn">Saqlash</button>
@@ -279,7 +250,7 @@ const Setings = () => {
                     aria-expanded="false"
                     aria-controls="flush-collapseFive"
                   >
-                    Email-manzilni o‘zgartirish
+                    Akauntni o‘chirish
                   </button>
                 </h2>
                 <div
@@ -298,7 +269,9 @@ const Setings = () => {
         </div>
       </div>
 
-      <Footer />
+    <div className="footer">
+    <Footer />
+    </div>
     </div>
   );
 };

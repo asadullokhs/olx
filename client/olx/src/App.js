@@ -5,8 +5,9 @@ import { useInfoContext } from "./context/Context";
 import Home from "./pages/Home/Home";
 import Auth from "./pages/Auth/Auth";
 import Settings from "./pages/Settings/Set";
+import AddProd from "./pages/AddProd/AddProd";
+import Announce from "./pages/Announce/Announce";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
 import Prod from "./pages/OneProd/Prod";
 
 const App = () => {
@@ -21,8 +22,9 @@ const App = () => {
             element={currentUser ? <Settings /> : <Auth />}
           />
           <Route path="/prod/:id" element={<Prod />} />
+          <Route path="/add-prod" element={<AddProd />} />
+          <Route path="/announce" element={<Announce />} />
         </Routes>
-        <ToastContainer />
       </div>
     </Router>
   );
