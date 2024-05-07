@@ -58,7 +58,7 @@ const Announc = () => {
           </ul>
           <div className="btns">
             <div className="filterR">
-              <i class="fa-solid fa-sliders" style={{marginRight:'10px'}}></i>
+              <i class="fa-solid fa-sliders" style={{ marginRight: '10px' }}></i>
               <span>Filtrni qo'shing</span>
             </div>
             <div className="searchInput">
@@ -67,7 +67,7 @@ const Announc = () => {
             </div>
             <div className="category">
               {/* asosida qidirish */}
-              <span>Istalgan toifa</span> 
+              <span>Istalgan toifa</span>
               <i class="fa-solid fa-chevron-down"></i>
             </div>
             <div className="sort">
@@ -82,7 +82,11 @@ const Announc = () => {
                   <div className="card-user">
                     <div className="one">
                       <div className="card-info">
-                        <img src={res.photos[0].url} alt="" />
+                        {res.photos.length > 0 ? (
+                          <img src={res?.photos[0].url} alt="card_img" />
+                        ) : (
+                          <img src="/images/logo.png" />
+                        )}
                         <div className="status-one">
                           <b>{res.content}</b> <br /> <br />
                           <i class="fa-solid fa-location-dot"></i>
@@ -106,7 +110,6 @@ const Announc = () => {
                             <span>
                               0 <i class="fa-solid fa-eye"></i>
                             </span>
-
                             <button>Просмотр статиску</button>
                             <button>
                               <i class="fa-regular fa-comment"></i> 0

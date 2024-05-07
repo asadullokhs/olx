@@ -44,7 +44,7 @@ const Corusel = () => {
                     <Slider {...settings }>
                         {prod?.photos?.length > 0 && prod.photos.map(item => {
                         return <div className="carousel-item active" >
-                            <img width={200} class="d-block w-100" src={item.url} alt="First slide" />
+                            <img style={{width:"300px"}}  class="d-block w-100" src={item.url} alt="First slide" />
                         </div>
                         })
                         }

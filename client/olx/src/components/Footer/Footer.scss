@@ -22,3 +22,9 @@ display: flex;
         filter: grayscale(0%);
     }
 }
+
+@media (max-width: 490px) {
+    .border-top {
+        display: none !important;
+    }
+}

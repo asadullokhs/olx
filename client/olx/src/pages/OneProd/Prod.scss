@@ -267,7 +267,7 @@
 
             .a2_futer {
                 display: flex;
-                margin-left: 22px;
+                // margin-left: 22px;
                 justify-content: space-between;
 
                 .a2_futer_btn {
@@ -320,7 +320,7 @@
                     }
                 }
 
-                
+
             }
 
             // 2
@@ -472,7 +472,7 @@
     }
 
     .a3_author_futter {
-        width: 972px;
+        width: 930px;
         background-color: #fff;
         display: flex;
 
@@ -569,4 +569,22 @@
             }
         }
     }
+}
+
+
+@media (max-width: 490px) {
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    .links_prod {
+        display: none;
+    }
+
+    // .Search{
+    //     display: none;
+    // }
+    // .carousel{
+    //     display: flex;
+    // }
 }
