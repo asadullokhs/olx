@@ -11,7 +11,7 @@
 
 
 .announcements {
-    margin: 50px 0;
+    margin: 30px 0;
     background-color: #fff;
     padding: 90px;
 
@@ -272,6 +272,7 @@
         padding: 0;
         width: 100% !important;
         flex-wrap: wrap !important;
+        overflow: hidden;
     }
 
     .h1 {
@@ -287,7 +288,7 @@
     .anns {
         width: 95px;
         height: 95px;
-        margin-left: -40px;
+        margin-left: -70px;
         padding: 0;
         display: flex;
         justify-content: space-between;
@@ -306,8 +307,6 @@
         width: 390px;
         height: auto;
     }
-
-   
 
     .futter1 {
         display: none;

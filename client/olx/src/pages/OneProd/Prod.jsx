@@ -48,13 +48,13 @@ const Prod = () => {
                     <div className="links_prod">
                         <button type="button" data-testid="to-back" className="btn_links"> <Link to="/" className='btn_link'> <i class="fa-solid fa-chevron-left"></i> Orqaga</Link></button>
                         <ol data-testid="breadcrumbs" data-cy="categories-breadcrumbs" className="links_ol">
-                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Bosh sahifa  </Link></li> <div> / </div>
-                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Transport  </Link></li> <div> / </div>
-                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Yengil avtomashinalar  </Link></li> <div> / </div>
-                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Boshqalar </Link></li> <div> / </div>
-                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Boshqalar - Toshkent viloyati </Link></li> <div> / </div>
-                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Boshqalar - Toshkent </Link></li> <div> / </div>
-                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Boshqalar - Yashnobod tumani  </Link></li> <div> / </div>
+                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Bosh sahifa  </Link></li>                  <div className="slash"> / </div>
+                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Transport  </Link></li>                    <div className="slash"> / </div>
+                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Yengil avtomashinalar  </Link></li>        <div className="slash"> / </div>
+                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Boshqalar </Link></li>                     <div className="slash"> / </div>
+                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Boshqalar - Toshkent viloyati </Link></li> <div className="slash"> / </div>
+                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Boshqalar - Toshkent </Link></li>          <div className="slash"> / </div>
+                            <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Boshqalar - Yashnobod tumani  </Link></li> <div className="slash"> / </div>
                         </ol>
                     </div>
                 </div>
@@ -238,7 +238,7 @@ const Prod = () => {
                             {/* 2 */}
                         </div>
                         <div className="author_futter_2">
-                            <button className='btn'>Xabar yozish</button>
+                            <button type='button' className='btn' onClick={() => setModal(true)}>Xabar yozish</button>
                             <div className='author_futter_2_2'>
                                 <div className="boll"><i className="fa-solid fa-phone"></i></div>
                                 <p>XXX XX XX</p>
@@ -250,7 +250,7 @@ const Prod = () => {
                 </div>
 
                 {
-                    modal && <div className='mesage_modal' style={{ boxShadow: "0 0 5px 2px grey", position: "fixed", bottom: "5%", right: "4%", backgroundColor: "white", padding: "20px" }}>
+                    modal && <div className='mesage_modal' style={{ boxShadow: "0 0 5px 2px grey", position: "fixed", bottom: "10%", right: "18%", backgroundColor: "white", padding: "20px", width:"336px", height:"445px" }}>
 
                         <div className="message_modal1" >
                             <div className="modal1_img" style={{ display: "flex", justifyContent: "space-between" }}>
@@ -260,25 +260,30 @@ const Prod = () => {
                                 </h5>
                                 <button type='button' className='btn-close' onClick={() => setModal(false)}></button>
                             </div>
-                            <div className="line" style={{ border: "1px solid black", width: "108%", marginLeft: "-20px", marginTop: "10px", marginBottom: "10px" }}></div>
+                            <div className="line" style={{ border: "1px solid black", width: "114%", marginLeft: "-20px", marginTop: "10px", marginBottom: "10px" }}></div>
                             <div className="modal-body">
                                 <div className="box d-flex">
                                     <img className='img_mesage_modal' src={prod?.photos[0].url} style={{ width: "40px", height: "40px" }} alt="" />
                                     <div >
                                         {prod?.name}
-                                        <div style={{ width: "500px", display: "flex", justifyContent: "space-between" }}>
+                                        <div style={{  display: "flex", justifyContent: "space-between" }}>
                                             <p>{prod?.price}  </p>
                                             <p> {prod?._id} </p>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="messages" style={{ width: "300px", height: "450px" }}>
-                                </div>
-                                <div className="message_futter">
-                                    <input type="file" placeholder='rasim' className='inp_file_message' />
-                                    <input type="text" className="inp_mesage" placeholder='malumot yozing' />
-                                    <button className='send_btn_mesage' >send</button>
+                                <div className="messages" style={{ width: "300px", height:"250px" }}></div>
+                                <div className="message_futter" style={{width:"336px", height:"48px"}}>
+                                    <label htmlFor="input"  className='inp_file_message' style={{margin:"4px 10px", cursor:"pointer	"}}> 
+                                    <input type="file" id='input' style={{display:"none"}} />
+                                    <i class="fa-solid fa-paperclip"></i>
+                                    </label>
+                                    {/* <input type="file"  className='inp_file_message'  style={{maxWidth:"206px"}}/> */}
+                                    <input type="text" className="inp_mesage" placeholder='malumot yozing'  style={{border:"none",outline:"none", margin:"0 20px"}}/>
+                                    <button className='send_btn_mesage' style={{border:"none", backgroundColor:"white", width:"40px", height:"40px" }}  >
+                                    <i class="fa-solid fa-circle-right"></i>
+                                    </button>
                                 </div>
                             </div>
 

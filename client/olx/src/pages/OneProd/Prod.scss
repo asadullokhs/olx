@@ -48,6 +48,7 @@
     .a1 {
         display: flex;
 
+        
 
         div {
 
@@ -577,7 +578,17 @@
         margin: 0;
         padding: 0;
     }
-    .links_prod {
+
+    .btn_links {
+        display: none;
+    }
+    .links_ol{
+        display: none;
+    }
+    .links_li{
+        display: none;
+    }
+    .slash{
         display: none;
     }
 
