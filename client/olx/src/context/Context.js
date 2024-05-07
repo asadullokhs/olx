@@ -3,6 +3,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 
 import { getAll, getProd } from "../api/getRequests";
 
+
 const InfoContext = createContext();
 
 export const useInfoContext = () => useContext(InfoContext);
@@ -12,8 +13,9 @@ export const InfoProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("profile") || null)
   );
 
-  const [cards, setCards] = useState([]);
+
   const [category, setCategory] = useState([]);
+  const [cards, setCards] = useState([])
   const [sub, setSub] = useState([]);
   const [type, setType] = useState([]);
   const [onlineUsers, setOnlineUsers] = useState([]);
@@ -56,8 +58,13 @@ export const InfoProvider = ({ children }) => {
     exit, category, setCategory,
     sub, setSub,
     type, setType,
+
+
+    exit,
     cards,
     setCards,
+
+
   };
 
   return <InfoContext.Provider value={value}>{children}</InfoContext.Provider>;

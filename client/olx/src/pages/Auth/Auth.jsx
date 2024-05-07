@@ -46,11 +46,11 @@ const Auth = () => {
         <h2 className="welcome">OLX ga xush kelibsiz!</h2>
         <div className="auth">
           <button className="facebook mb-3">
-            <i class="fa-brands fa-facebook"></i>
+            <i className="fa-brands fa-facebook"></i>
             <span>Facebook orqali kirish</span>
           </button>
           <button className="facebook apple mb-3">
-            <i class="fa-brands fa-apple"></i>
+            <i className="fa-brands fa-apple"></i>
             <span>Apple orqali kirish</span>
           </button>
           <button className="facebook google mb-3">

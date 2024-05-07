@@ -33,7 +33,7 @@ const Navbar = () => {
           </div>
           <ul>
             <li>
-              <i class="fa-regular fa-comment"></i>
+              <i className="fa-regular fa-comment"></i>
               Xabarlar
             </li>
             <li>O'z | Ру</li>

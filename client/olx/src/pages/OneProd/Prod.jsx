@@ -46,7 +46,7 @@ const Prod = () => {
 
                 <div className="container">
                     <div className="links_prod">
-                        <button type="button" data-testid="to-back" className="btn_links"> <Link to="/" className='btn_link'> <i class="fa-solid fa-chevron-left"></i> Orqaga</Link></button>
+                        <button type="button" data-testid="to-back" className="btn_links"> <Link to="/" className='btn_link'> <i className="fa-solid fa-chevron-left"></i> Orqaga</Link></button>
                         <ol data-testid="breadcrumbs" data-cy="categories-breadcrumbs" className="links_ol">
                             <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Bosh sahifa  </Link></li>                  <div className="slash"> / </div>
                             <li data-testid="breadcrumb-item" className="links_li"> <Link to="/" className="links_a">Transport  </Link></li>                    <div className="slash"> / </div>
@@ -81,7 +81,7 @@ const Prod = () => {
                                         {isToday ? fromattedDate : `Сегодня в ${new Date(prod?.createdAt).toLocaleTimeString().slice(0, 5)}`}
                                     </Link>
                                     <Link to="/" className='boxs_heard'>
-                                        <i class="fa-regular fa-heart"></i>
+                                        <i className="fa-regular fa-heart"></i>
                                     </Link>
                                 </div>
                                 <div className='sp span'>
@@ -122,7 +122,7 @@ const Prod = () => {
                                     </div>
                                 </div>
                                 <span className='profil_link_span_a'>
-                                    <Link to="/">Muallifning boshqa e'lonlari <i class="fa-solid fa-chevron-right"></i></Link>
+                                    <Link to="/">Muallifning boshqa e'lonlari <i className="fa-solid fa-chevron-right"></i></Link>
                                 </span>
                             </div>
                             <div className="box3">
@@ -146,10 +146,10 @@ const Prod = () => {
                         <div className='a2_futers' >
                             <div className="advertising">
                                 <Link to="/" className='link'>
-                                    <h6 className='.adv_h6'> <i class="fa-regular fa-bookmark"></i>  REKLAMA QILISH</h6>
+                                    <h6 className='.adv_h6'> <i className="fa-regular fa-bookmark"></i>  REKLAMA QILISH</h6>
                                 </Link>
                                 <Link to="/" className='link'>
-                                    <h6 className='.adv_h6'> <i class="fa-solid fa-rotate-right"></i>  KO'TARISH</h6>
+                                    <h6 className='.adv_h6'> <i className="fa-solid fa-rotate-right"></i>  KO'TARISH</h6>
                                 </Link>
                             </div>
                             <div className='tags'>

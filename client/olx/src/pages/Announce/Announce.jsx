@@ -4,12 +4,51 @@ import { Link } from "react-router-dom";
 import { useInfoContext } from "../../context/Context";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
+import { toast } from "react-toastify"
+import { deleteAll } from "../../api/delRequests";
 
 const Announc = () => {
-  const { cards, category, currentUser } = useInfoContext();
+  const { cards, category, currentUser, exit } = useInfoContext();
 
-  //   const userProd = cards.filter((prod) => prod.authorId === currentUser._id);
-  const userProd = [];
+  const userProd = cards.filter((prod) => prod.authorId === currentUser._id);
+  // const userProd = [];
+
+
+
+
+  const deleteProdact = async (prod) => {
+    const confirmDel = window.confirm('Ochirishni tastiqlang!!!')
+    if(confirmDel){
+      const method = category.filter(cat => cat._id === prod.categoryId)[0] 
+      toast.loading('Please wiat...')
+      let result = null
+      try {
+        if(method.name === 'Car'){
+          const res = await deleteAll(prod._id, 'car')
+          result = res.data.message
+        }else if (method.name === 'Fashion'){
+          const res = await deleteAll(prod._id, 'fashion')
+          result = res.data.message
+        } else if(method.name === 'Work'){
+          const res = await deleteAll(prod._id, 'work')
+          result = res.data.message
+        }
+          toast.dismiss()
+          toast.success(result)
+      } catch (err) {
+          toast.dismiss()
+          toast.error(err?.response?.data?.message)
+          if(err?.response?.data?.message === 'jwt expired'){
+            exit()
+          }
+      }
+    }
+  }
+
+
+
+
+
   return (
     <div className="announc">
       <Navbar />
@@ -22,7 +61,7 @@ const Announc = () => {
                 Sizning hisobingiz: 0 sum
                 <br /> Eʼlonlar reklamasi uchun: 0 bonuslarni
               </span>
-              <i class="fa-solid fa-circle-info"></i>
+              <i className="fa-solid fa-circle-info"></i>
               <button>Hisobni Toldirish</button>
               <button className="buyBtn">Paketni sotib oling</button>
             </div>
@@ -50,29 +89,35 @@ const Announc = () => {
       <div className="filter">
         <div className="container">
           <ul>
-            <li>Активные</li>
-            <li>Ожидающие</li>
-            <li>Неоплаченные</li>
-            <li>Неактивные</li>
-            <li>Отклоненные</li>
+            <li>Faol</li>
+            <li>Kutilmoqda</li>
+            <li>Tolanmagan</li>
+            <li>Faol emas</li>
+            <li>Rad etilgan</li>
           </ul>
           <div className="btns">
             <div className="filterR">
-              <i class="fa-solid fa-sliders" style={{ marginRight: '10px' }}></i>
+              <i
+                className="fa-solid fa-sliders"
+                style={{ marginRight: "10px" }}
+              ></i>
               <span>Filtrni qo'shing</span>
             </div>
             <div className="searchInput">
-              <i class="fa-solid fa-magnifying-glass"></i>
-              <input type="text" placeholder="Sarlavha, ID yoki joylashuvi..." />
+              <i className="fa-solid fa-magnifying-glass"></i>
+              <input
+                type="text"
+                placeholder="Sarlavha, ID yoki joylashuvi..."
+              />
             </div>
             <div className="category">
               {/* asosida qidirish */}
               <span>Istalgan toifa</span>
-              <i class="fa-solid fa-chevron-down"></i>
+              <i className="fa-solid fa-chevron-down"></i>
             </div>
             <div className="sort">
               <span>Saralash</span>
-              <i class="fa-solid fa-chevron-down"></i>
+              <i className="fa-solid fa-chevron-down"></i>
             </div>
           </div>
           <div className="cardsS">
@@ -82,6 +127,7 @@ const Announc = () => {
                   <div className="card-user">
                     <div className="one">
                       <div className="card-info">
+                        {" "}
                         {res.photos.length > 0 ? (
                           <img src={res?.photos[0].url} alt="card_img" />
                         ) : (
@@ -89,9 +135,9 @@ const Announc = () => {
                         )}
                         <div className="status-one">
                           <b>{res.content}</b> <br /> <br />
-                          <i class="fa-solid fa-location-dot"></i>
+                          <i className="fa-solid fa-location-dot"></i>
                           {res.location} <br /> <br />
-                          <i class="fa-solid fa-calendar-days"></i>
+                          <i className="fa-solid fa-calendar-days"></i>
                           {new Date(
                             res.createdAt
                           ).toLocaleTimeString()} <br /> <br />
@@ -102,17 +148,18 @@ const Announc = () => {
                           <b>{res.price}</b>
                           <div className="iconss">
                             <span>
-                              0 <i class="fa-regular fa-heart"></i>
+                              0 <i className="fa-regular fa-heart"></i>
                             </span>
                             <span>
-                              0 <i class="fa-solid fa-phone"></i>
+                              0 <i className="fa-solid fa-phone"></i>
                             </span>
                             <span>
-                              0 <i class="fa-solid fa-eye"></i>
+                              0 <i className="fa-solid fa-eye"></i>
                             </span>
-                            <button>Просмотр статиску</button>
+
+                            <button>Statiskani korish</button>
                             <button>
-                              <i class="fa-regular fa-comment"></i> 0
+                              <i className="fa-regular fa-comment"></i> 0
                             </button>
                           </div>
                         </div>
@@ -121,8 +168,8 @@ const Announc = () => {
                     <div className="usertwo">
                       <p>id:{res._id}</p>
                       <div>
-                        <button>Проверить</button>
-                        <span>Удалить</span>
+                        <button>Tekshirish</button>
+                        <span onClick={() =>deleteProdact(res)}>Ochirish</span>
                       </div>
                     </div>
                   </div>
@@ -130,7 +177,7 @@ const Announc = () => {
               })
             ) : (
               <h2>Categorya yo'q</h2>
-            )}{" "}
+            )}
           </div>
         </div>
       </div>
