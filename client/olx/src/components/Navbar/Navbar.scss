@@ -34,6 +34,7 @@
         .logo {
             width: 71px;
             margin-left: 35px;
+
             img {
                 width: 71px;
             }
@@ -81,5 +82,10 @@
         }
     }
 
-}   
+}
 
+@media only screen and (max-width: 490px) {
+    .navbar_media {
+        display: none;
+    }
+}

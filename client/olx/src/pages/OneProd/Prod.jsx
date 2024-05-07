@@ -8,19 +8,18 @@ import Footer from '../../components/Footer/Footer'
 import { Link, useParams } from 'react-router-dom';
 // import Slider from '../../components/Slider/Slider';
 // import  slidesData  from '../../components/Slider/caruselData.json';
-// import Corusel from '../../components/carousel/corusel';
-// import { useInfoContext } from '../../context/Context';
+import Corusel from '../../components/carousel/corusel';
 
 const Prod = ({ prod }) => {
 
 
     const createdAt = new Date(prod?.createdAt);
     const today = new Date();
+    console.log(prod);
 
     const fromattedDate = createdAt.toLocaleDateString();
     const todayDateString = today.toLocaleDateString();
 
-    console.log(fromattedDate);
 
     const isToday = fromattedDate === todayDateString;
 

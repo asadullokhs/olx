@@ -46,7 +46,7 @@ const Navbar = () => {
             </li>
             <li>
               <Link to={'/add-prod'}>
-               <button>E'lon berish</button>
+                <button>E'lon berish</button>
               </Link>
             </li>
           </ul>

@@ -12,19 +12,6 @@ export const InfoProvider = ({ children }) => {
   const [currentUser, setCurrentUser] = useState(
     JSON.parse(localStorage.getItem("profile") || null)
   );
-  const [cards, setCards] = useState([]);
-
-  useEffect(() => {
-    const getCars = async () => {
-      try {
-        const res = await getAll("car");
-        setCards(res.data.getAll);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    getCars();
-  }, [currentUser]);
 
 
   const [category, setCategory] = useState([]);
@@ -71,9 +58,11 @@ export const InfoProvider = ({ children }) => {
     sub, setSub,
     type, setType,
 
+
     exit,
     cards,
     setCards,
+
 
   };
 
