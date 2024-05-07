@@ -47,8 +47,8 @@
 
     .a1 {
         display: flex;
-        
-        
+
+
         div {
 
             .boxs {
@@ -59,10 +59,23 @@
                 border-radius: 10px;
                 margin-left: 8px;
 
+                a {
+                    color: #002f34 !important;
+                    text-decoration: none;
+                    cursor: text;
+                }
+
                 .box_1 {
                     margin-top: 0px;
                     display: flex;
                     justify-content: space-between;
+
+                    a {
+                        color: #002f34 !important;
+                        cursor: text;
+
+                        text-decoration: none;
+                    }
 
                     .boxs_heard {
 
@@ -141,6 +154,10 @@
                     }
 
                     .profil_link_date {
+                        display: flexs;
+                        align-items: center;
+                        justify-content: center;
+
                         a {
                             color: #002f34 !important;
                             text-decoration: none;
@@ -180,16 +197,19 @@
                     display: flex;
 
                     .location_div_div {
+                        display: flex;
+                        align-items: center;
+
                         width: 170px;
                         height: 142px
                     }
 
                     .div_img_box3 {
+
                         width: 145px;
                         height: 105px;
                         display: block;
                         object-fit: cover;
-                        cursor: pointer;
                         // background-color: black;
                     }
                 }
@@ -278,7 +298,8 @@
                         display: flex;
 
                         .link {
-                            padding: 15px;
+
+                            // padding: 15px;
 
                             // margin-left: 20px;
                             img {
@@ -289,7 +310,7 @@
                         }
 
                         .profil_link_date {
-                            padding-top: 15px;
+                            // padding-top: 15px;
 
                             .link {
                                 text-decoration: none;
@@ -298,6 +319,8 @@
                         }
                     }
                 }
+
+                
             }
 
             // 2
@@ -356,7 +379,6 @@
     }
 
     .a2 {
-
         width: 972px;
         height: auto;
         background-color: #fff;
@@ -384,10 +406,21 @@
                 padding: 20px;
 
                 .teg_car {
-                    background-color: #fff;
                     border-radius: 5px;
-                    border: 1px solid black;
+                    cursor: text;
+                    background-color: #fff;
                     margin: 5px;
+
+                    a {
+                        cursor: text;
+
+                        text-decoration: none;
+                        margin: 5px 0;
+                        color: #002f34 !important;
+
+                    }
+
+                    border: 1px solid black;
                 }
             }
 
@@ -396,6 +429,14 @@
 
                 h3 {
                     margin-left: 10px;
+                }
+
+                .text_a2 {
+                    a {
+                        cursor: text;
+                        text-decoration: none;
+                        color: #002f34 !important;
+                    }
                 }
             }
 
@@ -411,6 +452,12 @@
                 margin: 20px;
                 display: flex;
                 justify-content: space-between;
+
+                a {
+                    cursor: text;
+                    text-decoration: none;
+                    color: #002f34;
+                }
 
                 .a2_futer_btn {
                     border: none;
@@ -467,7 +514,7 @@
             // display: flex;
             margin: 25px;
             margin-left: 180px;
-            
+
 
             .btn {
                 width: 400px;
@@ -489,7 +536,8 @@
                 margin: 10px;
                 margin-left: 20px;
                 display: flex;
-                .boll{
+
+                .boll {
                     width: 44px;
                     height: 44px;
                     background-color: #23e5db;
@@ -498,9 +546,11 @@
                     align-items: center;
                     justify-content: center;
                 }
-                p{
+
+                p {
                     margin: 10px;
                 }
+
                 .btn2 {
                     width: 165px;
                     height: 49px;
