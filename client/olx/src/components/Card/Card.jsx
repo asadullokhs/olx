@@ -3,6 +3,7 @@ import './Card.scss'
 import { Link } from 'react-router-dom'
 
 const Card = ({ prod }) => {
+    console.log(prod);
     const createdAt = new Date(prod?.createdAt);
     const today = new Date();
 
@@ -13,10 +14,10 @@ const Card = ({ prod }) => {
     return (
         <div className='card'>
             <Link className='card-img' to={`/prod/${prod?._id}`}>
-                <img src={prod?.photos[0].url} alt="card_img" />
+                {prod.photos.length > 0 ? <img src={prod?.photos[0].url} alt="card_img" /> : <img src='/images/logo.png' />}
             </Link>
             <div className='card-body'>
-                <Link to={`/prod${prod?._id}`} className='card-content'>
+                <Link to={`/prod/${prod?._id}`} className='card-content'>
                     <div className="Prise">
                         <p>{prod?.content}</p>
                         <p>{prod?.price}</p>

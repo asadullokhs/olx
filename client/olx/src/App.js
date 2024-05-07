@@ -9,12 +9,15 @@ import AddProd from "./pages/AddProd/AddProd";
 import Announce from "./pages/Announce/Announce";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Prod from "./pages/OneProd/Prod";
+import Navbar from "./components/Navbar/Navbar";
+import Footer from "./components/Footer/Footer";
 
 const App = () => {
   const { currentUser } = useInfoContext();
   return (
     <Router>
       <div className="app">
+        <Navbar/>
         <Routes>
           <Route path="/" element={currentUser ? <Home /> : <Auth />} />
           <Route
@@ -25,7 +28,9 @@ const App = () => {
           <Route path="/add-prod" element={<AddProd />} />
           <Route path="/announce" element={<Announce />} />
         </Routes>
+        <Footer/>
       </div>
+
     </Router>
   );
 };

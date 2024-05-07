@@ -4,15 +4,52 @@ import { Link } from "react-router-dom";
 import { useInfoContext } from "../../context/Context";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
+import { toast } from "react-toastify"
+import { deleteAll } from "../../api/delRequests";
 
 const Announc = () => {
-  const { cards, category, currentUser } = useInfoContext();
+  const { cards, category, currentUser, exit } = useInfoContext();
 
-  //   const userProd = cards.filter((prod) => prod.authorId === currentUser._id);
-  const userProd = [];
+  const userProd = cards.filter((prod) => prod.authorId === currentUser._id);
+  // const userProd = [];
+
+
+
+
+  const deleteProdact = async (prod) => {
+    const confirmDel = window.confirm('Ochirishni tastiqlang!!!')
+    if(confirmDel){
+      const method = category.filter(cat => cat._id === prod.categoryId)[0] 
+      toast.loading('Please wiat...')
+      let result = null
+      try {
+        if(method.name === 'Car'){
+          const res = await deleteAll(prod._id, 'car')
+          result = res.data.message
+        }else if (method.name === 'Fashion'){
+          const res = await deleteAll(prod._id, 'fashion')
+          result = res.data.message
+        } else if(method.name === 'Work'){
+          const res = await deleteAll(prod._id, 'work')
+          result = res.data.message
+        }
+          toast.dismiss()
+          toast.success(result)
+      } catch (err) {
+          toast.dismiss()
+          toast.error(err?.response?.data?.message)
+          if(err?.response?.data?.message === 'jwt expired'){
+            exit()
+          }
+      }
+    }
+  }
+
+
+
+
+
   return (
-
-    
     <div className="announc">
       <Navbar />
       <div className="container">
@@ -52,24 +89,30 @@ const Announc = () => {
       <div className="filter">
         <div className="container">
           <ul>
-            <li>Активные</li>
-            <li>Ожидающие</li>
-            <li>Неоплаченные</li>
-            <li>Неактивные</li>
-            <li>Отклоненные</li>
+            <li>Faol</li>
+            <li>Kutilmoqda</li>
+            <li>Tolanmagan</li>
+            <li>Faol emas</li>
+            <li>Rad etilgan</li>
           </ul>
           <div className="btns">
             <div className="filterR">
-              <i className="fa-solid fa-sliders" style={{marginRight:'10px'}}></i>
+              <i
+                className="fa-solid fa-sliders"
+                style={{ marginRight: "10px" }}
+              ></i>
               <span>Filtrni qo'shing</span>
             </div>
             <div className="searchInput">
               <i className="fa-solid fa-magnifying-glass"></i>
-              <input type="text" placeholder="Sarlavha, ID yoki joylashuvi..." />
+              <input
+                type="text"
+                placeholder="Sarlavha, ID yoki joylashuvi..."
+              />
             </div>
             <div className="category">
               {/* asosida qidirish */}
-              <span>Istalgan toifa</span> 
+              <span>Istalgan toifa</span>
               <i className="fa-solid fa-chevron-down"></i>
             </div>
             <div className="sort">
@@ -84,7 +127,12 @@ const Announc = () => {
                   <div className="card-user">
                     <div className="one">
                       <div className="card-info">
-                        <img src={res.photos[0].url} alt="" />
+                        {" "}
+                        {res.photos.length > 0 ? (
+                          <img src={res?.photos[0].url} alt="card_img" />
+                        ) : (
+                          <img src="/images/logo.png" />
+                        )}
                         <div className="status-one">
                           <b>{res.content}</b> <br /> <br />
                           <i className="fa-solid fa-location-dot"></i>
@@ -109,7 +157,7 @@ const Announc = () => {
                               0 <i className="fa-solid fa-eye"></i>
                             </span>
 
-                            <button>Просмотр статиску</button>
+                            <button>Statiskani korish</button>
                             <button>
                               <i className="fa-regular fa-comment"></i> 0
                             </button>
@@ -120,8 +168,8 @@ const Announc = () => {
                     <div className="usertwo">
                       <p>id:{res._id}</p>
                       <div>
-                        <button>Проверить</button>
-                        <span>Удалить</span>
+                        <button>Tekshirish</button>
+                        <span onClick={() =>deleteProdact(res)}>Ochirish</span>
                       </div>
                     </div>
                   </div>
@@ -129,7 +177,7 @@ const Announc = () => {
               })
             ) : (
               <h2>Categorya yo'q</h2>
-            )}{" "}
+            )}
           </div>
         </div>
       </div>

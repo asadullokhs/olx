@@ -15,6 +15,7 @@ export const InfoProvider = ({ children }) => {
 
 
   const [category, setCategory] = useState([]);
+  const [cards, setCards] = useState([])
   const [sub, setSub] = useState([]);
   const [type, setType] = useState([]);
   const [onlineUsers, setOnlineUsers] = useState([]);
