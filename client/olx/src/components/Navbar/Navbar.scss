@@ -84,8 +84,8 @@
 
 }
 
-@media only screen and (max-width: 490px) {
-    .navbar_media {
-        display: none;
+@media (max-width: 490px) {
+    .scrollableDiv {
+        display: none !important;
     }
 }

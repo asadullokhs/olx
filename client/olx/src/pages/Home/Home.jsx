@@ -6,6 +6,7 @@ import Card from "../../components/Card/Card";
 import "./Home.scss";
 import { Link, useParams } from "react-router-dom";
 import { useInfoContext } from "../../context/Context";
+import NavbarFutter from "../../components/NavbarFutter/NavbarFutter";
 
 
 const Home = () => {
@@ -23,6 +24,7 @@ const Home = () => {
         <div className="announcements">
           <div className="container">
             <h1 className="h1">OLX эълонлар тахтасидаги рукнлар</h1>
+            <h1 className="h1_m" style={{ display: "none" }}>Bo'limlar</h1>
             <div className="anns">
               <Link to="/" className="icon">
                 <img
@@ -56,9 +58,9 @@ const Home = () => {
 
         <div className="container">
           <div className="vip_announcements">
-            <h1 className="h1">Премиум объявления</h1>
+            <h1 className="h1 h1_2_m">Премиум объявления</h1>
 
-            <div className="announcementss">
+            <div className="announcementss" style={{}}>
               {cards.length > 0 ? cards.map(card => {
                 return <Card key={card._id} prod={card} />
               }) : <h2>Tavar yo'q</h2>}
@@ -250,6 +252,8 @@ const Home = () => {
           </div>
         </div>
       </div>
+      <Footer />
+      <NavbarFutter />
     </div>
   );
 };

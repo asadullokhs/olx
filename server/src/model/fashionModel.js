@@ -29,7 +29,6 @@ const fashionSchema = new mongoose.Schema(
     },
     content: {
       type: String,
-      required: true,
     },
     price: {
       type: String,

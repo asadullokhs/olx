@@ -12,18 +12,18 @@ const Card = ({ prod }) => {
 
     const isToday = fromattedDate === todayDateString;
     return (
-        <div className='card'>
+        <div className='card' style={{ margin: "20px 0" }}>
             <Link className='card-img' to={`/prod/${prod?._id}`}>
                 {prod.photos.length > 0 ? <img src={prod?.photos[0].url} alt="card_img" /> : <img src='/images/logo.png' />}
             </Link>
             <div className='card-body'>
                 <Link to={`/prod/${prod?._id}`} className='card-content'>
                     <div className="Prise">
-                        <p>{prod?.content}</p>
-                        <p>{prod?.price}</p>
+                        <p className='content'>{prod?.content}</p>
+                        <p className='prise'>{prod?.price}</p>
                     </div>
                     <div className="data">
-                        {prod?.location} <br />
+                       <p className='location'> {prod?.location}</p> <br />
                         {isToday ? `Сегодня в ${createdAt.toLocaleDateString().slice(0, 5)}` : fromattedDate}
                     </div>
                 </Link>

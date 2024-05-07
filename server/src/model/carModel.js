@@ -29,7 +29,6 @@ const carSchema = new mongoose.Schema(
     },
     content: {
       type: String,
-      required: true,
     },
     price: {
       type: String,
@@ -69,7 +68,6 @@ const carSchema = new mongoose.Schema(
     },
     options: {
       type: String,
-      required: true,
     },
     location: {
       type: String,

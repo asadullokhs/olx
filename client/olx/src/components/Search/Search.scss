@@ -2,6 +2,7 @@
     display: flex;
     margin-top: 100px;
 
+    
     .inp_div {
 
         width: auto;
@@ -20,6 +21,9 @@
             background-color: #fff;
         }
 
+    }
+    .bell{
+        display: none;
     }
 
     .search {
@@ -64,7 +68,37 @@
 
 @media only screen and (max-width: 490px) {
     .Search_Com{
-        display: none;
+        margin: 0;
+        
+        .inp_div{
+            i{
+               display: none;
+            }
+            width: 275px;
+            .search{
+                height: 48px;
+            }
+        }
+        .location{
+            display: none;
+        }
+        .Search_btn{
+            width: 48px;
+            height: 48px;
+            p{
+                display: none;
+            }
+        }.Search_btn:hover{
+            width: 48px;
+            height: 48px;
+        }
+        .bell{
+            display: flex;
+            width: 46px;
+            height: 46px;
+            align-items: center;
+            justify-content: center;
+        }
     }
 }
 
