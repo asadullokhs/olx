@@ -1,9 +1,6 @@
-import React, { useContext, useEffect, useState } from "react";
-import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Footer/Footer";
+import React, { useEffect, useState } from "react";
 import "./AddProd.scss";
 import { useInfoContext } from "../../context/Context";
-import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import { addAll } from "../../api/addRequests";
 const modalData = [
@@ -55,17 +52,27 @@ const modalData = [
     "Go'zallik-salomatlik",
   ],
 ];
-
 const AddProd = () => {
-  const { category, type, sub, currentUser, exit } = useInfoContext();
+  const { category, type, sub, currentUser, toggleReset, exit } =
+    useInfoContext();
   const [currentData, setCurrentData] = useState(modalData[0]);
+  const [getId, setGetId] = useState(null);
+  const [subId, setSubId] = useState(null);
+  const [typeId, setTypeId] = useState(null);
+  const [modal, setModal] = useState(false);
+  const [list, setList] = useState(0);
+  const [showModal, setShowModal] = useState(false);
+  const [images, setImages] = useState(Array(8).fill(null));
+
+  const toggle = () => setModal(!modal);
+  const toggleShow = () => setShowModal(!showModal);
 
   const handleChangeMenu = (index) => {
     setCurrentData(modalData[index]);
   };
   useEffect(() => {
     document.querySelectorAll(".change-menu").forEach((item) => {
-      item.onclick = function () {
+      item.onClick = function () {
         document
           .querySelectorAll(".change-menu")
           .forEach((item) => item.classList.remove("active"));
@@ -92,10 +99,15 @@ const AddProd = () => {
 
       const res = await addAll(formData, entityType);
       const result = res?.data;
-      console.log(res);
 
       toast.dismiss();
+
       toast.success(result?.message);
+      toggleReset();
+      setImages(Array(8).fill(null));
+      setGetId(null);
+      setSubId(null);
+      setTypeId(null);
       e.target.reset();
     } catch (err) {
       toast.dismiss();
@@ -106,21 +118,16 @@ const AddProd = () => {
     }
   };
 
-  const [getId, setGetId] = useState(null);
-  const [subId, setSubId] = useState(null);
-  const [typeId, setTypeId] = useState(null);
-  const findCategory = category.filter((set) => set._id === getId)[0];
-
-  const filterCat = category.filter((set) => set._id === getId)[0];
-  const findType = type.filter((set) => set._id === typeId)[0];
-  const findSub = sub.filter((set) => set._id === subId)[0];
-
-  const [images, setImages] = useState(Array(8).fill(null));
+  const filterId = type.filter((res) => res._id === typeId)[0];
+  const filterCat = category.filter((res) => res._id === getId)[0];
+  const filterSub = sub.filter((res) => res._id === subId)[0];
 
   const handleImageChange = (index, e) => {
-    const newImages = [...images];
-    newImages[index] = URL.createObjectURL(e.target.files[0]);
-    setImages(newImages);
+    if (e.target) {
+      const newImages = [...images];
+      newImages[index] = URL.createObjectURL(e.target.files[0]);
+      setImages(newImages);
+    }
   };
 
   const handleRemoveImage = (index) => {
@@ -128,184 +135,227 @@ const AddProd = () => {
     newImages[index] = null;
     setImages(newImages);
   };
-  return (
-    <div>
-      <div className="bg">
-        <Navbar />
 
-        <div className="container">
-          <div className="Prod">
-            <form action="" onSubmit={handleAdd}>
-              <div className="prod_title">
-                <h2>E’lon joylashtirish</h2>
+  return (
+    <div className="bg">
+      <div className="container">
+        <div className="Prod">
+          <form onSubmit={handleAdd} action="">
+            <div className="prod_title">
+              <h2>E’lon joylashtirish</h2>
+            </div>
+
+            <section className="select">
+              <h4>Bizga e’loningiz haqida gapirib bering</h4>
+
+              <label htmlFor="">Sarlavhani kiriting*</label>
+              <input
+                type="text"
+                placeholder="Masalan, Iphone 11 kafolati bilan"
+                name="name"
+                maxLength={70}
+                minLength={16}
+                required
+              />
+
+              <div className="limit">
+                <p>Kamida 16 ta belgi kiriting</p>
+                <p>0/70</p>
               </div>
 
-              <section className="select">
-                <h4>Bizga e’loningiz haqida gapirib bering</h4>
+              <label className="rukn">Rukn*</label>
 
-                <label htmlFor="">Sarlavhani kiriting*</label>
-                <input
-                  type="text"
-                  placeholder="Masalan Iphone 11 kafolati bilan"
-                  name="name"
-                  maxLength={70}
-                  minLength={16}
-                  required
-                />
-
-                <div className="least">
-                  <p>Kamida 16 ta belgi kiriting</p>
-                  <span>0/70</span>
-                </div>
-
-                <label className="rukn">Rukn*</label>
-
-                <button
-                  type="button"
-                  className="add__btn"
-                  data-bs-toggle="modal"
-                  data-bs-target="#staticBackdrop"
+              <button
+                type="button"
+                className="add__btn"
+                onClick={() => {
+                  toggle();
+                  subId && setTypeId(null);
+                  setSubId(null);
+                }}
+              >
+                <div
+                  className="choose_btn"
+                  style={{ display: "flex", gap: "20px" }}
                 >
-                  {findCategory?.image && (
+                  {filterCat && (
                     <img
-                      style={{ backgroundColor: findCategory?.color }}
-                      src={findCategory?.image?.url}
+                      style={{
+                        height: "40px",
+                        width: "40px",
+                        borderRadius: "50%",
+                        backgroundColor: filterCat.color,
+                        marginLeft: "10px",
+                        marginTop: "19px",
+                      }}
+                      src={filterCat.image.url}
                       alt="photo"
                     />
                   )}
-                  <div className="choose_btn">
-                    <div className="chose_sct">
-                      <h5> {findType ? findType.name : "Bo‘limni tanlang"} </h5>
-                      {/* <i className="fa-solid fa-angle-right"></i> */}
+                  <div
+                    style={{
+                      textAlign: "start",
+                      marginTop: "15px",
+                      marginBottom: "0",
+                    }}
+                  >
+                    {!typeId ? (
+                      <p> Bo‘limni tanlang</p>
+                    ) : (
+                      <b>{filterId.name}</b>
+                    )}
+                    {filterCat && (
+                      <p>
+                        {filterCat?.name} / {filterSub?.name}
+                      </p>
+                    )}
+                  </div>
+                </div>
+                {subId && (
+                  <p className="help">
+                    <div style={{ marginTop: "15px" }}>
+                      ozgartirish
+                      <span></span>
                     </div>
-                    <p>
-                      {findCategory ? findCategory.name : ""}
-                      {findSub ? findSub.name : ""}
-                    </p>
-                  </div>
-                  <div className="reneme">
-                    <span>
-                      {findType && <Link className="py-2">O'zgartirish</Link>}
-                    </span>
-                    {/* <div className="hover_div"></div> */}
-                  </div>
-                </button>
+                  </p>
+                )}
+              </button>
 
-                <div
-                  className="modal fade"
-                  id="staticBackdrop"
-                  data-bs-backdrop="static"
-                  data-bs-keyboard="false"
-                  tabindex="-1"
-                  aria-labelledby="staticBackdropLabel"
-                  aria-hidden="true"
-                >
-                  <div className="modal-dialog">
-                    <div className="modal-content">
-                      <div className="modal-header">
-                        <h1
-                          className="modal-title fs-5"
-                          id="staticBackdropLabel"
+              {modal && (
+                <div className="modal-cat">
+                  <div className="modal-content-cat">
+                    <div className="modal-body-cat">
+                      <h2
+                        className="modal-title-cat"
+                        style={{ fontSize: "25px" }}
+                      >
+                        Bo‘limni tanlang
+                      </h2>
+                      <div className="btn-close-cat">
+                        <span
+                          onClick={() => {
+                            toggle();
+                            setList(0);
+                            setGetId(null);
+                            setSubId(null);
+                            setTypeId(null);
+                          }}
                         >
-                          Bo‘limni tanlang
-                        </h1>
-                        <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        ></button>
+                          X
+                        </span>
                       </div>
-                      <label className="modal-body">
-                        <div className="add_search">
-                          <i className="fa-solid fa-magnifying-glass"></i>
-                          <input type="text" placeholder="Qidiruv" />
-                        </div>
-                      </label>
-                      <div className="modal-body">
-                        <div className="category_modal">
-                          <div
-                            className="work-category"
-                            data-bs-toggle="modal"
-                            data-bs-target="#staticBackdrops"
-                          >
-                            <div className="modal-categorys">
-                              {category.length > 0 &&
-                                category.map((cat) => {
-                                  return (
-                                    <div className="modal_texts">
-                                      <img
-                                        style={{ backgroundColor: cat.color }}
-                                        src={cat.image.url}
-                                        alt="photo"
-                                      />
-                                      <p>{cat.name}</p>
-                                    </div>
-                                  );
-                                })}
-                            </div>
-                          </div>
-                        </div>
+                      <div className="add_search">
+                        <i className="fa-solid fa-magnifying-glass"></i>
+                        <input type="text" placeholder="Поиск..." />
+                      </div>
+                      <div className="modal-categorys">
+                        {category.length > 0 &&
+                          category.map((cat) => {
+                            return (
+                              <div
+                                key={cat._id}
+                                className="category"
+                                onClick={() => {
+                                  toggleShow();
+                                  toggle();
+                                  setGetId(cat._id);
+                                }}
+                              >
+                                <img
+                                  style={{ backgroundColor: cat.color }}
+                                  src={cat.image.url}
+                                  alt="photo"
+                                />
+                                <p className="none">{cat.name}</p>
+                              </div>
+                            );
+                          })}
                       </div>
                     </div>
                   </div>
                 </div>
-
-                <div
-                  className="modal fade"
-                  id="staticBackdrops"
-                  data-bs-backdrop="static"
-                  data-bs-keyboard="false"
-                  tabindex="-1"
-                  aria-labelledby="staticBackdropLabel"
-                  aria-hidden="true"
-                >
-                  <div className="second-modal modal-dialog">
-                    <div className="modal-content">
-                      <div className="modal-header">
-                        <h1
-                          className="modal-title fs-5"
-                          id="staticBackdropLabel"
+              )}
+              {showModal && (
+                <div className="modal-cat">
+                  <div className="modal-content-cat">
+                    <div className="modal-body-cat">
+                      <div className="btn-close-cat">
+                        <span
+                          onClick={() => {
+                            toggleShow();
+                            setList(0);
+                            setGetId(null);
+                            setSubId(null);
+                            setTypeId(null);
+                          }}
                         >
-                          Bo‘limni tanlang
-                        </h1>
-                        <button
-                          type="button"
-                          className="btn-close"
-                          data-bs-dismiss="modal"
-                          aria-label="Close"
-                        ></button>
+                          X
+                        </span>
                       </div>
-                      <div className="modal-body">
-                        <div className="ctg_first_sct">
-                          <ul className="modal_list">
-                            <div className="modal-categorys">
-                              {category.length > 0 &&
-                                category.map((cat) => {
-                                  return (
-                                    <li
-                                      className="change-menu "
-                                      onClick={() => {
-                                        handleChangeMenu(0);
-                                        setGetId(cat._id);
-                                      }}
-                                    >
-                                      {cat.name}{" "}
-                                      <i className="fa-solid fa-angle-right"></i>
-                                    </li>
-                                  );
-                                })}
-                            </div>
-                          </ul>
-                        </div>
-                        <div className="ctg_second_sct">
-                          <ul className="modal_list">
-                            {sub.map((item) => {
+                      <h1 className="modal-title-cat" id="staticBackdropLabel">
+                        Bo‘limni tanlang
+                      </h1>
+                      <div className="ctg-select">
+                        <ul
+                          className={
+                            list === 0 ? "modal_list" : "modal_list none-list"
+                          }
+                        >
+                          {category.length > 0 &&
+                            category.map((cat) => {
+                              return (
+                                <li
+                                  style={
+                                    cat._id === getId
+                                      ? {
+                                          backgroundColor:
+                                            "rgba(64, 99, 103, 0.200)",
+                                        }
+                                      : {}
+                                  }
+                                  key={cat._id}
+                                  className="change-menu"
+                                  onClick={() => {
+                                    handleChangeMenu(0);
+                                    setGetId(cat._id);
+                                    setSubId(null);
+                                    setList(1);
+                                  }}
+                                >
+                                  {cat.name}{" "}
+                                  <i className="fa-solid fa-angle-right"></i>
+                                </li>
+                              );
+                            })}
+                        </ul>
+                        <ul
+                          className={
+                            list === 1 ? "modal_list" : "modal_list none-list"
+                          }
+                        >
+                          {sub.length > 0 &&
+                            sub.map((item) => {
                               if (item.categoryId === getId) {
                                 return (
                                   <li
-                                    onClick={() => setSubId(item._id)}
+                                    style={
+                                      item._id === subId
+                                        ? {
+                                            backgroundColor:
+                                              "rgba(64, 99, 103, 0.200)",
+                                          }
+                                        : {}
+                                    }
+                                    key={item._id}
                                     className="change-menu"
+                                    onClick={() => {
+                                      setSubId(item?._id);
+                                      setList(2);
+                                      !type.find(
+                                        (res) => res.subId === item._id
+                                      ) && toggleShow();
+                                      setList(2);
+                                    }}
                                   >
                                     {item.name}{" "}
                                     <i className="fa-solid fa-angle-right"></i>
@@ -313,49 +363,75 @@ const AddProd = () => {
                                 );
                               }
                             })}
-                          </ul>
-                        </div>
-                        <div className="ctg_second_sct">
-                          <ul className="modal_list">
-                            {type.map((item) => {
-                              if (item.subId === subId) {
-                                return (
-                                  <li
-                                    type="button"
-                                    data-bs-dismiss="modal"
-                                    aria-label="Close"
-                                    onClick={() => setTypeId(item._id)}
-                                    className="change-menu"
-                                  >
-                                    {item.name}{" "}
-                                    <i className="fa-solid fa-angle-right"></i>
-                                  </li>
-                                );
-                              }
-                            })}
-                          </ul>
-                        </div>
+                        </ul>
+                        <ul
+                          className={
+                            list === 2 ? "modal_list" : "modal_list none-list"
+                          }
+                        >
+                          {type.map((item) => {
+                            if (item.subId === subId) {
+                              return (
+                                <li
+                                  key={item._id}
+                                  onClick={() => {
+                                    setTypeId(item._id);
+                                    toggleShow();
+                                    setList(0);
+                                  }}
+                                  className="change-menu"
+                                >
+                                  {item.name}{" "}
+                                </li>
+                              );
+                            }
+                          })}
+                        </ul>
                       </div>
                     </div>
                   </div>
                 </div>
-              </section>
+              )}
+            </section>
 
-              {filterCat?.name !== "Работа" && (
-                <section className="img_sec">
-                  <div className="images-info">
-                    <h4>Rasmlar</h4>
-                    <p>
-                      Birinchi surat e’loningiz asosiy rasmi bo’ladi. Suratlar
-                      tartibini ularning ustiga bosib va olib o’tish bilan
-                      o’zgartirishingiz mumkin.
-                    </p>
-                  </div>
+            {filterCat?.name !== "Work" && (
+              <section className="img_sec">
+                <div className="images-info">
+                  <h4>Rasmlar</h4>
+                  <p>
+                    Birinchi surat e’loningiz asosiy rasmi bo’ladi. Suratlar
+                    tartibini ularning ustiga bosib va olib o’tish bilan
+                    o’zgartirishingiz mumkin.
+                  </p>
+                </div>
 
-                  {/* <div className="img-boxes">
-                    {images.map((image, index) => (
-                      <div key={index} className="row">
-                        <label htmlFor={`inp-${index + 1}`}>
+                <div className="img-boxes">
+                  {images.map((image, index) => (
+                    <div key={index}>
+                      <div
+                        style={{
+                          height: "20px",
+                          textAlign: "end",
+                          padding: "0 10px",
+                        }}
+                      >
+                        {image && (
+                          <button
+                            style={{
+                              border: "none",
+                              backgroundColor: "red",
+                              padding: "5px 15px",
+                              color: "white",
+                            }}
+                            type="button"
+                            onClick={() => handleRemoveImage(index)}
+                          >
+                            x
+                          </button>
+                        )}
+                      </div>
+                      <label htmlFor={`inp-${index + 1}`}>
+                        <div className="input-add">
                           {image ? (
                             <div className="prev-img">
                               <img
@@ -365,346 +441,321 @@ const AddProd = () => {
                                 style={{ objectFit: "cover" }}
                                 alt="photo"
                               />
-                              <button onClick={() => handleRemoveImage(index)}>
-                                x
-                              </button>
                             </div>
                           ) : (
-                            <>
+                            <div>
                               {index === 0 ? (
                                 <p className="help">Rasm qoshish</p>
                               ) : (
                                 <i className="fa-solid fa-camera"></i>
                               )}
-                              <br />
-                              <input
-                                hidden
-                                onChange={(e) => handleImageChange(index, e)}
-                                id={`inp-${index + 1}`}
-                                type="file"
-                                name="image"
-                              />
-                            </>
+                            </div>
                           )}
-                        </label>
-                      </div>
-                    ))}
-                  </div> */}
-
-                  <div className="img-boxes">
-                    {images.map((image, index) => (
-                      <div key={index}>
-                        <div
-                        className="inf_img"
-                       
-                        >
-                          {image && (
-                            <button
-                              style={{
-                                border: "none",
-                                backgroundColor: "gray",
-                                padding: "5px 15px",
-                                color: "white",
-                              }}
-                              type="button"
-                              onClick={() => handleRemoveImage(index)}
-                            >
-                              X
-                            </button>
-                          )}
+                          <br />
+                          <input
+                            className={index === 0 ? "block-inp" : "none-input"}
+                            hidden={index !== 0}
+                            required={index === 0}
+                            onChange={(e) => handleImageChange(index, e)}
+                            id={`inp-${index + 1}`}
+                            type="file"
+                            name="image"
+                          />
                         </div>
-                        <label htmlFor={`inp-${index + 1}`}>
-                          <div className="input-add">
-                            {image ? (
-                              <div className="prev-img">
-                                <img
-                                  src={image}
-                                  height={100}
-                                  width={100}
-                                  style={{ objectFit: "cover" }}
-                                  alt="photo"
-                                />
-                              </div>
-                            ) : (
-                              <div>
-                                {index === 0 ? (
-                                  <p className="help">Rasm qoshish</p>
-                                ) : (
-                                  <i className="fa-solid fa-camera"></i>
-                                )}
-                              </div>
-                            )}
-                            <br />
-                            <input
-                              className={
-                                index === 0 ? "block-inp" : "none-input"
-                              }
-                              hidden={index !== 0}
-                              required={index === 0}
-                              onChange={(e) => handleImageChange(index, e)}
-                              id={`inp-${index + 1}`}
-                              type="file"
-                              name="image"
-                            />
-                          </div>
-                        </label>
-                      </div>
-                    ))}
-                  </div>
-                </section>
-              )}
-
-              <section className="comment_sec">
-                <div className="comment_info">
-                  <h4>Tavsif*</h4>
-                  <textarea>
-                    O'zingizni shu e'lonni k'orayotgan odam o'rniga qo'ying va
-                    tavsif yozing
-                  </textarea>
-                </div>
-                <div className="comment_least">
-                  <p>Kamida 40 ta belgi kiriting</p>
-                  <span>38/9000</span>
+                      </label>
+                    </div>
+                  ))}
                 </div>
               </section>
+            )}
 
-              <section class="price">
-                <div class="input_info">
-                  <div class="buttons">
+            <section className="comment_sec">
+              <div className="comment_info">
+                <h4>Tavsif*</h4>
+                <textarea
+                  required
+                  maxLength={9000}
+                  minLength={40}
+                  name="content"
+                  placeholder="O’zingizni shu e'lonni ko’rayotgan odam o’rniga qo’ying va tavsif yozing"
+                ></textarea>
+              </div>
+              {filterCat?.name !== "Work" && (
+                <div className="limit">
+                  <p>Kamida 40 ta belgi kiriting</p>
+                  <p>0/9000</p>
+                </div>
+              )}
+              {filterCat?.name === "Work" && (
+                <div className="input_info">
+                  <p>Rezyume berish formasiga havola</p>
+                  <input style={{ width: "70%" }} type="text" name="link" />
+                </div>
+              )}
+            </section>
+            {filterCat?.name !== "Work" && (
+              <section className="price">
+                <div className="input_info">
+                  <div className="buttons">
                     <button>Narx</button>
-                    <button>Almashsih</button>
+                    {filterCat?.name === "Fashion" && <button>Bepul</button>}
+                    <button>Ayirboshlash</button>
                   </div>
-                  <label for="">
+                  <label htmlFor="">
                     <p>Narx*</p>
-                    <input type="text" name="price" />
+                    <input
+                      style={{ width: "265px" }}
+                      type="text"
+                      name="price"
+                      required
+                    />
                   </label>
                 </div>
               </section>
-
-              {filterCat?.name === "Car" && (
-                <section className="input-box">
-                  <h2>Qo'shimcha ma'lumot</h2>
-                  <div className="input_info private">
-                    <p>Xususiy yoki biznes*</p>
-                    <label htmlFor="">
-                      <button type="button">Jismoniy shaxs</button>
-                      <button type="button">Biznes</button>
-                    </label>
-                  </div>
-                  <div className="input_info">
-                    <p>Kuzov turi*</p>
-                    <select required>
-                      <option selected disabled>
-                        Tanlash
-                      </option>
-                      <option value="Kabriolet">Kabriolet</option>
-                      <option value="Universal">Universal</option>
-                      <option value="Sedan">Sedan</option>
-                      <option value="Boshqa">Boshqa</option>
-                    </select>
-                  </div>
-                  <div className="input_info">
-                    <p>Ishlab chiqarilgan yili*</p>
-                    <input
-                      type="text"
-                      placeholder="Yilini kiriting"
-                      name="year"
-                      required
-                    />
-                  </div>
-                  <div className="input_info">
-                    <p>Bosgan yo‘li</p>
-                    <input type="text" placeholder="Yurgan probeg" name="run" />
-                  </div>
-                  <div className="input_info">
-                    <p>Uzatmalar qutisi*</p>
-                    <select name="transmission" required>
-                      <option selected disabled>
-                        Tanlash
-                      </option>
-                      <option value="Mexanika">Mexanika</option>
-                      <option value="Avtomat">Avtomat</option>
-                      <option value="Boshqa">Boshqa</option>
-                    </select>
-                  </div>
-                  <div className="input_info">
-                    <p>Rang*</p>
-                    <select name="color" required>
-                      <option selected disabled>
-                        Tanlash
-                      </option>
-                      <option value="Oq">Oq</option>
-                      <option value="Qora">Qora</option>
-                      <option value="Ko'k">Ko'k</option>
-                      <option value="Qizil">Qizil</option>
-                      <option value="Seriy">Seriy</option>
-                      <option value="Hamellion">Hamellion</option>
-                    </select>
-                  </div>
-                  <div className="input_info">
-                    <p>Dvigatel hajmi*</p>
-                    <input type="text" placeholder="CM3" name="capacity" />
-                  </div>
-                  <div className="input_info">
-                    <p>Yoqilg‘i turi*</p>
-                    <select name="type_of_fuel" required>
-                      <option selected disabled>
-                        Tanlash
-                      </option>
-                      <option value="Benzin">Benzin</option>
-                      <option value="Dizel">Dizel</option>
-                      <option value="Gibrid">Gibrid</option>
-                      <option value="Gaz/Benzin">Gaz/Benzin</option>
-                      <option value="Elektr">Elektr</option>
-                      <option value="Boshqa">Boshqa</option>
-                    </select>
-                  </div>
-                  <div className="input_info">
-                    <p>Mashina holati*</p>
-                    <select name="state" required>
-                      <option selected disabled>
-                        Tanlash
-                      </option>
-                      <option value="Yaxshi">Yaxshi</option>
-                      <option value="Orta">Orta</option>
-                      <option value="Ta'mir talab">Ta'mir talab </option>
-                    </select>
-                  </div>
-                  <div className="input_info">
-                    <p>Mulkdorlar soni</p>
-                    <select name="number_of_hosts" required>
-                      <option selected disabled>
-                        Tanlash
-                      </option>
-                      <option value="1">1</option>
-                      <option value="2">2</option>
-                      <option value="3">3</option>
-                      <option value="4+">4+</option>
-                    </select>
-                  </div>
-                </section>
-              )}
-              {filterCat?.name === "Fashion" && (
-                <section className="input-box">
-                  <h2>ДQoshimcha malumot</h2>
-                  <div className="input_info private">
-                    <p>Jismoniy shaxs yoki Biznes</p>
-                    <label htmlFor="">
-                      <button type="button">Jismoniy shaxsiy</button>
-                      <button type="button">Biznes</button>
-                    </label>
-                  </div>
-                  <div className="input_info private">
-                    <p>Holati*</p>
-                    <select name="state" required>
-                      <option selected disabled>
-                        Tanlash
-                      </option>
-                      <option value="Б/у">B/u</option>
-                      <option value="Новый">Yangi</option>
-                    </select>
-                  </div>
-                  <div className="input_info">
-                    <p>Razmer</p>
-                    <input type="text" name="size" />
-                  </div>
-                </section>
-              )}
-              {filterCat?.name === "Work" && (
-                <section className="input-box">
-                  <div className="input_info" style={{ marginBottom: "40px" }}>
-                    <label htmlFor="">
-                      <p>Oylik*</p>
-                      <input type="text" name="salary" required />
-                    </label>
-                  </div>
-                  <h2>Qoshimcha malumot</h2>
-                  <div className="input_info private">
-                    <p>Ish turi*</p>
-                    <select name="kinOfWork" required>
-                      <option selected disabled>
-                        Tanlov
-                      </option>
-                      <option value="Постоянная работа">Doimiy Bandlik</option>
-                      <option value="Временная работа">
-                        Vaqtinchalik bandlik
-                      </option>
-                    </select>
-                  </div>
-                  <div className="input_info private">
-                    <p>Bandlik tur*</p>
-                    <select name="employmentType" required>
-                      <option selected disabled>
-                        Tanlov
-                      </option>
-                      <option value="Работа на полную ставку">
-                        Toliq stavkada bandlik
-                      </option>
-                      <option value="Временная работа">
-                        Toliq bolmagan bandlik
-                      </option>
-                    </select>
-                  </div>
-                  <div className="input_info">
-                    <p>Qoshmcha Opi...</p>
-                  </div>
-                </section>
-              )}
-
-              <section className="avto_exs">
-                <div className="avto_body">
-                  <span>
-                    <svg
-                      className="svg"
-                      xmlns="http://www.w3.org/2000/svg"
-                      viewBox="0 0 448 512"
-                    >
-                      <path d="M349.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224c-10 8.8-13.6 22.9-8.9 35.3S50.7 288 64 288H175.5L98.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7H272.5L349.4 44.6z" />
-                    </svg>
-                    <h5>Avtomatik uzaytirish</h5>
-                  </span>
-                  <p>E'lon muddati 30 kundan keyin tugaydi</p>
+            )}
+            {filterCat?.name === "Car" && (
+              <section className="input-box">
+                <h2>Qo'shimcha ma'lumot</h2>
+                <div className="input_info private">
+                  <p>Xususiy yoki biznes*</p>
+                  <label htmlFor="">
+                    <button type="button">Jismoniy shaxs </button>
+                    <button type="button">Biznes</button>
+                  </label>
                 </div>
-              </section>
-
-              <section className="location">
-                <div className="location_info">
-                  <p>Joylashuv*</p>
-
+                <div className="input_info">
+                  <p>Kuzov turi*</p>
+                  <select required>
+                    <option selected disabled>
+                      Tanlash
+                    </option>
+                    <option value="Кабриолет">Kabriolet</option>
+                    <option value="Универсал">Sedan</option>
+                    <option value="Седан">off Road</option>
+                    <option value="Другая">Boshqa</option>
+                  </select>
+                </div>
+                <div className="input_info">
+                  <p>Ishlab chiqarilgan yili*</p>
                   <input
                     type="text"
-                    placeholder="Shahar yoki pochta indeksi !"
-                    name="location"
+                    placeholder="Yilini kiriting"
+                    name="year"
+                    required
                   />
                 </div>
-                <span>Joylashuv noto‘g‘ri</span>
-              </section>
-
-              <section className="inf_section">
-                <h4>Aloqa uchun ma'lumotlar</h4>
-                <div className="inf_label"></div>
-                <p>Murojaat qiluvchi shaxs*</p>
-                <input type="text" placeholder="" name="author" />
-                <p>Email-манзил</p>
-                <input
-                  className="th-l"
-                  type="text"
-                  placeholder="@gmail.com"
-                  name="email"
-                />
-                <p>Telefon raqami</p>
-                <input type="tel" placeholder="" name="phone" />
-              </section>
-
-              <section className="last_section">
-                <div className="rights">
-                  <a>Ko'rib chiqish</a>
-
-                  <button>E’lon joylashtirish</button>
+                <div className="input_info">
+                  <p>Probeg</p>
+                  <input type="text" placeholder="Yurgan probeg" name="run" />
+                </div>
+                <div className="input_info">
+                  <p>Uzatmalar qutisi*</p>
+                  <select name="transmission" required>
+                    <option selected disabled>
+                      Tanlash
+                    </option>
+                    <option value="Mexanika">Mexanika</option>
+                    <option value="Avtomat">Avtomat</option>
+                    <option value="Boshqa">Boshqa</option>
+                  </select>
+                </div>
+                <div className="input_info">
+                  <p>Rang*</p>
+                  <select name="color" required>
+                    <option selected disabled>
+                      Tanlash
+                    </option>
+                    <option value="Oq">Oq</option>
+                    <option value="Qora">Qora</option>
+                    <option value="Seriy">Seriy</option>
+                    <option value="Qizil">Qizil</option>
+                    <option value="Kok">Kok</option>
+                    <option value="Sariq">Sariq</option>
+                    <option value="Yashil">Yashil</option>
+                    <option value="Xamelion">Xamelion</option>
+                  </select>
+                </div>
+                <div className="input_info">
+                  <p>Dvigatel hajmi*</p>
+                  <input type="text" placeholder="CM3" name="capacity" />
+                </div>
+                <div className="input_info">
+                  <p>Yoqilg‘i turi*</p>
+                  <select name="type_of_fuel" required>
+                    <option selected disabled>
+                      Tanlash
+                    </option>
+                    <option value="Benzin">Benzin</option>
+                    <option value="Dizel">Dizel</option>
+                    <option value="Gibrid">Gibrid</option>
+                    <option value="Gaz/Benzin">Gaz/Benzin</option>
+                    <option value="Elektro">Elektro</option>
+                    <option value="Boshqa">Boshqa</option>
+                  </select>
+                </div>
+                <div className="input_info">
+                  <p>Mashina holati*</p>
+                  <select name="state" required>
+                    <option selected disabled>
+                      Tanlash
+                    </option>
+                    <option value="Yangi">Yangi</option>
+                    <option value="Yaxshi">Yaxshi</option>
+                    <option value="Orta">Orta</option>
+                    <option value="Ta'mir talab">Ta'mir talab</option>
+                  </select>
+                </div>
+                <div className="input_info">
+                  <p>Mulkdorlar soni*</p>
+                  <select name="number_of_hosts" required>
+                    <option selected disabled>
+                      Выбрать
+                    </option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4+">4+</option>
+                  </select>
+                </div>
+                <div className="input_info">
+                  <p>Qo‘shimcha optsiyalar</p>
                 </div>
               </section>
-            </form>
-          </div>
+            )}
+            {filterCat?.name === "Fashion" && (
+              <section className="input-box">
+                <h2>Qo'shimcha ma'lumot</h2>
+                <div className="input_info private">
+                  <p>Xususiy yoki biznes*</p>
+                  <label htmlFor="">
+                    <button type="button">Jismoniy shaxs</button>
+                    <button type="button">Biznes</button>
+                  </label>
+                </div>
+                <div className="input_info private">
+                  <p>Holati*</p>
+                  <select name="state" required>
+                    <option selected disabled>
+                      Tanlash
+                    </option>
+                    <option value="B/u">B/u</option>
+                    <option value="Yangi">Yangi</option>
+                  </select>
+                </div>
+                <div className="input_info">
+                  <p>Olchami</p>
+                  <input type="text" name="size" />
+                </div>
+                <div className="input_info">
+                  <p>Qo'shimcha ma'lumot</p>
+                </div>
+              </section>
+            )}
+            {filterCat?.name === "Work" && (
+              <section className="input-box">
+                <div className="input_info" style={{ marginBottom: "40px" }}>
+                  <label htmlFor="">
+                    <p>Tolov*</p>
+                    <input
+                      style={{ width: "370px" }}
+                      type="text"
+                      name="salary"
+                      required
+                    />
+                  </label>
+                </div>
+                <h2>Qo'shimcha ma'lumot</h2>
+                <div className="input_info private">
+                  <p>Ish turi*</p>
+                  <select name="kinOfWork" required>
+                    <option selected disabled>
+                      Tanlash
+                    </option>
+                    <option value="Постоянная Work">Doimiy bandlik</option>
+                    <option value="Временная Work">Vaqtinchalik ish</option>
+                  </select>
+                </div>
+                <div className="input_info private">
+                  <p>Bandlik turi*</p>
+                  <select name="employmentType" required>
+                    <option selected disabled>
+                      Tanlash
+                    </option>
+                    <option value="Work на полную ставку">
+                      To‘liq stavkada bandlik
+                    </option>
+                    <option value="Временная Work">
+                      To‘liq bo‘lmagan bandlik
+                    </option>
+                  </select>
+                </div>
+                <div className="input_info">
+                  <p>Qo'shimcha ma'lumot</p>
+                </div>
+              </section>
+            )}
+            <section>
+              <div className="input_info">
+                <p>Joylashuv*</p>
+                <input
+                  type="text"
+                  placeholder="Shahar yoki pochta indeksi"
+                  name="location"
+                  required
+                />
+              </div>
+            </section>
+            <section className="avto_exs">
+              <div className="avto_body">
+                <span>
+                  <svg
+                    className="svg"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 448 512"
+                  >
+                    <path d="M349.4 44.6c5.9-13.7 1.5-29.7-10.6-38.5s-28.6-8-39.9 1.8l-256 224c-10 8.8-13.6 22.9-8.9 35.3S50.7 288 64 288H175.5L98.6 467.4c-5.9 13.7-1.5 29.7 10.6 38.5s28.6 8 39.9-1.8l256-224c10-8.8 13.6-22.9 8.9-35.3s-16.6-20.7-30-20.7H272.5L349.4 44.6z" />
+                  </svg>
+                  <h5>Avtomatik uzaytirish</h5>
+                </span>
+                <p>E'lon muddati 30 kundan keyin tugaydi</p>
+              </div>
+            </section>
+            <section className="inf_section">
+              <h2>Aloqa uchun ma'lumotlar</h2>
+              <div className="inf_label"></div>
+              <p>Murojaat qiluvchi shaxs*</p>
+              <input
+                type="text"
+                placeholder=""
+                defaultValue={currentUser?.firstname}
+                name="author"
+                required
+              />
+              <p>Email-manzil</p>
+              <input
+                className="th-l"
+                disabled={true}
+                defaultValue={currentUser?.email}
+                type="email"
+                name="email"
+                placeholder="@gmail.com"
+              />
+              <p>Telefon raqami</p>
+              <input type="tel" placeholder="" name="phone" />
+            </section>
+            <section className="last_section">
+              <div className="rights">
+                <p className="help">
+                  <div>
+                    Korib chiqish
+                    <span></span>
+                  </div>
+                </p>
+                <a></a>
+                <button>E’lon joylashtirish</button>
+              </div>
+            </section>
+          </form>
         </div>
       </div>
     </div>

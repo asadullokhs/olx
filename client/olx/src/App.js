@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { useInfoContext } from "./context/Context";
@@ -7,19 +7,33 @@ import Auth from "./pages/Auth/Auth";
 import Settings from "./pages/Settings/Set";
 import AddProd from "./pages/AddProd/AddProd";
 import Announce from "./pages/Announce/Announce";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, useLocation } from "react-router-dom";
 import Prod from "./pages/OneProd/Prod";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
 
-const App = () => {
-  const { currentUser } = useInfoContext();
+function App() {
+  const {currentUser} = useInfoContext()
+  const [isSignUp, setIsSignUp] = useState(false)
+  const path = useLocation().pathname
+  
+  useEffect(() => { 
+    const rePath = () => {
+      if(path === '/add-prod' && !currentUser || path === '/settings' && !currentUser || path === '/announce' && !currentUser ){
+        setIsSignUp(true)
+      } else {
+        setIsSignUp(false)
+      }
+    }
+    rePath()
+  }, [path])
+
   return (
-    <Router>
+    <>
       <div className="app">
-        <Navbar/>
+        {!isSignUp && <Navbar/>}
         <Routes>
-          <Route path="/" element={currentUser ? <Home /> : <Auth />} />
+          <Route path="/" element={<Home/>} />
           <Route
             path="/settings"
             element={currentUser ? <Settings /> : <Auth />}
@@ -28,11 +42,11 @@ const App = () => {
           <Route path="/add-prod" element={<AddProd />} />
           <Route path="/announce" element={<Announce />} />
         </Routes>
-        <Footer/>
+        {!isSignUp && <Footer/>}
       </div>
 
-    </Router>
+    </>
   );
-};
+}
 
 export default App;

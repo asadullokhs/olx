@@ -1,13 +1,14 @@
-import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Footer/Footer";
+
 import "./Set.scss";
+
+import { deleteAll, deleteUser } from "../../api/delRequests";
 import { updateAll } from "../../api/updRequests";
 import { useInfoContext } from "../../context/Context";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 const Setings = () => {
-  const { currentUser, setCurrentUser } = useInfoContext();
+  const { currentUser, setCurrentUser, exit } = useInfoContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +28,24 @@ const Setings = () => {
       toast.dismiss();
       console.log(error);
       toast.error(error?.response?.data?.message);
+    }
+  };
+
+  const deleteAcc = async (prod) => {
+    const confirmDel = window.confirm("Ochirishni tasdiqlash!!!");
+    if (confirmDel) {
+      toast.loading("Please wiat...");
+      try {
+          const res = await deleteUser(currentUser._id);
+        toast.dismiss();
+        toast.success(res.data);
+      } catch (err) {
+        toast.dismiss();
+        toast.error(err.response.data.message);
+        if (err.response.data.message === "jwt expired") {
+          exit();
+        }
+      }
     }
   };
 
@@ -225,7 +244,7 @@ const Setings = () => {
                     <div className="accordion-body">
                       <label htmlFor="">
                         <div className="red-star">
-                        Паролингиз <sup>*</sup>
+                        Parolingiz <sup>*</sup>
                         </div>
                       
 
@@ -351,15 +370,13 @@ const Setings = () => {
                 >
                   <hr />
 
-                  <button className="last_btn">Akauntni o‘chirish</button>
+                  <button className="last_btn" onClick={deleteAcc}>Akauntni o‘chirish</button>
                 </div>
               </div>
             </div>
           </section>
         </div>
       </div>
-
-      
     </div>
   );
 };

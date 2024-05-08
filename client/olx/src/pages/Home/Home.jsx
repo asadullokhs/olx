@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <div>
       <div className="body">
-        <Navbar />
+        {/* <Navbar /> */}
         <Search />
 
         <div className="announcements">
@@ -252,8 +252,8 @@ const Home = () => {
           </div>
         </div>
       </div>
-      <Footer />
-      <NavbarFutter />
+    
+      {/* <NavbarFutter /> */}
     </div>
   );
 };

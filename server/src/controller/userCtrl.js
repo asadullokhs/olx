@@ -45,7 +45,7 @@ const userCtrl = {
     try {
       const { id } = req.params;
 
-      if (req.user || req.userIsAdmin) {
+      if (req.user._id === id || req.userIsAdmin) {
         const deletedUser = await User.findByIdAndDelete(id);
 
         if (!deletedUser) {
