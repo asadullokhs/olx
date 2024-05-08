@@ -1,12 +1,9 @@
 import React from "react";
-import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Footer/Footer";
 import Search from "../../components/Search/Search";
 import Card from "../../components/Card/Card";
 import "./Home.scss";
 import { Link, useParams } from "react-router-dom";
 import { useInfoContext } from "../../context/Context";
-import NavbarFutter from "../../components/NavbarFutter/NavbarFutter";
 
 
 const Home = () => {
@@ -252,8 +249,6 @@ const Home = () => {
           </div>
         </div>
       </div>
-    
-      {/* <NavbarFutter /> */}
     </div>
   );
 };
