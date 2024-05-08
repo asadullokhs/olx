@@ -21,7 +21,12 @@
             color: #002F34;
         }
         .location{
+            overflow: hidden;
             margin: 0;
+            
+        }
+        .location , .prise , .content{
+            overflow: hidden;
         }
     }
 }

@@ -15,7 +15,7 @@ function NavbarFutter() {
                     <li className='nav_fut_spn'>saralash</li>
                 </div>
                 <div className="nav_fut_div">
-                    <li className='nav_fut_spn'><i className=" i_i fa-regular fa-circle-xmark"></i></li>
+                    <li className='nav_fut_spn'><i className=" i_i e_i fa-regular fa-circle-xmark"></i></li>
                     <li className='nav_fut_spn'>Elonlar</li>
                 </div>
                 <div className="nav_fut_div">

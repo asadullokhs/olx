@@ -63,7 +63,7 @@ const Home = () => {
             <div className="announcementss" style={{}}>
               {cards.length > 0 ? cards.map(card => {
                 return <Card key={card._id} prod={card} />
-              }) : <h2>Tavar yo'q</h2>}
+              }) : <h2 >Tavar yo'q</h2>}
             </div>
 
           </div>
