@@ -1,4 +1,21 @@
+<<<<<<< HEAD
 header{
+=======
+.scrollableDiv {
+    position: fixed !important;
+    top: 0;
+    left: 50%;
+    opacity: 1;
+    transition: opacity 0.5s ease;
+}
+
+
+.hidden {
+    opacity: 0;
+}
+
+.navbar {
+>>>>>>> 58bf73008e0b09e7091a98d9c4d406dc810bffb2
     background-color: #002f34;
     font-family: sans-serif;
     font-weight: bold;
@@ -66,6 +83,7 @@ header{
         .nav-list{
             display: flex;
             align-items: center;
+<<<<<<< HEAD
             justify-content: center;
             list-style-type: none;
             gap: 40px;
@@ -83,6 +101,21 @@ header{
                 span{
                     color: #7f9799;
                     font-weight: normal;
+=======
+
+            li {
+                color: white !important;
+                cursor: pointer;
+                transition: all 0.2s linear;
+                .link{
+                    cursor: pointer;
+                    text-decoration: none;
+                color: white !important;
+                }
+
+                &:hover {
+                    color: gray;
+>>>>>>> 58bf73008e0b09e7091a98d9c4d406dc810bffb2
                 }
                 button{
                     cursor: pointer;
@@ -140,8 +173,16 @@ header{
         }
     }
 }
+<<<<<<< HEAD
 @media (max-width: 1024px){
     .header-none{
         display: none;
+=======
+
+
+@media (max-width: 490px) {
+    .scrollableDiv {
+        display: none !important;
+>>>>>>> 58bf73008e0b09e7091a98d9c4d406dc810bffb2
     }
 }

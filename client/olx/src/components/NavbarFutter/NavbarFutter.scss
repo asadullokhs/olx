@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // .NavbarFutter {
 //     // width: 390px;
 //     // height: 48px;
@@ -38,3 +39,38 @@
 //     }
     
 // }
+=======
+.NavbarFutter {
+    display: none;
+}
+@media (max-width: 490px) {
+    .NavbarFutter {
+        position: fixed;
+        bottom: 0;
+        right: 0;
+        width: 100%;
+        height: 48px;
+        display: flex;
+    }        
+    .nav_fut {
+        background-color: white;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        height: 48px;
+        width: 100%;
+        background-color: whitesmoke;
+    }
+    .nav_fut_div {
+        margin: 3px;
+        max-width: 78px;
+        max-height: 38px;
+        list-style-type: none;
+        text-align: center;
+    }
+    .nav_fut_spn{
+        font-size: smaller;
+        margin: 0;
+        padding: 0; 
+    }
+}
+>>>>>>> 58bf73008e0b09e7091a98d9c4d406dc810bffb2

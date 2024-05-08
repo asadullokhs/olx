@@ -64,13 +64,14 @@
 
     .h1 {
         margin-left: 400px;
+        
     }
 
     .announcementss {
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-
+        background-color: #f1f2f2;
         // justify-content: space-around;
         margin-bottom: 200px;
         width: 1238px;
@@ -268,7 +269,7 @@
 
     .announcementss {
         margin: 0;
-        background-color: #fff;
+        background-color: #f1f2f2;
         padding: 0;
         width: 100% !important;
         flex-wrap: wrap !important;
@@ -288,7 +289,7 @@
     .anns {
         width: 95px;
         height: 95px;
-        margin-left: -70px;
+        margin-left: -50px;
         padding: 0;
         display: flex;
         justify-content: space-between;
@@ -305,18 +306,22 @@
 
     .vip_announcements {
         width: 390px;
+        background-color: #f1f2f2;
         height: auto;
     }
 
     .futter1 {
+        background-color: #f1f2f2;
         display: none;
     }
 
     .futter2 {
+        background-color: #f1f2f2;
         display: none;
     }
 
     .futter3 {
+        background-color: #f1f2f2;
         display: none;
     }
 }

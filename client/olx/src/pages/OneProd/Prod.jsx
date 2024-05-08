@@ -12,6 +12,7 @@ import { Link, useParams } from 'react-router-dom';
 // import  slidesData  from '../../components/Slider/caruselData.json';
 import Corusel from '../../components/carousel/corusel';
 import Slider from 'react-slick';
+import Card from '../../components/Card/Card';
 
 const Prod = () => {
     const { setCards, cards } = useInfoContext()
@@ -247,6 +248,15 @@ const Prod = () => {
                         </div>
                     </div>
 
+                    {/* ////////////////////// carusel /////////////////////// */}
+
+                    <div className='additional_products'>
+                            <div className="announcementss" style={{}}>
+                                {cards.length > 0 ? cards.map(card => {
+                                     return <Card key={card._id} prod={card} />
+                                }) : <h2 >o'xshash tavar yo'q 😔 😔 😔 </h2>}
+                            </div>
+                    </div>
                 </div>
 
                 {
