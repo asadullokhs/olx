@@ -11,6 +11,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Prod from "./pages/OneProd/Prod";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
+import Message from "./pages/Message/Message";
 
 const App = () => {
   const { currentUser } = useInfoContext();
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/prod/:id" element={<Prod />} />
           <Route path="/add-prod" element={<AddProd />} />
           <Route path="/announce" element={<Announce />} />
+          <Route path="/message" element={< Message/>} />
         </Routes>
         <Footer/>
       </div>

@@ -33,19 +33,21 @@ const Navbar = () => {
           </div>
           <ul>
             <li>
-              <i className="fa-regular fa-comment"></i>
-              Xabarlar
+              <Link className="link" to="/message">
+                <i className="fa-regular fa-comment"></i>
+                Xabarlar
+              </Link>
             </li>
             <li>O'z | Ру</li>
-            <li>
+            <li to="#">
               <i className="fa-regular fa-heart"></i>
             </li>
-            <li>
+            <li to="#">
               <i className="fa-regular fa-user"></i>
               Hisobingiz
             </li>
             <li>
-              <Link to={'/add-prod'}>
+              <Link className="link" to={'/add-prod'}>
                 <button>E'lon berish</button>
               </Link>
             </li>
