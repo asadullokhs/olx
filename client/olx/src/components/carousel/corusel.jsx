@@ -73,5 +73,3 @@ const Corusel = () => {
 }
 
 export default Corusel
-
-

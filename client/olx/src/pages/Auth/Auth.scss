@@ -1,0 +1,252 @@
+.signup {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  background-color: #3a77ff;
+  overflow-x: hidden;
+}
+
+
+.signup .circle {
+
+  position: absolute;
+  margin: 0 auto;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 100vw;
+  height: 100vw;
+  border: 150px solid #CEDDFF;
+  border-radius: 50%;
+  animation: loader 1.5s ease-out;
+}
+
+@keyframes loader {
+  from {
+      width: 0;
+      height: 0;
+  }
+
+  ;
+
+  to {
+      width: 100vw;
+  }
+
+  ;
+}
+
+.signup-page {
+  background-color: white;
+  max-width: 400px;
+  width: 100%;
+  padding: 20px;
+  min-height: 681px;
+  margin: 0px auto;
+  display: block;
+  position: relative;
+  top: 50px;
+  border-radius: 4px;
+  .welcome{
+    display: none;
+  }
+}
+
+.signup-page .facebook {
+  padding: 9px;
+  width: 100%;
+  background-color: transparent;
+  border: 4px solid #002f34;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.7px;
+  transition: all 0.1s linear;
+  margin-bottom: 10px;
+}
+
+.facebook i {
+  color: rgb(24, 119, 242);
+  margin-right: 10px;
+  
+}
+
+.facebook:hover {
+  box-shadow: inset 0 0 0 1px #002f34;
+}
+.apple i {
+  color: black;
+  font-size: 22px;
+}
+
+.google img {
+  width: 30px;
+  height: 30px;
+}
+
+.password {
+  position: relative;
+}
+
+.password i {
+  position: absolute;
+  top: 55%;
+  right: 5%;
+  transform: translate(50% 50%);
+}
+
+.signing {
+  .line{
+    background-color: #7F9799;
+    width: 100%;
+    height: 1px;
+  }
+  .and{
+    color: #002F34;;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: 0.7px;
+    line-height: 16px;
+    margin: 0 24px;
+    text-transform: uppercase;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+  h5 {
+    font-size: 14px;
+    margin: 15px 0;
+    font-weight: normal;
+    font-family: Geomanist, sans-serif;
+    text-align: center;
+    transition: all 0.1s ease;
+    width: 100%;
+    padding: 10px;  
+  }
+  h5:hover{
+    border-bottom: 3px solid #002F34;
+  }
+  label {
+    display: block;
+    font-family: "Geomanist", Arial, sans-serif;
+    cursor: auto;
+    font-size: 14px;
+    margin-bottom: 8px;
+    color: #002F34;
+  }
+  input {
+    width: 100%;
+    background: #F2F4F5;
+    border: none;
+    border-bottom: 2px solid transparent;
+    border-radius: 4px;
+    box-sizing: border-box;
+    color: #002F34;
+    font-family: Geomanist, sans-serif;
+    font-size: 16px;
+    height: 48px;
+    padding: 14px 16px 14px 16px;
+    outline: none;
+  }
+  .forgot{
+    cursor: pointer;
+    font-family: Geomanist, sans-serif;
+    font-size: 14px;
+    font-weight: 700;
+    height: 40px;
+    letter-spacing: 0.7px;
+    line-height: 18px;
+    padding-left: 24px;
+    padding-right: 24px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+    width: auto;
+    background: transparent;
+    color: #002F34;
+  }
+  .login{
+    border-radius: 4px;
+    box-sizing: border-box;
+    cursor: pointer;
+    font-family: Geomanist, sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    height: 48px;
+    letter-spacing: 0.7px;
+    line-height: 20px;
+    padding-left: 32px;
+    padding-right: 32px;
+    position: relative;
+    text-align: center;
+    white-space: nowrap;
+    width: auto;
+    background: #002F34;
+    color: #FFFFFF;
+    margin-top: 16px;
+    width: 100%;
+  }
+  .login:hover{
+    background-color: white;
+    color: #002F34;
+    border: 4px solid #002F34;
+  }
+  .olx{
+    color: #002F34;
+    font-family: Geomanist, sans-serif;
+    font-weight: 400;
+    -webkit-text-decoration: none;
+    text-decoration: none;
+    font-size: 12px;
+    line-height: 14px;
+    margin-block-end: unset;
+    margin-block-start: unset;
+    line-height: 18px;
+    margin-top: 4px;
+    margin-bottom: 1em;
+  }
+  .check{
+    input[type="checkbox"] {
+      width: 30px;
+      height: 30px;
+      accent-color: #002F34;
+    }
+    span{
+      position: relative;
+      font-size: 12px;
+      line-height: 18px;
+      margin-left: 16px;
+      margin-top: -4px;
+      user-select: none;
+      margin-left: 10px;
+    }
+  }
+}
+
+
+@media (max-width: 425px) {
+  .signup-page{
+    width: 100%;
+    top: 0;
+    .facebook{
+     
+      border-radius: 3px;
+    }
+    .welcome{
+      display: flex;
+      justify-content: center;
+      margin-bottom: 35px;
+
+    }
+
+    .facebook:hover {
+      background-color: #85a6aa;
+      border-color: white;
+      box-shadow: none;
+    }
+  }
+  .circle{
+    display: none;
+  }
+}
