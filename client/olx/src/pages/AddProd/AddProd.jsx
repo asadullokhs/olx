@@ -108,6 +108,7 @@ const AddProd = () => {
       setGetId(null);
       setSubId(null);
       setTypeId(null);
+      toggleReset()
       e.target.reset();
     } catch (err) {
       toast.dismiss();

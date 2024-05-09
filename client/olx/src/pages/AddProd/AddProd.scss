@@ -7,8 +7,8 @@
   background-color: #f2f4f5 !important;
   width: 100%;
   select,input{
-    width: 30%;
-    padding: 15px;
+    width: 50%;
+    padding: 15px 20px !important; 
     border: none;
     outline: none;
     border-radius: 5px;
@@ -44,7 +44,7 @@
     .price{
       .input_info{
         button{
-          padding: 15px 80px;
+          padding: 15px 50px;
           border-radius: 5px;
           width: 15%;
           text-align: center;
@@ -58,14 +58,19 @@
       }
     }
     .private{
-      button{
-        padding: 10px 20px;
-        width: 15%;
-        margin-right: 10px;
-        border: none;
-        background-color: #002f3427;
-        color: #002f34;
-        border-radius: 5px;
+      label{
+        display: flex;
+        align-items: center;
+        width: 50%;
+        button{
+          padding: 5px 10px;
+          margin-right: 10px;
+          border: none;
+          background-color: #002f3427;
+          color: #002f34;
+          border-radius: 5px;
+          width: 300px;
+        }
       }
     }
 
@@ -232,6 +237,7 @@
                 background-color: rgb(242, 244, 245);
                 input{
                   padding: 15px;
+                  width: 40%;
                 }
                 i {
                   align-items: center;
@@ -412,7 +418,7 @@
         font-size: 14px;
       }
       input {
-        width: 30%;
+        width: 50%;
         background-color: #f2f4f5;
         border-radius: 4px;
         padding: 15px;

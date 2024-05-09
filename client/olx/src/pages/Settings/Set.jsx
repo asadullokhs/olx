@@ -68,7 +68,7 @@ const Setings = () => {
                   Sizning hisobingiz: 0 so'm <br />
                   Reklama e'lonlari uchun: 0 bonus
                 </span>
-                <i class="fa-solid fa-circle-info"></i>
+                <i className="fa-solid fa-circle-info"></i>
 
                 <button className="pay_btn">Hisobni To'ldirish</button>
                 <button className="buyBtn">Paketni sotib oling</button>
@@ -91,6 +91,9 @@ const Setings = () => {
         </div>
         <div className="container">
           <section className="middle_sec">
+
+
+
             <div
               className="accordion accordion-flush"
               id="accordionFlushExample"
@@ -116,7 +119,7 @@ const Setings = () => {
                 >
                   <form onSubmit={handleSubmit}>
                     <div className="accordion-body">
-                      <label for="address">
+                      <label htmlFor="address">
                         Sizning OLX dagi ismingiz
                         <input
                           type="text"
@@ -127,7 +130,7 @@ const Setings = () => {
                       </label>
                     </div>
                     <div className="accordion-body">
-                      <label for="address">
+                      <label htmlFor="address">
                         Telefon raqami
                         <input
                           type="text"
@@ -138,7 +141,7 @@ const Setings = () => {
                     </div>
                     <div className="accordion-body">
                         Joylashuv
-                      <label for="address" className="location-input">
+                      <label htmlFor="address" className="location-input">
                           <i className="fa-solid fa-location-dot"></i>
                           <input
                             type="text"
@@ -179,7 +182,7 @@ const Setings = () => {
                 >
                   <form onSubmit={handleSubmit}>
                     <div className="accordion-body">
-                      <label for="address">
+                      <label htmlFor="address">
                         Shaharni tanlash
                         <input
                           type="text"
@@ -192,7 +195,7 @@ const Setings = () => {
                     <div className="set_line"></div>
 
                     <div className="accordion-body">
-                      <label htmlFor="">
+                      <label htm htmlFor="">
                         Aloqa uchun shaxs
                         <input
                           type="text"
@@ -202,7 +205,7 @@ const Setings = () => {
                       </label>
                     </div>
                     <div className="accordion-body">
-                      <label htmlFor="">Telefon raqami
+                      <label htm htmlFor="">Telefon raqami
 
                       <input
                         type="text"
@@ -242,7 +245,7 @@ const Setings = () => {
                 >
                   <form>
                     <div className="accordion-body">
-                      <label htmlFor="">
+                      <label htm htmlFor="">
                         <div className="red-star">
                         Parolingiz <sup>*</sup>
                         </div>
@@ -252,7 +255,7 @@ const Setings = () => {
                     </div>
 
                     <div className="accordion-body">
-                      <label htmlFor="">
+                      <label htm htmlFor="">
                        <div className="red-star">
                        Yangi parol <sup>*</sup>
                        </div>
@@ -296,14 +299,14 @@ const Setings = () => {
                 >
                   <form>
                     <div className="accordion-body">
-                      <label htmlFor="">
+                      <label htm htmlFor="">
                         Sizning OLX dagi xozirgi parolingiz
                       
                       <input type="text" className="accord-input" /></label>
                     </div>
 
                     <div className="accordion-body">
-                      <label htmlFor="">Yangi Email
+                      <label htm htmlFor="">Yangi Email
                       <input
                         type="text"
                         name="email"

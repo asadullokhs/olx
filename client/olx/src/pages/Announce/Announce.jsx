@@ -34,6 +34,7 @@ const UserProd = () => {
         }
         toast.dismiss();
         toast.success(result);
+        toggleReset()
       } catch (err) {
         toast.dismiss();
         toast.error(err.response.data.message);
@@ -53,7 +54,7 @@ const UserProd = () => {
               Hisobingiz balansi: 0 сум <br />
               Mavjud bonuslar: 0 bonus
             </p>
-            <i class="fa-solid fa-circle-info"></i>
+            <i className="fa-solid fa-circle-info"></i>
             <button className="payBtn">Hisobni to'ldirish</button>
             <button className="buyBtn">To'plam sotib olish </button>
           </div>

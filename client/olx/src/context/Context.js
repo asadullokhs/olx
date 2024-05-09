@@ -19,6 +19,9 @@ export const InfoProvider = ({ children }) => {
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [currentChat, setcurrentChat] = useState(null);
   const [chats, setChats] = useState([]);
+  const [loading, setLoading] = useState(false)
+
+  const toggleReset = () => setLoading(!loading)
 
   const exit = () => {
     localStorage.clear();
@@ -45,7 +48,7 @@ export const InfoProvider = ({ children }) => {
     };
 
     myFunc();
-  }, [currentUser]);
+  }, [currentUser, loading]);
 
   const value = {
     currentUser,
@@ -57,7 +60,7 @@ export const InfoProvider = ({ children }) => {
     setSub,
     type,
     setType,
-
+    toggleReset,
     works,
     exit,
     cards,

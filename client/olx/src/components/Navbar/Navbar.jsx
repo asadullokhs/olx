@@ -7,7 +7,7 @@ const Navbar = () => {
     const {exit, currentUser, cards, works} = useInfoContext()
     const path = useLocation().pathname
     const userArr = [...cards, ...works]
-    
+   
     const [filtered, setFiltered] = useState([])
     useEffect(() => {
         const filteredCards = userArr.filter(obj1 =>
@@ -71,7 +71,7 @@ const Navbar = () => {
                             <div className="links">
                                 <b>Избранные:</b>
                                 <ul>
-                                    <NavLink style={{textDecoration: 'none'}} to='/like'><li>Elonlar {filtered.length}</li></NavLink>
+                                    <NavLink style={{textDecoration: 'none'}} to='/'><li>Elonlar {filtered.length}</li></NavLink>
                                     <NavLink style={{textDecoration: 'none'}} to='/'><li>Qidiruv 0</li></NavLink>
                                     <li className='exit' onClick={exit}><code>Chiqish</code></li>
                                 </ul>
@@ -79,7 +79,7 @@ const Navbar = () => {
                             </div>
                         </li>
                         <li className="nav-item">
-                            <NavLink style={{textDecoration: 'none'}} to="/add" className="nav-link">
+                            <NavLink style={{textDecoration: 'none'}} to="/add-prod" className="nav-link">
                                 <button className='header-btn'>
                                     E'lon berish
                                 </button>
@@ -98,9 +98,9 @@ const Navbar = () => {
                     </NavLink>
                 </li>
                 <li className="media-item">
-                    <NavLink style={{textDecoration: 'none'}} to="/" className="media-link">
-                        <i className="fa-solid fa-heart"></i>
-                        Saqlangan
+                    <NavLink style={{textDecoration: 'none'}} to="/announce" className="media-link">
+                    <i className="fa-solid fa-user-plus"></i>
+                        Elonlar
                     </NavLink>
                 </li>
                 <li className="media-item">
