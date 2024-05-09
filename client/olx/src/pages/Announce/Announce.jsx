@@ -20,7 +20,6 @@ const UserProd = () => {
       const method = category.filter((cat) => cat._id === prod.categoryId)[0];
       toast.loading("Please wiat...");
       let result = null;
-      console.log(method.name);
       try {
         if (method.name === "Car") {
           const res = await deleteAll(prod._id, "car");

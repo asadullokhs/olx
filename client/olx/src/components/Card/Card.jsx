@@ -3,7 +3,6 @@ import "./Card.scss";
 import { Link } from "react-router-dom";
 
 const Card = ({ prod }) => {
-  console.log(prod);
   const createdAt = new Date(prod?.createdAt);
   const today = new Date();
 

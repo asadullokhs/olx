@@ -22,7 +22,6 @@ const Auth = () => {
       const formData = new FormData(e.target);
 
       const res = isAccount ? await login(formData) : await register(formData);
-      console.log(res);
       toast.dismiss();
       localStorage.setItem("profile", JSON.stringify(res?.data?.user));
       localStorage.setItem("token", JSON.stringify(res?.data?.token));

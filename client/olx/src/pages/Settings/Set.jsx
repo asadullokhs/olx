@@ -243,7 +243,7 @@ const Setings = () => {
                   aria-labelledby="flush-headingTwo"
                   data-bs-parent="#accordionFlushExample"
                 >
-                  <form>
+                  <form onSubmit={handleSubmit}> 
                     <div className="accordion-body">
                       <label htm htmlFor="">
                         <div className="red-star">
@@ -268,7 +268,7 @@ const Setings = () => {
                       /> </label>
                     </div>
 
-                    <button className="d_btn">Saqlash</button>
+                    <button className="d_btn" >Saqlash</button>
                   </form>
                 </div>
               </div>
@@ -297,7 +297,7 @@ const Setings = () => {
                   aria-labelledby="flush-headingThree"
                   data-bs-parent="#accordionFlushExample"
                 >
-                  <form>
+                  <form onSubmit={handleSubmit}> 
                     <div className="accordion-body">
                       <label htm htmlFor="">
                         Sizning OLX dagi xozirgi parolingiz
@@ -373,7 +373,7 @@ const Setings = () => {
                 >
                   <hr />
 
-                  <button className="last_btn" onClick={deleteAcc}>Akauntni o‘chirish</button>
+                  <button  className="last_btn" onClick={deleteAcc}>Akauntni o‘chirish</button>
                 </div>
               </div>
             </div>
