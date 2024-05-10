@@ -90,7 +90,7 @@ const Setings = () => {
             </div>
           </div>
         </div>
-        <div className="container">
+        <div className="container nd-con">
           <section className="middle_sec">
 
 
@@ -344,7 +344,10 @@ const Setings = () => {
                   aria-labelledby="flush-headingFour"
                   data-bs-parent="#accordionFlushExample"
                 >
-                  <button className="d_btn">Nomzod profiliga oʻtish</button>
+
+                 
+
+
                 </div>
               </div>
             </div>
