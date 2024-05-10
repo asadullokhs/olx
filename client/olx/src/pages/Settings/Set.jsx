@@ -1,7 +1,7 @@
 
 import "./Set.scss";
 
-import { deleteAll, deleteUser } from "../../api/delRequests";
+import { deleteUser } from "../../api/delRequests";
 import { updateAll } from "../../api/updRequests";
 import { useInfoContext } from "../../context/Context";
 import { toast } from "react-toastify";
