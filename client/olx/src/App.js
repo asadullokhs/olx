@@ -40,9 +40,9 @@ function App() {
             element={currentUser ? <Settings /> : <Auth />}
           />
           <Route path="/prod/:id" element={<Prod />} />
-          <Route path="/add-prod" element={<AddProd />} />
-          <Route path="/announce" element={<Announce />} />
-          <Route path="/message" element={< Message/>} />
+          <Route path="/add-prod" element={currentUser ? <AddProd /> : <Auth/>} />
+          <Route path="/announce" element={currentUser ? <Announce /> : <Auth/>} />
+          <Route path="/message" element={currentUser ? < Message/> : <Auth/>} />
         </Routes>
         {!isSignUp && <Footer/>}
       </div>

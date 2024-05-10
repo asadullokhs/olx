@@ -36,10 +36,12 @@ const Setings = () => {
         if(confirmAcc){
             try {
                 toast.loading('Please wiat...')
-                const res = await deleteUser(currentUser._id)
+                const res = await deleteUser(currentUser?._id)
+                console.log(res);
                 toast.dismiss()
                 toast.success(res?.data?.message)
                 toggleReset()
+                exit()
             } catch (error) {
                 toast.dismiss()
                 toast.error(error?.response?.data?.message)
@@ -54,6 +56,7 @@ const Setings = () => {
     <div className="bg">
       <div className="media_texts">
         <h1>Sozlamalar</h1>
+        <div className="media-icon" onClick={exit}><span>Chiqish</span> <i className="fa-solid fa-right-from-bracket"></i></div>
       </div>
    
       <div className="settings">

@@ -63,10 +63,10 @@ const UserProd = () => {
         <nav>
           <ul>
             <li>
-              <NavLink to="/my">E‘lonlar</NavLink>
+              <NavLink to="/announce">E‘lonlar</NavLink>
             </li>
             <li>
-              <NavLink to="/chat">Xabarlar</NavLink>
+              <NavLink to="/message">Xabarlar</NavLink>
             </li>
             <li>
               <NavLink to="/">To‘lovlar va OLX hisobi</NavLink>
@@ -75,7 +75,7 @@ const UserProd = () => {
               <NavLink to="/">Nomzod profili</NavLink>
             </li>
             <li>
-              <NavLink to="/account">Sozlamalar</NavLink>
+              <NavLink to="/settings">Sozlamalar</NavLink>
             </li>
           </ul>
         </nav>

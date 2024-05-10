@@ -53,9 +53,9 @@ const Auth = () => {
             <span>Apple orqali kirish</span>
           </button>
           <button className="facebook google mb-3">
-            <div>
-              <GoogleLogin
-                width="330"
+            <div className="google_auth">
+              <GoogleLogin          
+                width="300"
                 onSuccess={async (credentialResponse) => {
                   let data = jwtDecode(credentialResponse?.credential);
                   toast.loading("Please wait...");
@@ -71,7 +71,7 @@ const Auth = () => {
 
                   res = await googleAuth(newUser);
                   toast.dismiss();
-
+                  
                   localStorage.setItem(
                     "profile",
                     JSON.stringify(res?.data?.user)
