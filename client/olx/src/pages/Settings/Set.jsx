@@ -1,7 +1,7 @@
 
 import "./Set.scss";
 
-import { deleteAll, deleteUser } from "../../api/delRequests";
+import { deleteUser } from "../../api/delRequests";
 import { updateAll } from "../../api/updRequests";
 import { useInfoContext } from "../../context/Context";
 import { toast } from "react-toastify";
@@ -90,7 +90,7 @@ const Setings = () => {
             </div>
           </div>
         </div>
-        <div className="container">
+        <div className="container nd-con">
           <section className="middle_sec">
 
 
@@ -344,7 +344,10 @@ const Setings = () => {
                   aria-labelledby="flush-headingFour"
                   data-bs-parent="#accordionFlushExample"
                 >
-                  <button className="d_btn">Nomzod profiliga oʻtish</button>
+
+                 
+
+
                 </div>
               </div>
             </div>
