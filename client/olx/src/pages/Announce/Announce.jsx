@@ -1,165 +1,157 @@
 import React from "react";
 import "./Announce.scss";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useInfoContext } from "../../context/Context";
-import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Footer/Footer";
-import { toast } from "react-toastify"
+import Card from "../../components/Card/Card";
 import { deleteAll } from "../../api/delRequests";
+import { toast } from "react-toastify";
 
-const Announc = () => {
-  const { cards, category, currentUser, exit } = useInfoContext();
+const UserProd = () => {
+  const { cards, toggleReset, currentUser, exit, works, category } =
+    useInfoContext();
 
-  const userProd = cards.filter((prod) => prod.authorId === currentUser._id);
-  // const userProd = [];
+  const userArr = [...cards, ...works];
 
-
-
+  const userProd = userArr.filter((prod) => prod.authorId === currentUser._id);
 
   const deleteProdact = async (prod) => {
-    const confirmDel = window.confirm('Ochirishni tastiqlang!!!')
-    if(confirmDel){
-      const method = category.filter(cat => cat._id === prod.categoryId)[0] 
-      toast.loading('Please wiat...')
-      let result = null
+    const confirmDel = window.confirm("Ochirishni tasdiqlash!!!");
+    if (confirmDel) {
+      const method = category.filter((cat) => cat._id === prod.categoryId)[0];
+      toast.loading("Please wiat...");
+      let result = null;
       try {
-        if(method.name === 'Car'){
-          const res = await deleteAll(prod._id, 'car')
-          result = res.data.message
-        }else if (method.name === 'Fashion'){
-          const res = await deleteAll(prod._id, 'fashion')
-          result = res.data.message
-        } else if(method.name === 'Work'){
-          const res = await deleteAll(prod._id, 'work')
-          result = res.data.message
+        if (method.name === "Car") {
+          const res = await deleteAll(prod._id, "car");
+          result = res.data.message;
+        } else if (method.name === "Fashion") {
+          const res = await deleteAll(prod._id, "fashion");
+          result = res.data.message;
+        } else if (method.name === "Work") {
+          const res = await deleteAll(prod._id, "work");
+          result = res.data.message;
         }
-          toast.dismiss()
-          toast.success(result)
+        toast.dismiss();
+        toast.success(result);
+        toggleReset()
       } catch (err) {
-          toast.dismiss()
-          toast.error(err?.response?.data?.message)
-          if(err?.response?.data?.message === 'jwt expired'){
-            exit()
-          }
+        toast.dismiss();
+        toast.error(err.response.data.message);
+        if (err.response.data.message === "jwt expired") {
+          exit();
+        }
       }
     }
-  }
+  };
 
-
-
-
-
+  
   return (
-    <div className="announc">
-      <Navbar />
-      <div className="container">
-        <div>
-          <div className="one-top">
-            <h1>Sozlamalar</h1>
-            <div>
-              <span>
-                Sizning hisobingiz: 0 sum
-                <br /> Eʼlonlar reklamasi uchun: 0 bonuslarni
-              </span>
-              <i className="fa-solid fa-circle-info"></i>
-              <button>Hisobni Toldirish</button>
-              <button className="buyBtn">Paketni sotib oling</button>
-            </div>
-          </div>
-          <div className="two">
-            <b>E’tibor bering, OLX.UZ-da yetkazib berish xizmati mavjud emas</b>
+    <div className="my mt-5">
+      <div className="top-account">
+        <div className="top-btn">
+          <h2>Sizning e’lonlaringiz</h2>
+          <div className="btn">
             <p>
-              Xaridni yetkazib berish orqali rasmiylashtirish haqidagi
-              havolalarni e’tiborsiz qoldiring. Eng muhimi, hech qachon bank
-              kartangiz maxfiy raqamini yozmang
+              Hisobingiz balansi: 0 сум <br />
+              Mavjud bonuslar: 0 bonus
             </p>
-            <p>Internetda xavfsiz xarid qilishni bilib oling</p>
+            <i className="fa-solid fa-circle-info"></i>
+            <button className="payBtn">Hisobni to'ldirish</button>
+            <button className="buyBtn">To'plam sotib olish </button>
           </div>
-          <ul className="announcUl">
-            <li>E'lonlar</li>
-            <li>Xabarlar</li>
-            <li>To‘lovlar va OLX hisobi</li>
-            <li>Nomzod profili</li>
+        </div>
+        <nav>
+          <ul>
             <li>
-              <Link to="/settings">Sozlamalar</Link>
+              <NavLink to="/my">E‘lonlar</NavLink>
+            </li>
+            <li>
+              <NavLink to="/chat">Xabarlar</NavLink>
+            </li>
+            <li>
+              <NavLink to="/">To‘lovlar va OLX hisobi</NavLink>
+            </li>
+            <li>
+              <NavLink to="/">Nomzod profili</NavLink>
+            </li>
+            <li>
+              <NavLink to="/account">Sozlamalar</NavLink>
             </li>
           </ul>
-        </div>
+        </nav>
       </div>
       <div className="filter">
         <div className="container">
-          <ul>
+          <div className="none">
+            <Link to="/">
+              <button className="media-btn">
+                <i className="fa-solid fa-chevron-left"></i>
+              </button>
+            </Link>
+            <h2>Elonlar</h2>
+          </div>
+          <ul className="media">
             <li>Faol</li>
-            <li>Kutilmoqda</li>
+            <li>Kutayotgan</li>
             <li>Tolanmagan</li>
-            <li>Faol emas</li>
+            <li>Nofaol</li>
             <li>Rad etilgan</li>
           </ul>
-          <div className="btns">
+          <div className="btns media">
             <div className="filterR">
-              <i
-                className="fa-solid fa-sliders"
-                style={{ marginRight: "10px" }}
-              ></i>
-              <span>Filtrni qo'shing</span>
+              <i className="fa-solid fa-sliders"></i>
+              <span>Filtrni qoshish</span>
             </div>
             <div className="searchInput">
               <i className="fa-solid fa-magnifying-glass"></i>
-              <input
-                type="text"
-                placeholder="Sarlavha, ID yoki joylashuvi..."
-              />
+              <input type="text" placeholder="Искать по заголовку..." />
             </div>
             <div className="category">
-              {/* asosida qidirish */}
               <span>Istalgan toifa</span>
-              <i className="fa-solid fa-chevron-down"></i>
+              <i className="fa-solid fa-chevron-down me-2"></i>
             </div>
             <div className="sort">
               <span>Saralash</span>
-              <i className="fa-solid fa-chevron-down"></i>
+              <i className="fa-solid fa-chevron-down me-2"></i>
             </div>
           </div>
           <div className="cardsS">
             {userProd.length > 0 ? (
               userProd.map((res) => {
                 return (
-                  <div className="card-user">
+                  <div key={res._id} className="card-user">
                     <div className="one">
                       <div className="card-info">
-                        {" "}
-                        {res.photos.length > 0 ? (
-                          <img src={res?.photos[0].url} alt="card_img" />
-                        ) : (
-                          <img src="/images/logo.png" />
+                        {res?.photos?.length > 0 && (
+                          <img src={res.photos[0].url} alt="" />
                         )}
                         <div className="status-one">
-                          <b>{res.content}</b> <br /> <br />
+                          <div id="res-content">
+                            <b>{res.content}</b>
+                            <br />
+                          </div>
                           <i className="fa-solid fa-location-dot"></i>
-                          {res.location} <br /> <br />
+                          {res.location} <br />
                           <i className="fa-solid fa-calendar-days"></i>
-                          {new Date(
-                            res.createdAt
-                          ).toLocaleTimeString()} <br /> <br />
+                          {new Date(res.createdAt).toLocaleTimeString()}
                         </div>
                       </div>
                       <div className="card-status">
                         <div className="status-two">
                           <b>{res.price}</b>
-                          <div className="iconss">
+                          <div className="iconss gap">
                             <span>
-                              0 <i className="fa-regular fa-heart"></i>
+                              0 <i className="fa-regular fa-heart ms-1"></i>
                             </span>
                             <span>
-                              0 <i className="fa-solid fa-phone"></i>
+                              0 <i className="fa-solid fa-phone ms-1"></i>
                             </span>
                             <span>
-                              0 <i className="fa-solid fa-eye"></i>
+                              0 <i className="fa-solid fa-eye ms-1"></i>
                             </span>
-
                             <button>Statiskani korish</button>
                             <button>
-                              <i className="fa-regular fa-comment"></i> 0
+                              <i className="fa-regular fa-comment me-1"></i> 0
                             </button>
                           </div>
                         </div>
@@ -168,22 +160,28 @@ const Announc = () => {
                     <div className="usertwo">
                       <p>id:{res._id}</p>
                       <div>
-                        <button>Tekshirish</button>
-                        <span onClick={() =>deleteProdact(res)}>Ochirish</span>
+                        <Link to={`/prod/${res._id}`}>
+                          <button>Tekshirish</button>
+                        </Link>
+                        <span
+                          onClick={() => deleteProdact(res)}
+                          style={{ cursor: "pointer" }}
+                        >
+                          O'chirish
+                        </span>
                       </div>
                     </div>
                   </div>
                 );
               })
             ) : (
-              <h2>Categorya yo'q</h2>
+              <h2>Malumot yoq</h2>
             )}
           </div>
         </div>
       </div>
-      <Footer />
     </div>
   );
 };
 
-export default Announc;
+export default UserProd;

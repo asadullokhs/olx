@@ -1,6 +1,4 @@
 import React from "react";
-import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Footer/Footer";
 import Search from "../../components/Search/Search";
 import Card from "../../components/Card/Card";
 import "./Home.scss";
@@ -17,7 +15,7 @@ const Home = () => {
   return (
     <div>
       <div className="body">
-        <Navbar />
+        {/* <Navbar /> */}
         <Search />
 
         <div className="announcements">

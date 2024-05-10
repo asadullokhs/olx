@@ -1,8 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-
 import { getAll, getProd } from "../api/getRequests";
-
 
 const InfoContext = createContext();
 
@@ -13,14 +11,17 @@ export const InfoProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("profile") || null)
   );
 
-
   const [category, setCategory] = useState([]);
-  const [cards, setCards] = useState([])
+  const [cards, setCards] = useState([]);
   const [sub, setSub] = useState([]);
   const [type, setType] = useState([]);
+  const [works, setWorks] = useState([]);
   const [onlineUsers, setOnlineUsers] = useState([]);
   const [currentChat, setcurrentChat] = useState(null);
   const [chats, setChats] = useState([]);
+  const [loading, setLoading] = useState(false)
+
+  const toggleReset = () => setLoading(!loading)
 
   const exit = () => {
     localStorage.clear();
@@ -39,32 +40,31 @@ export const InfoProvider = ({ children }) => {
         setCategory(resCategory?.data?.category);
         setSub(resSub?.data?.getAll);
         setType(resType?.data?.getAll);
-        setCards([ 
-          ...resCar?.data?.getAll,
-          ...resFashion?.data?.getAll,
-          ...resWork?.data?.getAll,
-        ]);
+        setWorks(resWork?.data?.getAll);
+        setCards([...resCar?.data?.getAll, ...resFashion?.data?.getAll]);
       } catch (error) {
         console.log(error);
       }
     };
 
     myFunc();
-  }, [currentUser]);
+  }, [currentUser, loading]);
 
   const value = {
     currentUser,
     setCurrentUser,
-    exit, category, setCategory,
-    sub, setSub,
-    type, setType,
-
-
+    exit,
+    category,
+    setCategory,
+    sub,
+    setSub,
+    type,
+    setType,
+    toggleReset,
+    works,
     exit,
     cards,
     setCards,
-
-
   };
 
   return <InfoContext.Provider value={value}>{children}</InfoContext.Provider>;

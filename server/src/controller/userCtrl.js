@@ -42,41 +42,31 @@ const userCtrl = {
     }
   },
   deleteUser: async (req, res) => {
+    const {id} = req.params
     try {
-      const { id } = req.params;
-
-      if (req.user || req.userIsAdmin) {
-        const deletedUser = await User.findByIdAndDelete(id);
-
-        if (!deletedUser) {
-          return res.status(404).send({ message: "Not found" });
-        }
-        if (
-          deletedUser.profilePicture &&
-          typeof deletedUser.profilePicture === "object"
-        ) {
-          let public_id = deletedUser?.profilePicture?.public_id;
-          await cloudinary.v2.uploader.destroy(public_id, async (err) => {
-            if (err) {
-              throw err;
+        if(id === req.user._id || req.userIsAdmin){
+            const deleteUser = await User.findByIdAndDelete(id)
+            if(deleteUser){
+                if(deleteUser.profilePicture?.public_id){
+                    await cloudinary.v2.uploader.destroy(deleteUser.profilePicture.public_id, async (err) =>{
+                        if(err){
+                            throw err
+                        }
+                    })
+                }
+                return res.status(200).json({message: "User deleted successfully", user: deleteUser})
             }
-          });
+            return res.status(404).json({message: 'User not found'})
         }
-
-        await Car.deleteMany({ authorId: id });
-        await workModel.deleteMany({ authorId: id });
-        await fashionModel.deleteMany({ authorId: id });
-
-        return res
-          .status(200)
-          .send({ message: "Deleted succesfully", deletedUser });
-      }
-
-      res.status(405).send({ message: "Not allowed" });
+        const delCar = await Car.deleteMany({authorId: id})
+        console.log(delCar);
+        await Work.deleteMany({authorId: id})
+        await Fashion.deleteMany({authorId: id})
+        res.status(405).json({message: 'Acces Denied!. You can delete only your own accout'})
     } catch (error) {
-      res.status(503).send(error.message);
+        res.status(503).json({message: error.message})
     }
-  },
+},
 
   updateUser: async (req, res) => {
     try {

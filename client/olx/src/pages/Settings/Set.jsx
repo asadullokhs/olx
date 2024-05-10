@@ -1,13 +1,14 @@
-import Navbar from "../../components/Navbar/Navbar";
-import Footer from "../../components/Footer/Footer";
+
 import "./Set.scss";
+
+import { deleteUser } from "../../api/delRequests";
 import { updateAll } from "../../api/updRequests";
 import { useInfoContext } from "../../context/Context";
 import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 const Setings = () => {
-  const { currentUser, setCurrentUser } = useInfoContext();
+  const { currentUser, setCurrentUser, exit , toggleReset} = useInfoContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +31,25 @@ const Setings = () => {
     }
   };
 
+  const deleteAcc = async () => {
+        const confirmAcc = window.confirm('Ochirishni tasdiqlash!!!')
+        if(confirmAcc){
+            try {
+                toast.loading('Please wiat...')
+                const res = await deleteUser(currentUser._id)
+                toast.dismiss()
+                toast.success(res?.data?.message)
+                toggleReset()
+            } catch (error) {
+                toast.dismiss()
+                toast.error(error?.response?.data?.message)
+                if(error.response.data.message === 'jwt expired'){
+                    exit()
+                }
+            }
+        }
+    }
+
   return (
     <div className="bg">
       <div className="media_texts">
@@ -49,7 +69,7 @@ const Setings = () => {
                   Sizning hisobingiz: 0 so'm <br />
                   Reklama e'lonlari uchun: 0 bonus
                 </span>
-                <i class="fa-solid fa-circle-info"></i>
+                <i className="fa-solid fa-circle-info"></i>
 
                 <button className="pay_btn">Hisobni To'ldirish</button>
                 <button className="buyBtn">Paketni sotib oling</button>
@@ -70,8 +90,11 @@ const Setings = () => {
             </div>
           </div>
         </div>
-        <div className="container">
+        <div className="container nd-con">
           <section className="middle_sec">
+
+
+
             <div
               className="accordion accordion-flush"
               id="accordionFlushExample"
@@ -97,7 +120,7 @@ const Setings = () => {
                 >
                   <form onSubmit={handleSubmit}>
                     <div className="accordion-body">
-                      <label for="address">
+                      <label htmlFor="address">
                         Sizning OLX dagi ismingiz
                         <input
                           type="text"
@@ -108,7 +131,7 @@ const Setings = () => {
                       </label>
                     </div>
                     <div className="accordion-body">
-                      <label for="address">
+                      <label htmlFor="address">
                         Telefon raqami
                         <input
                           type="text"
@@ -119,7 +142,7 @@ const Setings = () => {
                     </div>
                     <div className="accordion-body">
                         Joylashuv
-                      <label for="address" className="location-input">
+                      <label htmlFor="address" className="location-input">
                           <i className="fa-solid fa-location-dot"></i>
                           <input
                             type="text"
@@ -160,7 +183,7 @@ const Setings = () => {
                 >
                   <form onSubmit={handleSubmit}>
                     <div className="accordion-body">
-                      <label for="address">
+                      <label htmlFor="address">
                         Shaharni tanlash
                         <input
                           type="text"
@@ -173,7 +196,7 @@ const Setings = () => {
                     <div className="set_line"></div>
 
                     <div className="accordion-body">
-                      <label htmlFor="">
+                      <label htm htmlFor="">
                         Aloqa uchun shaxs
                         <input
                           type="text"
@@ -183,7 +206,7 @@ const Setings = () => {
                       </label>
                     </div>
                     <div className="accordion-body">
-                      <label htmlFor="">Telefon raqami
+                      <label htm htmlFor="">Telefon raqami
 
                       <input
                         type="text"
@@ -221,11 +244,11 @@ const Setings = () => {
                   aria-labelledby="flush-headingTwo"
                   data-bs-parent="#accordionFlushExample"
                 >
-                  <form>
+                  <form onSubmit={handleSubmit}> 
                     <div className="accordion-body">
-                      <label htmlFor="">
+                      <label htm htmlFor="">
                         <div className="red-star">
-                        Паролингиз <sup>*</sup>
+                        Parolingiz <sup>*</sup>
                         </div>
                       
 
@@ -233,7 +256,7 @@ const Setings = () => {
                     </div>
 
                     <div className="accordion-body">
-                      <label htmlFor="">
+                      <label htm htmlFor="">
                        <div className="red-star">
                        Yangi parol <sup>*</sup>
                        </div>
@@ -246,7 +269,7 @@ const Setings = () => {
                       /> </label>
                     </div>
 
-                    <button className="d_btn">Saqlash</button>
+                    <button className="d_btn" >Saqlash</button>
                   </form>
                 </div>
               </div>
@@ -275,16 +298,16 @@ const Setings = () => {
                   aria-labelledby="flush-headingThree"
                   data-bs-parent="#accordionFlushExample"
                 >
-                  <form>
+                  <form onSubmit={handleSubmit}> 
                     <div className="accordion-body">
-                      <label htmlFor="">
+                      <label htm htmlFor="">
                         Sizning OLX dagi xozirgi parolingiz
                       
                       <input type="text" className="accord-input" /></label>
                     </div>
 
                     <div className="accordion-body">
-                      <label htmlFor="">Yangi Email
+                      <label htm htmlFor="">Yangi Email
                       <input
                         type="text"
                         name="email"
@@ -321,7 +344,10 @@ const Setings = () => {
                   aria-labelledby="flush-headingFour"
                   data-bs-parent="#accordionFlushExample"
                 >
-                  <button className="d_btn">Nomzod profiliga oʻtish</button>
+
+                 
+
+
                 </div>
               </div>
             </div>
@@ -351,15 +377,13 @@ const Setings = () => {
                 >
                   <hr />
 
-                  <button className="last_btn">Akauntni o‘chirish</button>
+                  <button  className="last_btn" onClick={deleteAcc}>Akauntni o‘chirish</button>
                 </div>
               </div>
             </div>
           </section>
         </div>
       </div>
-
-      
     </div>
   );
 };

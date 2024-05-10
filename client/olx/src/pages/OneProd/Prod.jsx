@@ -41,7 +41,7 @@ const Prod = () => {
 
     return (
         <div className='prodbody'>
-            <Navbar />
+           
 
             <Search />
 
@@ -69,8 +69,8 @@ const Prod = () => {
 
                         <div className="carousel" style={{ width: "930px", margin: "2px", padding: "40px", backgroundColor: "#fff", height: "700px" }}>
                             <Slider {...settings}>
-                                {prod?.photos?.length && prod.photos.map(item => {
-                                    return <img src={item.url} />
+                                {prod?.photos?.length && prod?.photos?.map(item => {
+                                    return <img key={item._id + '1'} src={item.url} />
                                 })}
                             </Slider>
                         </div>
@@ -132,7 +132,7 @@ const Prod = () => {
                                 <p className='location'>  Joylashuv</p>
                                 <div className='location_div'>
                                     <div className="location_div_div" >
-                                        <i style={{ display: "flex", marginBottom: "100px" }} class="fa-solid fa-location-dot"></i>
+                                        <i style={{ display: "flex", marginBottom: "100px" }} className="fa-solid fa-location-dot"></i>
                                         <Link to={`#/${prod?._id}`} style={{ color: "#002f34", cursor: "text", textDecoration: "none" }} >
                                             <h3 style={{ display: "flex", marginBottom: "100px", marginLeft: "10px" }}>{prod?.location}</h3>
                                         </Link>
@@ -218,7 +218,7 @@ const Prod = () => {
                                         Ko'rishlar:{/* {prod?._id} */} 13
                                     </Link>
                                 </span>
-                                <button className='a2_futer_btn'> <Link to="/" className='a2_futer_btn_link'> <i class="fa-regular fa-font-awesome"></i> Shikoyat qilish </Link> </button>
+                                <button className='a2_futer_btn'> <Link to="/" className='a2_futer_btn_link'> <i className="fa-regular fa-font-awesome"></i> Shikoyat qilish </Link> </button>
                             </div>
                         </div>
                     </div>
@@ -298,16 +298,16 @@ const Prod = () => {
                                     </div>
                                 </div>
 
-                                <div className="messages" style={{ width: "300px", height: "250px" }}></div>
-                                <div className="message_futter" style={{ width: "336px", height: "48px" }}>
-                                    <label htmlFor="input" className='inp_file_message' style={{ margin: "4px 10px", cursor: "pointer	" }}>
-                                        <input type="file" id='input' style={{ display: "none" }} />
-                                        <i class="fa-solid fa-paperclip"></i>
+                                <div className="messages" style={{ width: "300px", height:"250px" }}></div>
+                                <div className="message_futter" style={{width:"336px", height:"48px"}}>
+                                    <label htmlFor="input"  className='inp_file_message' style={{margin:"4px 10px", cursor:"pointer	"}}> 
+                                    <input type="file" id='input' style={{display:"none"}} />
+                                    <i className="fa-solid fa-paperclip"></i>
                                     </label>
                                     {/* <input type="file"  className='inp_file_message'  style={{maxWidth:"206px"}}/> */}
-                                    <input type="text" className="inp_mesage" placeholder='malumot yozing' style={{ border: "none", outline: "none", margin: "0 20px" }} />
-                                    <button className='send_btn_mesage' style={{ border: "none", backgroundColor: "white", width: "40px", height: "40px" }}  >
-                                        <i class="fa-solid fa-circle-right"></i>
+                                    <input type="text" className="inp_mesage" placeholder='malumot yozing'  style={{border:"none",outline:"none", margin:"0 20px"}}/>
+                                    <button className='send_btn_mesage' style={{border:"none", backgroundColor:"white", width:"40px", height:"40px" }}  >
+                                    <i className="fa-solid fa-circle-right"></i>
                                     </button>
                                 </div>
                             </div>
