@@ -22,11 +22,12 @@ const Card = ({ prod }) => {
       <div className="card-body">
         <Link to={`/prod/${prod?._id}`} className="card-content">
           <div className="Prise">
-            <p className="content">{prod?.content}</p>
+            <p className="content" style={{overflow:"hidden", width:"146px",
+            height:"20px" }}>{prod?.content}</p>
             <p className="prise">{prod?.price}</p>
           </div>
           <div className="data">
-            <p className="location"> {prod?.location}</p> <br />
+            <p className="location" > {prod?.location}</p> <br />
             {isToday
               ? `Сегодня в ${createdAt.toLocaleDateString().slice(0, 5)}`
               : fromattedDate}

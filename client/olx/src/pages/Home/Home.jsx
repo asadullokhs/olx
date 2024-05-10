@@ -20,7 +20,9 @@ const Home = () => {
 
         <div className="announcements">
           <div className="container">
-            <h1 className="h1">OLX эълонлар тахтасидаги рукнлар</h1>
+
+            <h2 className='title'>Разделы на сервисе OLX</h2>
+            <h2 className='title-media'>Категории <span>Смотреть все</span></h2>
             <h1 className="h1_m" style={{ display: "none" }}>Bo'limlar</h1>
             <div className="anns">
               <Link to="/" className="icon">
@@ -66,28 +68,26 @@ const Home = () => {
           </div>
         </div>
 
-        <div className="futter1">
-          <div className="container">
-            <div className="infob">
-              <div className="info">
-                <img
-                  src="https://www.olx.uz/app/static/media/graph.49012f6ae.svg"
-                  alt=""
-                />
-              </div>
-
-              <div className="info2">
-                <div className="info_text">
-                  <p> Stand out as a company! </p>
-                  <h4>OLX bilan internetda biznesingizni boshlang!</h4>
-                </div>
-              </div>
-              <button className="info_btn">Batafsll</button>
+        {/* <div className="futter1">
+          <div className="infob">
+            <div className="info">
+              <img
+                src="https://www.olx.uz/app/static/media/graph.49012f6ae.svg"
+                alt=""
+              />
             </div>
-          </div>
-        </div>
 
-        <div className="futter2">
+            <div className="info2">
+              <div className="info_text">
+                <p> Stand out as a company! </p>
+                <h4>OLX bilan internetda biznesingizni boshlang!</h4>
+              </div>
+            </div>
+            <button className="info_btn">Batafsll</button>
+          </div>
+        </div> */}
+
+        {/* <div className="futter2">
           <div className="img_f2">
             <img
               src="https://logos-world.net/wp-content/uploads/2022/04/OLX-Logo.png"
@@ -113,8 +113,8 @@ const Home = () => {
               OLX O'zbekiston - sizning ishonchli va tengi yo'q yordamchingiz.
             </span>
           </div>
-        </div>
-        <div className="container">
+        </div> */}
+        {/* <div className="container">
           <div className="futter3">
             <div className="f1">
               <img
@@ -247,7 +247,7 @@ const Home = () => {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
