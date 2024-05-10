@@ -17,6 +17,8 @@ import Card from '../../components/Card/Card';
 const Prod = () => {
     const { setCards, cards } = useInfoContext()
     const [modal, setModal] = useState(false)
+    const [tel, setTel] = useState(false)
+
 
     const prodId = useParams().id
     const prod = cards.filter(res => res._id === prodId)[0]
@@ -238,29 +240,42 @@ const Prod = () => {
 
                             {/* 2 */}
                         </div>
-                        <div className="author_futter_2">
-                            <button type='button' className='btn' onClick={() => setModal(true)}>Xabar yozish</button>
+
+                        {!tel ? <div className='author_futter_2_2'>
+                            <div className="boll"><i className="fa-solid fa-phone"></i></div>
+                            <p>xxx xxx xxx</p>
+                            <button onClick={() => setTel(true)}>Ko'rsatish</button>
+                        </div> :
                             <div className='author_futter_2_2'>
-                                <div className="boll"><i className="fa-solid fa-phone"></i></div>
-                                <p>XXX XX XX</p>
-                                <button className='btn2'>Ko'rsatish</button>
+                                <i className="fa-solid fa-phone"></i>
+                                {prod?.phone}
                             </div>
-                        </div>
+                        }
                     </div>
 
                     {/* ////////////////////// carusel /////////////////////// */}
 
                     <div className='additional_products'>
-                            <div className="announcementss" style={{}}>
-                                {cards.length > 0 ? cards.map(card => {
-                                     return <Card key={card._id} prod={card} />
-                                }) : <h2 >o'xshash tavar yo'q 😔 😔 😔 </h2>}
+                        <div className="announcementss" style={{ display: "flex" }}>
+                            {prod?.userProd?.map(prod => {
+                                return <Card key={prod._id} prod={prod} />
+                            })}
+                            <div className="announcementss" style={{ display: "flex" }} >
+                                <div className="top">
+                                    <h2>Все объявления автора <Link to='/' className='link-prod'>Смотреть все</Link></h2>
+                                </div>
+                                <div className="carousel-item">
+                                    {prod?.userProd?.map(prod => {
+                                        return <Card key={prod?._id} prod={prod} />
+                                    })}
+                                </div>
                             </div>
+                        </div>
                     </div>
                 </div>
 
                 {
-                    modal && <div className='mesage_modal' style={{ boxShadow: "0 0 5px 2px grey", position: "fixed", bottom: "10%", right: "18%", backgroundColor: "white", padding: "20px", width:"336px", height:"445px" }}>
+                    modal && <div className='mesage_modal' style={{ boxShadow: "0 0 5px 2px grey", position: "fixed", bottom: "10%", right: "18%", backgroundColor: "white", padding: "20px", width: "336px", height: "445px" }}>
 
                         <div className="message_modal1" >
                             <div className="modal1_img" style={{ display: "flex", justifyContent: "space-between" }}>
@@ -276,23 +291,23 @@ const Prod = () => {
                                     <img className='img_mesage_modal' src={prod?.photos[0].url} style={{ width: "40px", height: "40px" }} alt="" />
                                     <div >
                                         {prod?.name}
-                                        <div style={{  display: "flex", justifyContent: "space-between" }}>
+                                        <div style={{ display: "flex", justifyContent: "space-between" }}>
                                             <p>{prod?.price}  </p>
                                             <p> {prod?._id} </p>
                                         </div>
                                     </div>
                                 </div>
 
-                                <div className="messages" style={{ width: "300px", height:"250px" }}></div>
-                                <div className="message_futter" style={{width:"336px", height:"48px"}}>
-                                    <label htmlFor="input"  className='inp_file_message' style={{margin:"4px 10px", cursor:"pointer	"}}> 
-                                    <input type="file" id='input' style={{display:"none"}} />
-                                    <i class="fa-solid fa-paperclip"></i>
+                                <div className="messages" style={{ width: "300px", height: "250px" }}></div>
+                                <div className="message_futter" style={{ width: "336px", height: "48px" }}>
+                                    <label htmlFor="input" className='inp_file_message' style={{ margin: "4px 10px", cursor: "pointer	" }}>
+                                        <input type="file" id='input' style={{ display: "none" }} />
+                                        <i class="fa-solid fa-paperclip"></i>
                                     </label>
                                     {/* <input type="file"  className='inp_file_message'  style={{maxWidth:"206px"}}/> */}
-                                    <input type="text" className="inp_mesage" placeholder='malumot yozing'  style={{border:"none",outline:"none", margin:"0 20px"}}/>
-                                    <button className='send_btn_mesage' style={{border:"none", backgroundColor:"white", width:"40px", height:"40px" }}  >
-                                    <i class="fa-solid fa-circle-right"></i>
+                                    <input type="text" className="inp_mesage" placeholder='malumot yozing' style={{ border: "none", outline: "none", margin: "0 20px" }} />
+                                    <button className='send_btn_mesage' style={{ border: "none", backgroundColor: "white", width: "40px", height: "40px" }}  >
+                                        <i class="fa-solid fa-circle-right"></i>
                                     </button>
                                 </div>
                             </div>
@@ -302,7 +317,7 @@ const Prod = () => {
                 }
             </div>
             <br />
-            <Footer />
+
 
         </div >
     )

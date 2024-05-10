@@ -16,7 +16,7 @@
         margin-right: 20px;
     min-width: 412px;
     width: 412px;
-    padding: 0px 16px;
+    padding: 10px 16px;
     background-color: rgb(250, 251, 251);
     .navbar_s_a_b{
         display: flex;
@@ -60,6 +60,19 @@
             border: none;
             border-radius: 5px;
         }
+    }
+    .texts{
+    display: flex;
+    flex-direction: column;
+    -webkit-box-pack: start;
+    justify-content: flex-start;
+    -webkit-box-align: center;
+    align-items: center;
+    text-align: center;
+    padding-top: 24px;
+    }
+    .elonlar{
+        text-decoration: none;
     }
     }.messages{
     width: 100%;
