@@ -6,6 +6,32 @@
 
 }
 
+.price-bottom {
+    button {
+        cursor: pointer;
+        width: 100%;
+        border: 5px solid #002f34;
+        background-color: #002f34;
+        padding: 10px 30px;
+        margin: 5px;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+
+        &:hover {
+            background-color: white;
+            color: #002f34;
+        }
+
+        &:nth-child(2) {
+            background-color: white;
+            color: #002f34;
+            border: 5px solid #002f34;
+        }
+    }
+}
+
 .prodbody2 {
     margin: 0 5%;
 
@@ -49,7 +75,7 @@
     .a1 {
         display: flex;
 
-        
+
 
         div {
 
@@ -571,15 +597,143 @@
             }
         }
     }
-    .additional_products{
+
+    .additional_products {
         display: flex;
         overflow: hidden;
     }
 }
 
 
-@media (max-width: 490px) {
-    *{
+
+.small-chat-box {
+    position: fixed;
+    right: 15%;
+    background-color: white;
+    bottom: 30%;
+    height: 550px;
+    width: 355px;
+    box-shadow: 2px 2px 15px gray;
+    border-radius: 10px;
+
+    .profile-box {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 15px 0 5px 0;
+        border-bottom: 1px solid gray;
+
+        .profile-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0 10px;
+            font-size: 12px;
+
+            .exit {
+                display: none;
+                padding: 5px;
+            }
+
+            img {
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                object-fit: cover;
+            }
+        }
+
+        .profile-set {
+            padding-right: 15px;
+            font-size: 20px;
+            cursor: pointer;
+        }
+    }
+
+    .send-message {
+        height: 360px;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+
+        .messages {
+            .span-box {
+                display: flex;
+                flex-direction: column;
+                align-items: start;
+
+                span {
+                    background-color: rgba(128, 128, 128, 0.425);
+                    padding: 5px;
+                    max-width: 100px;
+                    font-size: 12px;
+                }
+
+                .message-time {
+                    font-size: 8px;
+                    line-height: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: end;
+                    // align-items: center;
+                }
+            }
+        }
+
+        .own {
+            .span-box {
+                text-align: end;
+                align-items: end;
+
+                span {
+                    background-color: greenyellow;
+                }
+
+            }
+        }
+    }
+
+    .send-input-box {
+        font-size: 20px;
+
+        .input-form {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            padding: 0 10px;
+
+            label {
+                &:hover {
+                    cursor: pointer;
+                }
+            }
+
+            input {
+                width: 100%;
+                padding: 10px 20px;
+                border: none;
+                outline: none;
+            }
+
+            button {
+                border: none;
+                font-size: 25px;
+                padding: 0;
+                background: transparent;
+            }
+        }
+    }
+}
+
+.media-info-prod {
+    display: none;
+}
+
+
+@media (max-width: 1024) {
+    * {
         margin: 0;
         padding: 0;
     }
@@ -587,20 +741,33 @@
     .btn_links {
         display: none;
     }
-    .links_ol{
-        display: none;
-    }
-    .links_li{
-        display: none;
-    }
-    .slash{
+
+    .links_ol {
         display: none;
     }
 
-    // .Search{
-    //     display: none;
-    // }
-    // .carousel{
-    //     display: flex;
-    // }
+    .links_li {
+        display: none;
+    }
+
+    .slash {
+        display: none;
+    }
+
+    .small-chat-box {
+        bottom: 100px;
+        z-index: 2;
+    }
+}
+@media (max-width: 450px){
+    .small-chat-box{
+        width: 100vw !important;
+        height: 100vh !important;
+        bottom: 0 !important;
+        left: 0;
+        z-index: 2;
+        .send-message{
+            height: 600px !important;
+        }
+    }
 }

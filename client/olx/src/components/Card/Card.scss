@@ -3,10 +3,10 @@
     height: 334px;
     border-radius: 10px;
 
-    .card-img {
+    .card_img {
+        width: 100%;
+        height: 200px;
         img {
-            width: 100%;
-            height: 200px;
             object-fit: cover;
             border-radius: 5px 5px 0px 0px;
         }
@@ -17,56 +17,91 @@
         height: 167px;
         display: flex;
         justify-content: space-between;
+
         .card-content {
             text-decoration: none;
             color: #002F34;
         }
-        .location{
+
+        .location {
             overflow: hidden;
             margin: 0;
-            
+
         }
-        .location , .prise , .content{
+
+        .location,
+        .prise,
+        .content {
             overflow: hidden;
         }
     }
 }
 
-@media (max-width: 490px) {
-    .card {
-        max-width: 175px;
 
-        max-height: 364px;
+@media (max-width: 1024px) {
+    .card-body {
+        width: 48%;
+
+        .card_img {
+            width: 100%;
+            img {
+            height: 300px;
+            }
+        }
     }
+}
+
+@media (max-width: 428px) {
+
 
     .card-body {
         max-width: 175px;
         max-height: 250px;
     }
-    .card-content{
+
+    .card-content {
         margin: -4px;
     }
-    .content{
+
+    .content {
         max-width: 70%;
         max-height: 24px;
         overflow: hidden;
     }
 
-    .card-img {
+    .card_img {
         overflow: hidden;
+        width: 120%;
     }
-    .prise{
+
+    .prise {
         margin: 0;
         padding: 0;
     }
+
     img {
         max-width: 175px;
     }
-    .location{
+
+    .location {
         max-width: 175px;
         height: 24px;
         overflow: hidden;
         margin: -1px;
         padding: 0;
+    }
+
+    .card {
+        width: 48%;
+
+        .card-img {
+            img {
+                height: 150px;
+            }
+        }
+
+        .card-body {
+            padding: 5px;
+        }
     }
 }

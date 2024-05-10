@@ -3,9 +3,108 @@
     padding: 0;
 }
 
+
+.top-account {
+    max-width: 1440px;
+    width: 100%;
+    margin: 0 auto;
+
+    .top-btn {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: white;
+      padding: 50px;
+
+      .btn {
+        display: flex;
+        gap: 20px;
+        align-items: center;
+        text-align: end;
+
+        p {
+          text-align: center;
+          margin-top: 10px;
+        }
+
+        i {
+          font-size: 20px;
+        }
+
+        .buyBtn {
+          background: #002f34;
+          color: #fff;
+          padding: 10px 30px;
+          border-radius: 5px;
+          // transition: all 0.2s linear;
+        }
+
+        .buyBtn:hover {
+          background-color: white;
+          color: #002f34;
+          box-shadow: inset 0 0 0 3px black;
+        }
+
+        .payBtn {
+          padding: 10px 30px;
+          border: 2px solid #002f34;
+          border-radius: 5px;
+          background: #fff;
+          color: #002f34;
+          font-size: 14px;
+          font-weight: bold;
+
+        }
+
+        .payBtn:hover {
+          background-color: white;
+          color: #002f34;
+          box-shadow: inset 0 0 0 3px black;
+        }
+      }
+    }
+
+    nav {
+      display: block;
+
+      ul {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        background-color: white;
+        list-style-type: none;
+        padding: 20px 0;
+
+        li {
+          cursor: pointer;
+
+          a {
+            text-decoration: none;
+            color: gray;
+          }
+
+          .active {
+            border-bottom: 2px solid black;
+            padding: 20px;
+
+            & {
+              color: #002f34;
+              background-color: white;
+            }
+          }
+
+          &:hover {
+            background-color: #002f34;
+            color: rgb(4, 4, 4);
+          }
+        }
+      }
+    }
+  } 
+
 .Message{
     margin-top: 300px ;
-    width: 1238px;
+    max-width: 1238px;
     max-width: calc(-64px + 100vw);
     height: calc(-58px + 100vh);
     min-height: 512px;

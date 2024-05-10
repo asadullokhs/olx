@@ -20,7 +20,9 @@ const Home = () => {
 
         <div className="announcements">
           <div className="container">
-            <h1 className="h1">OLX эълонлар тахтасидаги рукнлар</h1>
+
+            <h2 className='title'>Разделы на сервисе OLX</h2>
+            <h2 className='title-media'>Категории <span>Смотреть все</span></h2>
             <h1 className="h1_m" style={{ display: "none" }}>Bo'limlar</h1>
             <div className="anns">
               <Link to="/" className="icon">
