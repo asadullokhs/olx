@@ -1,14 +1,17 @@
 .card {
-    width: 264px;
-    height: 334px;
-    border-radius: 10px;
+    width: 264px !important;
+    height: 500px !important;
+    border-radius: 10px !important;
 
-    .card_img {
-        width: 100%;
-        height: 200px;
-        img {
-            object-fit: cover;
-            border-radius: 5px 5px 0px 0px;
+    .card-img {
+        width: 100% !important;
+        height: 300px;
+
+        .card-img-a {
+            width: 100%;
+            height: 300px;
+            object-fit: cover !important;
+            border-radius: 5px 5px 0px 0px !important;
         }
     }
 
@@ -39,13 +42,17 @@
 
 
 @media (max-width: 1024px) {
-    .card-body {
-        width: 48%;
+    .card {
+        margin-left: 30% !important;
+        .card-body {
+            width: 48%;
 
-        .card_img {
-            width: 100%;
-            img {
-            height: 300px;
+            .card_img {
+                width: 100%;
+
+                img {
+                    height: 300px;
+                }
             }
         }
     }
@@ -55,23 +62,30 @@
 
 
     .card-body {
-        max-width: 175px;
-        max-height: 250px;
+        max-width: 175px !important;
+        max-height: 250px !important;
     }
 
     .card-content {
-        margin: -4px;
+        margin: -4px !important;
     }
 
     .content {
-        max-width: 70%;
-        max-height: 24px;
-        overflow: hidden;
+        max-width: 70% !important;
+        max-height: 24px !important;
+        overflow: hidden !important;
     }
 
     .card_img {
-        overflow: hidden;
-        width: 120%;
+        overflow: hidden !important;
+        width: 150% !important;
+        height: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    .card-img-a {
+        max-width: 175px !important;
     }
 
     .prise {
@@ -79,24 +93,25 @@
         padding: 0;
     }
 
-    img {
-        max-width: 175px;
-    }
 
     .location {
-        max-width: 175px;
-        height: 24px;
-        overflow: hidden;
-        margin: -1px;
+        max-width: 175px !important;
+        height: 24px !important;
+        overflow: hidden !important;
+        margin: -1px !important;
         padding: 0;
     }
 
     .card {
-        width: 48%;
+        width: 175px !important;
+        height: 290px !important;
+        margin-left: 18% !important;
+        margin-bottom: 20px !important;
 
         .card-img {
             img {
-                height: 150px;
+                height: 150px !important;
+                margin: 0px !important;
             }
         }
 

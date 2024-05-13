@@ -28,7 +28,7 @@ const Navbar = () => {
                 <nav>
                     <ul className="nav-list">
                         <li className="nav-item">
-                            <NavLink style={{textDecoration: 'none'}} to="/message" className="nav-link">
+                            <NavLink style={{textDecoration: 'none'}} to="/chat" className="nav-link">
                                 <i className="fa-regular fa-comment"></i>
                                 Xabarlar
                             </NavLink>

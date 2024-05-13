@@ -11,16 +11,17 @@ import { BrowserRouter as Router, Routes, Route, useLocation } from "react-route
 import Prod from "./pages/OneProd/Prod";
 import Navbar from "./components/Navbar/Navbar";
 import Footer from "./components/Footer/Footer";
-import Message from "./pages/Message/Message";
+import Chat from './pages/Chat/Chat';
+
 
 function App() {
-  const {currentUser} = useInfoContext()
+  const { currentUser } = useInfoContext()
   const [isSignUp, setIsSignUp] = useState(false)
   const path = useLocation().pathname
-  
-  useEffect(() => { 
+
+  useEffect(() => {
     const rePath = () => {
-      if(path === '/add-prod' && !currentUser || path === '/settings' && !currentUser || path === '/announce' && !currentUser ){
+      if (path === '/add-prod' && !currentUser || path === '/settings' && !currentUser || path === '/announce' && !currentUser) {
         setIsSignUp(true)
       } else {
         setIsSignUp(false)
@@ -32,19 +33,16 @@ function App() {
   return (
     <>
       <div className="app">
-        {!isSignUp && <Navbar/>}
+        {!isSignUp && <Navbar />}
         <Routes>
-          <Route path="/" element={<Home/>} />
-          <Route
-            path="/settings"
-            element={currentUser ? <Settings /> : <Auth />}
-          />
+          <Route path="/" element={<Home />} />
+          <Route path="/settings" element={currentUser ? <Settings /> : <Auth />} />
           <Route path="/prod/:id" element={<Prod />} />
           <Route path="/add-prod" element={<AddProd />} />
           <Route path="/announce" element={<Announce />} />
-          <Route path="/message" element={< Message/>} />
+          <Route path='/chat' element={ <Chat />} />
         </Routes>
-        {!isSignUp && <Footer/>}
+        {!isSignUp && <Footer />}
       </div>
 
     </>

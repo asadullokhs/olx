@@ -16,11 +16,11 @@ import { BrowserRouter } from "react-router-dom";
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
-         <InfoProvider>
-    <GoogleOAuthProvider clientId="169889383935-j3a63hj1cv6bsca80knlvfc6924l43l2.apps.googleusercontent.com">
-      <App />
-    </GoogleOAuthProvider>
+    <InfoProvider>
+      <GoogleOAuthProvider clientId="169889383935-j3a63hj1cv6bsca80knlvfc6924l43l2.apps.googleusercontent.com">
+        <App />
+      </GoogleOAuthProvider>
       <ToastContainer />
-  </InfoProvider>
+    </InfoProvider>
   </BrowserRouter>
 );

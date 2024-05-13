@@ -11,19 +11,22 @@ const Card = ({ prod }) => {
 
   const isToday = fromattedDate === todayDateString;
   return (
-    <div className="card" style={{ margin: "20px 0" }}>
+    <div className="card">
+
       <Link className="card-img" to={`/prod/${prod?._id}`}>
         {prod.photos.length > 0 ? (
-          <img src={prod?.photos[0].url} alt="card_img" />
+          <img className="card-img-a" src={prod?.photos[0].url} alt="card_img" />
         ) : (
-          <img src="/images/logo.png" />
+          <img className="card-img-a" src="/images/logo.png" />
         )}
       </Link>
       <div className="card-body">
         <Link to={`/prod/${prod?._id}`} className="card-content">
           <div className="Prise">
-            <p className="content" style={{overflow:"hidden", width:"146px",
-            height:"20px" }}>{prod?.content}</p>
+            <p className="content" style={{
+              overflow: "hidden", width: "146px",
+              height: "20px"
+            }}>{prod?.content}</p>
             <p className="prise">{prod?.price}</p>
           </div>
           <div className="data">

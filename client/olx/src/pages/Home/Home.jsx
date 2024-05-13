@@ -14,8 +14,10 @@ const Home = () => {
 
   return (
     <div>
+
       <div className="body">
         {/* <Navbar /> */}
+        <br />
         <Search />
 
         <div className="announcements">
@@ -33,7 +35,7 @@ const Home = () => {
                 <br />
                 <span className="spans1">Transport</span>
               </Link>
-              <a href="#" className="icon">
+              <Link to="#" className="icon">
                 <img
                   className="img job "
                   src="https://categories.olxcdn.com/assets/categories/olxuz/rabota-6-1x.png"
@@ -41,8 +43,8 @@ const Home = () => {
                 />
                 <br />
                 <span className="spans">Ish</span>
-              </a>
-              <a href="#" className="icon">
+              </Link>
+              <Link to="#" className="icon">
                 <img
                   className="img stil "
                   src="https://categories.olxcdn.com/assets/categories/olxuz/moda-i-stil-891-1x.png"
@@ -50,7 +52,7 @@ const Home = () => {
                 />
                 <br />
                 <span className="spans1">Moda va stil</span>
-              </a>
+              </Link>
             </div>
           </div>
         </div>

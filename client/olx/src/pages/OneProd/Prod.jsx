@@ -21,7 +21,8 @@ const Prod = () => {
     const [openChat, setOpenChat] = useState(false)
     const { setCards, cards, chats, exit, setChats, currentUser, currentChat, setCurrentChat, onlineUsers } = useInfoContext()
     const [modal, setModal] = useState(false)
-    const [tel, setTel, send, setSend] = useState(false)
+    const [tel, setTel] = useState(false)
+    const [send, setSend] = useState(false)
 
 
 
@@ -35,8 +36,6 @@ const Prod = () => {
 
     const fromattedDate = setCar.toLocaleDateString();
     const todayDateString = today.toLocaleDateString();
-
-
 
     const isToday = fromattedDate === todayDateString;
     var settings = {
@@ -59,8 +58,8 @@ const Prod = () => {
         formData.append('createdAt', new Date().getTime());
 
         const newMessage = {
-            senderId: currentUser._id,
-            chatId: currentChat._id,
+            senderId: currentUser?._id,
+            chatId: currentChat?._id,
             text: formData.get('text'),
             createdAt: new Date().getTime(),
         }
@@ -283,17 +282,19 @@ const Prod = () => {
 
                             {/* 2 */}
                         </div>
-
-                        {!tel ? <div className='author_futter_2_2'>
-                            <div className="boll"><i className="fa-solid fa-phone"></i></div>
-                            <p>xxx xxx xxx</p>
-                            <button onClick={() => setTel(true)}>Ko'rsatish</button>
-                        </div> :
-                            <div className='author_futter_2_2'>
-                                <i className="fa-solid fa-phone"></i>
-                                {prod?.phone}
-                            </div>
-                        }
+                        <div className='a_f_2_2_div'>
+                            <button onClick={() => setOpenChat(true)} className="btn_sms">Xabar yozish</button>
+                            {!tel ? <div className='author_futter_2_2'>
+                                <div className="boll"><i className="fa-solid fa-phone"></i></div>
+                                <p>xxx xxx xxx</p>
+                                <button onClick={() => setTel(true)} className="btn2_af22">Ko'rsatish</button>
+                            </div> :
+                                <div className='author_futter_2_2'>
+                                    <i className="fa-solid fa-phone"></i>
+                                    {prod?.phone}
+                                </div>
+                            }
+                        </div>
                     </div>
 
                     {/* ////////////////////// carusel /////////////////////// */}
@@ -317,6 +318,8 @@ const Prod = () => {
                     </div>
                 </div>
 
+                {/* chat ///////////////// */}
+
                 {openChat && currentUser?._id !== prod?.user?._id && <div className='small-chat-box'>
                     <div className="message-list" key={currentChat?._id}>
                         <div className="profile-box">
@@ -324,7 +327,7 @@ const Prod = () => {
                                 <i className='fa-solid fa-chevron-left exit'></i>
                                 <img src={prod?.user?.profilePicture?.url ? `${prod?.user?.profilePicture?.url}` : '/images/default_.jpg'} alt="profile_img" className="message-img" />
                                 <div className="user-name">
-                                    <h3>{prod?.author? prod?.author : 'New user'}</h3>
+                                    <h3>{prod?.author ? prod?.author : 'New user'}</h3>
                                 </div>
                             </div>
                             <div className="profile-set" onClick={toggleChat}>

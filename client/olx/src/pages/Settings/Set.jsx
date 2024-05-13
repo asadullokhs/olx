@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import { Link } from "react-router-dom";
 
 const Setings = () => {
-  const { currentUser, setCurrentUser, exit , toggleReset} = useInfoContext();
+  const { currentUser, setCurrentUser, exit, toggleReset } = useInfoContext();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -32,30 +32,30 @@ const Setings = () => {
   };
 
   const deleteAcc = async () => {
-        const confirmAcc = window.confirm('Ochirishni tasdiqlash!!!')
-        if(confirmAcc){
-            try {
-                toast.loading('Please wiat...')
-                const res = await deleteUser(currentUser._id)
-                toast.dismiss()
-                toast.success(res?.data?.message)
-                toggleReset()
-            } catch (error) {
-                toast.dismiss()
-                toast.error(error?.response?.data?.message)
-                if(error.response.data.message === 'jwt expired'){
-                    exit()
-                }
-            }
+    const confirmAcc = window.confirm('Ochirishni tasdiqlash!!!')
+    if (confirmAcc) {
+      try {
+        toast.loading('Please wiat...')
+        const res = await deleteUser(currentUser._id)
+        toast.dismiss()
+        toast.success(res?.data?.message)
+        toggleReset()
+      } catch (error) {
+        toast.dismiss()
+        toast.error(error?.response?.data?.message)
+        if (error.response.data.message === 'jwt expired') {
+          exit()
         }
+      }
     }
+  }
 
   return (
     <div className="bg">
       <div className="media_texts">
         <h1>Sozlamalar</h1>
       </div>
-   
+
       <div className="settings">
         <div className="header">
           <div className="container">
@@ -81,11 +81,19 @@ const Setings = () => {
                 <Link to="/announce" className="fleft">
                   E'lonlar
                 </Link>
-                <li className="fleft">Xabarlar</li>
+                <li className="fleft">
+                  <Link to="/chat" className="fleft">
+                    Xabarlar
+                  </Link>
+                </li>
                 <li className="fleft">To'lovlar va OLX hisobi</li>
                 <li className="fleft">Olingan ballar</li>
                 <li className="fleft">Nomzod profili</li>
-                <li className="fleft">Sozlamalar</li>
+                <li className="fleft">
+                  <Link to="/settings" className="fleft">
+                    Sozlamalar
+                  </Link>
+                </li>
               </ul>
             </div>
           </div>
@@ -141,15 +149,15 @@ const Setings = () => {
                       </label>
                     </div>
                     <div className="accordion-body">
-                        Joylashuv
+                      Joylashuv
                       <label htmlFor="address" className="location-input">
-                          <i className="fa-solid fa-location-dot"></i>
-                          <input
-                            type="text"
-                            name="address"
-                            className="accord-input"
-                            placeholder="Toshkent, Shayxontoxur tumani"
-                          />
+                        <i className="fa-solid fa-location-dot"></i>
+                        <input
+                          type="text"
+                          name="address"
+                          className="accord-input"
+                          placeholder="Toshkent, Shayxontoxur tumani"
+                        />
                       </label>
                     </div>
 
@@ -208,11 +216,11 @@ const Setings = () => {
                     <div className="accordion-body">
                       <label htm htmlFor="">Telefon raqami
 
-                      <input
-                        type="text"
-                        name="phone"
-                        className="accord-input"
-                      /></label>
+                        <input
+                          type="text"
+                          name="phone"
+                          className="accord-input"
+                        /></label>
                     </div>
 
                     <button className="d_btn">Saqlash</button>
@@ -244,29 +252,29 @@ const Setings = () => {
                   aria-labelledby="flush-headingTwo"
                   data-bs-parent="#accordionFlushExample"
                 >
-                  <form onSubmit={handleSubmit}> 
+                  <form onSubmit={handleSubmit}>
                     <div className="accordion-body">
                       <label htm htmlFor="">
                         <div className="red-star">
-                        Parolingiz <sup>*</sup>
+                          Parolingiz <sup>*</sup>
                         </div>
-                      
 
-                      <input type="text" className="accord-input" /></label>
+
+                        <input type="text" className="accord-input" /></label>
                     </div>
 
                     <div className="accordion-body">
                       <label htm htmlFor="">
-                       <div className="red-star">
-                       Yangi parol <sup>*</sup>
-                       </div>
-                     
+                        <div className="red-star">
+                          Yangi parol <sup>*</sup>
+                        </div>
 
-                      <input
-                        type="text"
-                        name="password"
-                        className="accord-input"
-                      /> </label>
+
+                        <input
+                          type="text"
+                          name="password"
+                          className="accord-input"
+                        /> </label>
                     </div>
 
                     <button className="d_btn" >Saqlash</button>
@@ -298,21 +306,21 @@ const Setings = () => {
                   aria-labelledby="flush-headingThree"
                   data-bs-parent="#accordionFlushExample"
                 >
-                  <form onSubmit={handleSubmit}> 
+                  <form onSubmit={handleSubmit}>
                     <div className="accordion-body">
                       <label htm htmlFor="">
                         Sizning OLX dagi xozirgi parolingiz
-                      
-                      <input type="text" className="accord-input" /></label>
+
+                        <input type="text" className="accord-input" /></label>
                     </div>
 
                     <div className="accordion-body">
                       <label htm htmlFor="">Yangi Email
-                      <input
-                        type="text"
-                        name="email"
-                        className="accord-input"
-                      /></label>
+                        <input
+                          type="text"
+                          name="email"
+                          className="accord-input"
+                        /></label>
                     </div>
 
                     <button className="d_btn">Saqlash</button>
@@ -345,7 +353,7 @@ const Setings = () => {
                   data-bs-parent="#accordionFlushExample"
                 >
 
-                 
+
 
 
                 </div>
@@ -377,7 +385,7 @@ const Setings = () => {
                 >
                   <hr />
 
-                  <button  className="last_btn" onClick={deleteAcc}>Akauntni o‘chirish</button>
+                  <button className="last_btn" onClick={deleteAcc}>Akauntni o‘chirish</button>
                 </div>
               </div>
             </div>

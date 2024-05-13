@@ -1,6 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
 
-import { getAll, getProd } from "../api/getRequests";
+import { getAll } from "../api/getRequests";
 
 const InfoContext = createContext();
 
@@ -17,7 +17,7 @@ export const InfoProvider = ({ children }) => {
   const [type, setType] = useState([]);
   const [works, setWorks] = useState([]);
   const [onlineUsers, setOnlineUsers] = useState([]);
-  const [currentChat, setcurrentChat] = useState(null);
+  const [currentChat, setCurrentChat] = useState(null);
   const [chats, setChats] = useState([]);
   const [loading, setLoading] = useState(false)
 
@@ -51,20 +51,13 @@ export const InfoProvider = ({ children }) => {
   }, [currentUser, loading]);
 
   const value = {
-    currentUser,
-    setCurrentUser,
-    exit,
-    category,
-    setCategory,
-    sub,
-    setSub,
-    type,
-    setType,
-    toggleReset,
-    works,
-    exit,
-    cards,
-    setCards,
+    currentUser, setCurrentUser,
+    exit, category, setCategory,
+    sub, setSub, type, setType,
+    toggleReset, works, exit,
+    cards, setCards, onlineUsers,
+    setOnlineUsers, currentChat,
+    setCurrentChat, chats, setChats
   };
 
   return <InfoContext.Provider value={value}>{children}</InfoContext.Provider>;

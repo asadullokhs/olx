@@ -9,7 +9,7 @@
 .price-bottom {
     button {
         cursor: pointer;
-        width: 100%;
+        width: 95%;
         border: 5px solid #002f34;
         background-color: #002f34;
         padding: 10px 30px;
@@ -33,6 +33,10 @@
 }
 
 .prodbody2 {
+    * {
+        overflow: hidden;
+    }
+
     margin: 0 5%;
 
     .container {
@@ -170,6 +174,7 @@
                     margin-top: 15px;
                     display: flex;
                     margin-bottom: 10px;
+                    overflow: hidden;
                     width: 516px;
 
                     img {
@@ -560,41 +565,7 @@
                 color: #406367;
             }
 
-            .author_futter_2_2 {
-                margin: 10px;
-                margin-left: 20px;
-                display: flex;
 
-                .boll {
-                    width: 44px;
-                    height: 44px;
-                    background-color: #23e5db;
-                    border-radius: 50%;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                }
-
-                p {
-                    margin: 10px;
-                }
-
-                .btn2 {
-                    width: 165px;
-                    height: 49px;
-                    background-color: #fff;
-                    border: 2px solid #406367;
-                    border-radius: 10px;
-                    color: #406367;
-                }
-
-                .btn2:hover {
-                    width: 164px;
-                    height: 48px;
-                    background-color: #406367;
-                    color: #fff;
-                }
-            }
         }
     }
 
@@ -604,15 +575,65 @@
     }
 }
 
+.a_f_2_2_div {
+    margin: 0 100px;
+    .btn_sms {
+        width: 95%;
+        border: 5px solid #002f34;
+        background-color: #002f34;
+        padding: 10px 30px;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: bold;
+        color: white;
+    }
+
+    .author_futter_2_2 {
+        margin: 10px;
+        margin-left: 20px;
+        display: flex;
+
+        .boll {
+            width: 44px;
+            height: 44px;
+            background-color: #23e5db;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        p {
+            margin: 10px;
+        }
+
+        .btn2_af22 {
+            width: 165px;
+            height: 49px;
+            background-color: #fff;
+            border: 2px solid #406367;
+            border-radius: 10px;
+            color: #406367;
+        }
+
+        .btn2_af22:hover {
+            width: 164px;
+            height: 48px;
+            background-color: #406367;
+            color: #fff;
+        }
+    }
+}
+
 
 
 .small-chat-box {
     position: fixed;
-    right: 15%;
+    right: 2%;
     background-color: white;
-    bottom: 30%;
-    height: 550px;
-    width: 355px;
+    bottom: 5%;
+    height: 500px;
+    width: 370px;
     box-shadow: 2px 2px 15px gray;
     border-radius: 10px;
 
@@ -696,15 +717,19 @@
 
     .send-input-box {
         font-size: 20px;
+        padding: 10px;
 
         .input-form {
             display: flex;
             align-items: center;
             justify-content: space-between;
             width: 100%;
-            padding: 0 10px;
 
             label {
+                width: auto;
+                height: auto;
+                width: 8%;
+                height: 50%;
                 &:hover {
                     cursor: pointer;
                 }
@@ -759,14 +784,16 @@
         z-index: 2;
     }
 }
-@media (max-width: 450px){
-    .small-chat-box{
+
+@media (max-width: 450px) {
+    .small-chat-box {
         width: 100vw !important;
         height: 100vh !important;
         bottom: 0 !important;
         left: 0;
         z-index: 2;
-        .send-message{
+
+        .send-message {
             height: 600px !important;
         }
     }

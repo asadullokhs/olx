@@ -3,8 +3,8 @@ import "./Search.scss";
 
 const Search = () => {
     return (
-        
-        <div div className = "search-box" >
+
+        <div div className="search-box" >
             <div className="container">
                 <div className="search">
                     <label htmlFor="">
@@ -25,7 +25,7 @@ const Search = () => {
                 </div>
             </div>
         </div>
-        
+
         // {/*<div className="container">
         //      <div className='Search_Com'  >
         //         <div className='inp_div'><i class="fa-solid fa-magnifying-glass"></i> <input type="text" placeholder='Nimani qidiryapsiz?' className='search' /> </div>
@@ -38,7 +38,7 @@ const Search = () => {
         //                 <i class="fa-regular fa-bell"></i>
         //             </div>
         //     </div> 
-            
+
         // </div>*/}
     )
 }
