@@ -3,8 +3,12 @@
   background-color: #f2f4f5;
   .media_texts {
     display: none;
+    justify-content: space-between;
   }
-
+  .accordion-button {
+    background: none !important;
+    box-shadow: none !important;
+  }
   .red-star {
     sup {
       color: red;
@@ -81,8 +85,6 @@
           margin-top: 20px;
           max-width: 1238px;
 
-          // max-height: 56px;
-          // line-height: 56px;
           display: flex;
           justify-content: space-between;
           padding-inline-end: 25px;
@@ -111,16 +113,16 @@
       .accordion {
         max-width: 100%;
         margin-bottom: 20px !important;
-        padding: 10px 20px;
         background-color: white;
-        x
-        // margin-bottom: 15px;
+
         .accordion-button {
-          background: none;
-          box-shadow: none;
+          background: none !important;
+          box-shadow: none !important;
         }
 
         .accordion-collapse {
+          padding: 10px 20px;
+
           .accordion-body {
             padding-left: 0;
 
@@ -171,7 +173,7 @@
           }
 
           .d_btn {
-            background-color: #002f34;
+            background-color: #002f34 !important;
             color: white;
             padding: 7px 60px;
             font-size: 16px;
@@ -202,15 +204,32 @@
   }
 }
 
+@media (max-width: 1105px) {
+  .part_pay {
+    display: none !important;
+  }
+
+  .accordion {
+    max-width: 80% !important;
+    margin-bottom: 20px !important;
+    padding: 15px;
+  }
+}
+
 @media (max-width: 425px) {
-  body, .middle_sec, .container{
+  .accordion {
+    max-width: 100% !important;
+  }
+  body,
+  .middle_sec,
+  .container {
     background-color: white !important;
   }
- .media_texts{
-  padding: 10px;  
-  margin: 0 !important;
- }
-  .location-input{
+  .media_texts {
+    padding: 10px;
+    margin: 0 !important;
+  }
+  .location-input {
     width: 100% !important;
   }
   .navbar,
@@ -219,18 +238,30 @@
     display: none !important;
   }
   .bg {
-    padding: 0 0 50px 0;
     background: white !important;
     .media_texts {
+      padding: 20px 20px;
       width: 100%;
       height: 100%;
       background-color: white;
-      display: block !important;
+      display: flex !important;
+      justify-content: space-between;
       font-size: 32px !important;
       line-height: 34px !important;
       font-weight: 700 !important;
       color: rgb(0, 47, 52) !important;
-      margin: 20px 15px 20px !important;
+      .media-icon {
+        padding: 5px;
+        font-size: 15px;
+        color: red;
+        align-items: center;
+        span {
+        }
+        i {
+          padding-left: 5px;
+          font-size: 20px;
+        }
+      }
     }
 
     .settings {
@@ -252,11 +283,10 @@
           margin-bottom: 20px !important;
           padding: 10px 10px;
           background-color: white;
-          x
-        // margin-bottom: 15px;
-      
-        
-        .accordion-collapse {
+
+          // margin-bottom: 15px;
+
+          .accordion-collapse {
             .accordion-body {
             }
             .set_line {
@@ -273,16 +303,18 @@
             }
 
             .d_btn {
+              width:100px !important;
               display: flex;
               text-align: center;
-              background-color: #4db1bc !important;
+              background-color: #002f34 !important;
             }
           }
         }
       }
     }
   }
-}
-.last_btn {
-  justify-content: center;
+
+  .last_btn {
+    justify-content: center;
+  }
 }

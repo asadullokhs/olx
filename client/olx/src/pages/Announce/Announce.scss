@@ -373,7 +373,33 @@
   }
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1105px) {
+footer{
+  display: none;
+}
+  // .top-account, .none, .media{
+  //   display: none !important;
+  // }
+
+h2{
+  font-size: 20 px;
+}
+p{
+  font-size: 15px;
+ 
+}
+button{
+  padding: 2px 20px !important;
+}
+  .my .top-account .top-btn {
+  
+   
+}
+  .filter .cardsS .card-user{
+    width: 100% !important;
+
+  }
+
   .one {
     .card-user {
       img {

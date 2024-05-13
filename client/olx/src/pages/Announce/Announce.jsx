@@ -66,7 +66,7 @@ const UserProd = () => {
               <NavLink to="/announce">E‘lonlar</NavLink>
             </li>
             <li>
-              <NavLink to="/chat">Xabarlar</NavLink>
+              <NavLink to="/message">Xabarlar</NavLink>
             </li>
             <li>
               <NavLink to="/">To‘lovlar va OLX hisobi</NavLink>
