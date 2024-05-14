@@ -15,6 +15,9 @@ const chatCtrl = {
   findChat: async (req, res) => {
     const { firstId, secondId } = req.params;
     try {
+      if (firstId === secondId) {
+        return res.status(503).json({ message: "Can't afford" });
+      }
       const chat = await Chat.findOne({
         members: { $all: [firstId, secondId] },
       });
