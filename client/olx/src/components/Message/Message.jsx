@@ -3,27 +3,23 @@ import './Message.scss'
 import { useInfoContext } from '../../context/Context'
 import { addMessage, deleteMessage, getMessage, updateMessage } from '../../api/messageRequests'
 import { toast } from 'react-toastify'
-import { deleteChat } from '../../api/chatRequests'
 import { getOneProd } from '../../api/getRequests'
+import { deleteChat } from '../../api/chatRequests'
+import { deleteAll } from '../../api/delRequests'
 
 
-const Message = ({ asnwerMessage, setSendMessage, setPage, setSocketDel, deleted, loading, setLoading }) => {
+const Message = ({ asnwerMessage, setSendMessage, socketDel, setPage, setSocketDel, deleted, loading, setLoading }) => {
     const { onlineUsers, currentChat, setCurrentChat, currentUser, exit } = useInfoContext()
     const [userData, setUserData] = useState(null)
     const [messages, setMessages] = useState([])
     const [delChat, setDelChat] = useState(false)
     const [send, setSend] = useState(false)
 
-
-    const [textMessage, setTextMessage] = useState('')
-
-
-    const imgRef = useRef()
-    const scroll = useRef()
+    const scrollMessage = useRef()
 
 
     useEffect(() => {
-        scroll.current?.scrollIntoView({ behavior: "smooth" })
+        scrollMessage.current?.scrollIntoView({ behavior: "smooth" })
     }, [messages])
 
     const userId = currentChat?.members?.find(id => id !== currentUser._id)
@@ -35,23 +31,23 @@ const Message = ({ asnwerMessage, setSendMessage, setPage, setSocketDel, deleted
                 const res = await getOneProd(userId, 'user')
                 setUserData(res.data.user);
             } catch (error) {
-                if (error.response.data.message === 'jwt exprired') {
+                if (error?.response?.data?.message === 'jwt exprired') {
                     exit()
                 }
             }
         }
-        if (currentChat) {
+        if (currentChat && userId) {
             getUsers()
         }
-    }, [userId])
+    }, [userId, delChat.currentChat])
 
     useEffect(() => {
         const fetchMessage = async () => {
             try {
                 const { data } = await getMessage(currentChat._id)
-                setMessages(data.messages)
+                setMessages(data?.messages)
             } catch (error) {
-                if (error.response.data.message === 'jwt exprired') {
+                if (error?.response?.data?.message === 'jwt exprired') {
                     exit()
                 }
             }
@@ -59,10 +55,10 @@ const Message = ({ asnwerMessage, setSendMessage, setPage, setSocketDel, deleted
         if (currentChat) {
             fetchMessage()
         }
-    }, [currentChat, loading, asnwerMessage, deleted])
+    }, [currentChat, socketDel, asnwerMessage, delChat])
 
     useEffect(() => {
-        if (currentChat && asnwerMessage !== null && asnwerMessage.chatId === currentChat._id) {
+        if (currentChat && asnwerMessage !== null && asnwerMessage?.chatId === currentChat._id) {
             setMessages([...messages, asnwerMessage])
         }
     }, [asnwerMessage])
@@ -80,7 +76,6 @@ const Message = ({ asnwerMessage, setSendMessage, setPage, setSocketDel, deleted
             try {
                 const res = await deleteChat(currentChat._id);
                 setLoading(!loading)
-                setDelChat(false)
                 setCurrentChat(null)
                 setPage(0)
             } catch (err) {
@@ -96,23 +91,25 @@ const Message = ({ asnwerMessage, setSendMessage, setPage, setSocketDel, deleted
 
     const handleSend = async (e) => {
         e.preventDefault()
-        const formData = new FormData(e.target)
-
-        formData.append('senderId', currentUser._id);
-        formData.append('chatId', currentChat._id);
-        formData.append('createdAt', new Date().getTime());
-
-        const newMessage = {
-            senderId: currentUser._id,
-            chatId: currentChat._id,
-            text: textMessage,
-            createdAt: new Date().getTime(),
-        }
-
-        setSend(true)
-        setSendMessage({ ...newMessage, receivedId: userId })
-
         try {
+            const formData = new FormData(e.target)
+            if (formData.get('text') === "") {
+                return
+            }
+
+            formData.append('senderId', currentUser._id);
+            formData.append('chatId', currentChat._id);
+
+            const newMessage = {
+                senderId: currentUser._id,
+                chatId: currentChat._id,
+                text: formData.get('text'),
+                createdAt: new Date().getTime(),
+            }
+
+            setSend(true)
+            setSendMessage({ ...newMessage, receivedId: userId })
+
             const { data } = await addMessage(formData);
             setMessages([...messages, data.messages])
             setSend(false)
@@ -126,19 +123,36 @@ const Message = ({ asnwerMessage, setSendMessage, setPage, setSocketDel, deleted
         }
     }
 
-    const [previewImage, setPreviewImage] = useState('');
-
-    const handleImg = (e) => {
-        const image = e.target.files[0];
-        setPreviewImage(URL.createObjectURL(image));
+    const handleDel = async (id) => {
+        try {
+            await deleteAll(id, 'message')
+            setSocketDel(true)
+        } catch (error) {
+            toast.dismiss()
+            toast.error(error?.response?.data.message)
+        }
     }
+
+    const [swipedIndex, setSwipedIndex] = useState(null);
+
+    const handleSwipeStart = (index) => {
+        setSwipedIndex(index);
+    };
+
+    const handleSwipeEnd = () => {
+        setSwipedIndex(null);
+    };
+
+    const today = new Date().toLocaleDateString();
+
     return (
         <div className="message-box">
             {currentChat ? <div className="message-list" key={currentChat._id}>
                 <div className="profile-box">
                     <div className='profile-content'>
                         <i className='fa-solid fa-chevron-left exit' onClick={() => setPage(0)}></i>
-                        <img src={userData?.profilePicture?.url ? `${userData?.profilePicture?.url}` : '/images/default_.jpg'} alt="profile_img" className="message-img" />
+                        {userData?.profilePicture?.url ? <img src={userData.profilePicture.url} alt="" className='message-img' />
+                            : <img src={userData?.profilePicture ? userData.profilePicture : '/images/default_.jpg'} alt="" className='message-img' />}
                         <div className="user-name">
                             <h3>{userData?.firstname ? userData.firstname : 'Новый пользователь'}</h3>
                             <div style={online() ? { color: 'greenyellow' } : { color: 'gray' }}>{online() ? 'в сети' : 'был(а) недавно'}</div>
@@ -153,17 +167,26 @@ const Message = ({ asnwerMessage, setSendMessage, setPage, setSocketDel, deleted
                 </div>
                 <div className="send-message">
                     <b style={{ textAlign: 'center', fontSize: '12px' }}>начилос в {new Date(currentChat.createdAt).toLocaleDateString()}</b>
-                    {messages?.length > 0 ? messages.map(chat => {
-                        return (<div key={chat._id} className={chat.senderId === currentUser._id ? "messages own" : "messages"}>
-                            <div className='span-box'>
-                                <span>
-                                    {chat.file && <img style={{ width: '100%' }} src={`${chat?.file?.url}`} alt='chat_img' />}
-                                    {chat.text} </span>
-                                <strong className='message-time'>{new Date(chat.createdAt).toLocaleTimeString().slice(0, 5)}</strong>
+                    {messages?.length > 0 ? messages.map((chat, index) => {
+                        return (<div key={chat._id}>
+                            <div className={chat.senderId === currentUser._id ? "messages own" : "messages"}>
+                                <div className="div-del">
+                                    <div className={index === swipedIndex ? 'swiped span-box' : 'span-box'} onTouchStart={() => handleSwipeStart(index)} onTouchEnd={handleSwipeEnd} onMouseDown={() => handleSwipeStart(index)} onMouseUp={handleSwipeEnd}>
+                                        <span>
+                                            {chat.file && <img style={{ width: '100%' }} src={`${chat?.file?.url}`} alt='chat_img' />}
+                                            {chat.text} </span>
+                                        <div className="div-flex">
+                                            <strong className='message-time'>{new Date(chat.createdAt).toLocaleDateString() === today ? `${new Date(chat.createdAt).toLocaleTimeString().slice(0, 5)}` : new Date(chat.createdAt).toLocaleDateString()}</strong>{chat.senderId === currentUser._id && <img width={15} src="/images/double_check.png" alt="" />}
+                                        </div>
+                                    </div>
+                                    {index === swipedIndex && chat.senderId === currentUser._id && (
+                                        <button onClick={() => handleDel(chat._id)}><i className='fa-solid fa-trash'></i></button>
+                                    )}
+                                </div>
+                                <div ref={scrollMessage}></div>
                             </div>
                         </div>)
                     }) : <h3>No correspondence yet !</h3>}
-                    <div ref={scroll} />
                 </div>
                 <div className="send-input-box">
                     <form onSubmit={handleSend} className="input-form">

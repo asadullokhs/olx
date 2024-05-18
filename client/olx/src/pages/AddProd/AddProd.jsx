@@ -119,9 +119,9 @@ const AddProd = () => {
     }
   };
 
-  const filterId = type.filter((res) => res._id === typeId)[0];
-  const filterCat = category.filter((res) => res._id === getId)[0];
-  const filterSub = sub.filter((res) => res._id === subId)[0];
+  const filterId = type?.filter((res) => res._id === typeId)[0];
+  const filterCat = category?.filter((res) => res._id === getId)[0];
+  const filterSub = sub?.filter((res) => res._id === subId)[0];
 
   const handleImageChange = (index, e) => {
     if (e.target) {
@@ -136,6 +136,7 @@ const AddProd = () => {
     newImages[index] = null;
     setImages(newImages);
   };
+
 
   return (
     <div className="bg">
@@ -250,7 +251,7 @@ const AddProd = () => {
                         <input type="text" placeholder="Поиск..." />
                       </div>
                       <div className="modal-categorys">
-                        {category.length > 0 &&
+                        {category?.length > 0 &&
                           category.map((cat) => {
                             return (
                               <div
@@ -302,7 +303,7 @@ const AddProd = () => {
                             list === 0 ? "modal_list" : "modal_list none-list"
                           }
                         >
-                          {category.length > 0 &&
+                          {category?.length > 0 &&
                             category.map((cat) => {
                               return (
                                 <li
@@ -334,7 +335,7 @@ const AddProd = () => {
                             list === 1 ? "modal_list" : "modal_list none-list"
                           }
                         >
-                          {sub.length > 0 &&
+                          {sub?.length > 0 &&
                             sub.map((item) => {
                               if (item.categoryId === getId) {
                                 return (
@@ -370,7 +371,7 @@ const AddProd = () => {
                             list === 2 ? "modal_list" : "modal_list none-list"
                           }
                         >
-                          {type.map((item) => {
+                          {type?.map((item) => {
                             if (item.subId === subId) {
                               return (
                                 <li
