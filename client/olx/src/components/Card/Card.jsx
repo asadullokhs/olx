@@ -12,7 +12,6 @@ const Card = ({ prod }) => {
   const isToday = fromattedDate === todayDateString;
   return (
     <div className="card">
-
       <Link className="card-img" to={`/prod/${prod?._id}`}>
         {prod.photos.length > 0 ? (
           <img className="card-img-a" src={prod?.photos[0].url} alt="card_img" />
@@ -26,7 +25,7 @@ const Card = ({ prod }) => {
             <p className="content" style={{
               overflow: "hidden", width: "146px",
               height: "20px"
-            }}>{prod?.content}</p>
+            }}>{prod?.content}</p> 
             <p className="prise">{prod?.price}</p>
           </div>
           <div className="data">
