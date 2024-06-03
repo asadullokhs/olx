@@ -64,14 +64,11 @@ const userCtrl = {
         return res.status(404).json({ message: "User not found" });
       }
       const delCar = await Car.deleteMany({ authorId: id });
-      console.log(delCar);
       await Work.deleteMany({ authorId: id });
       await Fashion.deleteMany({ authorId: id });
-      res
-        .status(405)
-        .json({
-          message: "Acces Denied!. You can delete only your own accout",
-        });
+      res.status(405).json({
+        message: "Acces Denied!. You can delete only your own accout",
+      });
     } catch (error) {
       res.status(503).json({ message: error.message });
     }
